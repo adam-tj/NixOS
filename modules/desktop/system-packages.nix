@@ -10,7 +10,7 @@
     kdePackages.partitionmanager killall
     mlocate
     lsof
-    nixd
+    nixd nixfmt
     ocl-icd opencl-headers # openrgb-with-all-plugins
     pciutils
     rar

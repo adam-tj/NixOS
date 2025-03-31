@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   users.users.adam = {
@@ -9,6 +9,7 @@
       appimage-run
       bottles
       discord
+      element-desktop
       /* flameshot */
       gearlever gimp google-chrome
       irssi isoimagewriter

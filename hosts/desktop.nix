@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
 
   imports = [
@@ -19,10 +17,13 @@
       ../modules/common/firefox.nix
       ../modules/desktop/coolercontrol.nix
       ../modules/common/virtualbox.nix
+      ../modules/common/vscodium.nix
+#       ../modules/common/vscodium.nix
 
       # GUI
       ../modules/services/sddm.nix
       ../modules/services/plasma6.nix
+      ../modules/common/exclude-plasma6-packages.nix
       ../modules/services/fluxbox.nix
       ../modules/services/xserver.nix
       ../modules/services/keyboard-layout.nix
