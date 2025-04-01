@@ -24,7 +24,6 @@
     ../modules/common/exclude-plasma6-packages.nix
     ../modules/services/fluxbox.nix
     ../modules/services/xserver.nix
-    ../modules/services/keyboard-layout.nix
 
     # System
     ../modules/desktop/boot.nix
