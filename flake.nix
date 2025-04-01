@@ -21,21 +21,26 @@
     in {
       nixosConfigurations = {
         # Laptop Configuration
-        #       thinkpad = nixpkgs.lib.nixosSystem {
-        #         system = "x86_64-linux";
-        #         modules = commonModules ++ [
-        # #           ./hosts/thinkpad/default.nix
-        #           {
-        # #             home-manager.users.yourname = import ./home/thinkpad/default.nix;
-        #             # Laptop-specific home-manager settings
-        #             home-manager.extraSpecialArgs = {
-        #               inherit inputs;
-        # #               isLaptop = true;
-        #             };
-        #           }
-        #         ];
-        #         specialArgs = { inherit inputs; };
-        #       };
+        thinkpad = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = commonModules ++ [
+            ./hosts/thinkpad.nix
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.adam = ./modules/thinkpad/home.nix;
+              home-manager.extraSpecialArgs = {
+                pkgs-unstable = import nixpkgs-unstable {
+                  system = "x86_64-linux";
+                  config.allowUnfree = true;
+                };
+              };
+
+            }
+                 ];
+               };
+
 
         # Desktop Configuration
         desktop = nixpkgs.lib.nixosSystem {
