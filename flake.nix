@@ -2,6 +2,7 @@
   inputs.slippi.url = "github:lytedev/slippi-nix";
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   inputs.nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+  inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   inputs.nix-vscode-extensions = {
     url = "github:nix-community/nix-vscode-extensions?ref=master";
     inputs.nixpkgs.follows = "nixpkgs";
@@ -11,7 +12,8 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, slippi, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, slippi
+    , ... }@inputs:
     let
       # Common parameters for both systems
       commonModules = [
@@ -25,6 +27,7 @@
           system = "x86_64-linux";
           modules = commonModules ++ [
             ./hosts/thinkpad.nix
+            nixos-hardware.nixosModules.lenovo-thinkpad-l13
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -38,9 +41,8 @@
               };
 
             }
-                 ];
-               };
-
+          ];
+        };
 
         # Desktop Configuration
         desktop = nixpkgs.lib.nixosSystem {
