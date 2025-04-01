@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   # Use 'gnugrep' instead of the default 'grep'

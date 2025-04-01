@@ -1,5 +1,1 @@
-{ config, pkgs, ... }:
-
-{
-  services.xserver.windowManager.fluxbox.enable = true;
-}
+{ services.xserver.windowManager.fluxbox.enable = true; }

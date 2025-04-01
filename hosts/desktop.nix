@@ -2,47 +2,45 @@
 
   imports = [
 
-      # Hardware
-      ../modules/desktop/hardware.nix
-      ../modules/desktop/nvidia-gpu.nix
-      ../modules/common/gamecube-controller.nix
-      ../modules/common/xbox-controller.nix
-      ../modules/services/piper-rules.nix
+    # Hardware
+    ../modules/desktop/hardware.nix
+    ../modules/desktop/nvidia-gpu.nix
+    ../modules/common/gamecube-controller.nix
+    ../modules/common/xbox-controller.nix
+    ../modules/services/piper-rules.nix
 
-      # User
-      ../modules/desktop/adam.nix
-      ../modules/desktop/flatpak.nix
-      ../modules/common/steam.nix
-      ../modules/common/plex-portal.nix
-      ../modules/common/firefox.nix
-      ../modules/desktop/coolercontrol.nix
-      ../modules/common/virtualbox.nix
-      ../modules/common/vscodium.nix
-#       ../modules/common/vscodium.nix
+    # User
+    ../modules/desktop/adam.nix
+    ../modules/desktop/flatpak.nix
+    ../modules/common/steam.nix
+    ../modules/common/plex-portal.nix
+    ../modules/common/firefox.nix
+    ../modules/desktop/coolercontrol.nix
+    ../modules/common/virtualbox.nix
 
-      # GUI
-      ../modules/services/sddm.nix
-      ../modules/services/plasma6.nix
-      ../modules/common/exclude-plasma6-packages.nix
-      ../modules/services/fluxbox.nix
-      ../modules/services/xserver.nix
-      ../modules/services/keyboard-layout.nix
+    # GUI
+    ../modules/services/sddm.nix
+    ../modules/services/plasma6.nix
+    ../modules/common/exclude-plasma6-packages.nix
+    ../modules/services/fluxbox.nix
+    ../modules/services/xserver.nix
+    ../modules/services/keyboard-layout.nix
 
-      # System
-      ../modules/desktop/boot.nix
-      ../modules/desktop/system-packages.nix
-      ../modules/desktop/firewall.nix
-      ../modules/services/network-manager.nix
-      ../modules/services/pipewire.nix
+    # System
+    ../modules/desktop/boot.nix
+    ../modules/desktop/system-packages.nix
+    ../modules/desktop/firewall.nix
+    ../modules/services/network-manager.nix
+    ../modules/services/pipewire.nix
 
-      # Services
-      ../modules/services/bluetooth.nix
-      ../modules/services/flatpak.nix
-      ../modules/services/kdeconnect.nix
-      ../modules/services/cups.nix
-      ../modules/services/locate.nix
-      ../modules/services/podman.nix
-      ../modules/services/jellyfin.nix
+    # Services
+    ../modules/services/bluetooth.nix
+    ../modules/services/flatpak.nix
+    ../modules/services/kdeconnect.nix
+    ../modules/services/cups.nix
+    ../modules/services/locate.nix
+    ../modules/services/podman.nix
+    ../modules/services/jellyfin.nix
 
   ];
 

@@ -1,4 +1,4 @@
-{ config, pkgs, slippi, ... }:
+{ slippi, ... }:
 
 {
   imports = [
@@ -15,8 +15,5 @@
       enableJukebox = true;
       useNetplayBeta = false;
     };
-
-slippi-launcher.isoPath = "~/Games/ROMS/animelee.iso";
-
   };
 }

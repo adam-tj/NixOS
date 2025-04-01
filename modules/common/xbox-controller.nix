@@ -1,5 +1,1 @@
-{ config, pkgs, ... }:
-
-{
-  hardware.xone.enable = true;
-}
+{ hardware.xone.enable = true; }

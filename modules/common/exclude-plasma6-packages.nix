@@ -2,7 +2,7 @@
 
 {
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
-  discover
-  elisa
+    discover
+    elisa
   ];
 }
