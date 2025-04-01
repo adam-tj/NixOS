@@ -7,4 +7,8 @@
     pavucontrol
     waybar
   ];
+
+  imports = [
+    ../modules/common/fonts.nix
+  ];
 }
