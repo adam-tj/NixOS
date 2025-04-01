@@ -6,8 +6,7 @@
     distrobox
     fastfetch fish
     gh git gnugrep
-    htop hyprpaper
-    kitty
+    htop
     intel-gpu-tools
     kdePackages.partitionmanager killall
     libva-utils
@@ -19,6 +18,6 @@
     usbutils
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     vulkan-tools
-    waybar wget wofi
+    wget
   ];
 }

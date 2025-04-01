@@ -4,11 +4,13 @@
   programs.hyprland.enable = true;
 
   environment.systemPackages = with pkgs; [
-    pavucontrol
-    waybar
+    hyprlock
+    hyprpaper
+    rofi
   ];
 
   imports = [
-    ../modules/common/fonts.nix
+    ../common/fonts.nix
+    ../common/tiling_pkgs.nix
   ];
 }
