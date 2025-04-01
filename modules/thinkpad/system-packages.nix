@@ -12,7 +12,7 @@
     kdePackages.partitionmanager killall
     libva-utils
     mlocate
-    nixd nixfmt
+    nixd nixfmt-rfc-style
     ocl-icd opencl-headers
     pciutils
     rar
