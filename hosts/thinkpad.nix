@@ -20,6 +20,7 @@
     ../modules/services/sddm.nix
     ../modules/services/plasma6.nix
     ../modules/common/exclude-plasma6-packages.nix
+    ../modules/services/hyprland.nix
     ../modules/services/xserver.nix
 
     # System
