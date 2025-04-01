@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
-{  environment.systemPackages = with pkgs; [
+{
+  environment.systemPackages = with pkgs; [
     alacritty
     brightnessctl
     flameshot
