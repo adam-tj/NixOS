@@ -10,6 +10,7 @@
     ../modules/services/piper-rules.nix
 
     # User
+    ../modules/common/adam.nix
     ../modules/desktop/adam.nix
     ../modules/desktop/flatpak.nix
     ../modules/common/steam.nix
