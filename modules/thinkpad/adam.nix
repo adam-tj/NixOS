@@ -7,6 +7,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     networkmanagerapplet
+    pwvucontrol
     rofi
     ];
   };
