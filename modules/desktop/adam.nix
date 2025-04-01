@@ -25,7 +25,7 @@
       qalculate-qt quasselClient qbittorrent /* quadrapassel */
       r2modman remmina
       /* sameboy */ skypeforlinux /* slippi-netplay */ smplayer svp
-      vlc vscode
+      vlc vscodium
       wine
       zapzap zoom-us
     ];
