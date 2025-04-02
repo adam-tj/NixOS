@@ -29,6 +29,7 @@
     ../modules/thinkpad/system-packages.nix
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
+    ../modules/common/fish.nix
 
     # Services
     ../modules/services/bluetooth.nix

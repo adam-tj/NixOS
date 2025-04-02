@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs; [
     btop
     distrobox
-    fastfetch fish
+    fastfetch
     gh git gnugrep
     htop
     kdePackages.partitionmanager killall
