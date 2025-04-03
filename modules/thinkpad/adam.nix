@@ -10,6 +10,7 @@
         mpv = mpv-unwrapped.override { vapoursynthSupport = true; };
         youtubeSupport = true;
       })
+      svp
 
     ];
   };
