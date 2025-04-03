@@ -45,10 +45,10 @@
 
   ];
 
-  # Flakes and home-manager
+  # Enable flakes and home-manager
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "desktop"; # Define your hostname.
+  networking.hostName = "desktop";
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
@@ -68,7 +68,6 @@
     LC_TIME = "sv_SE.UTF-8";
   };
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # This value determines the NixOS release from which the default

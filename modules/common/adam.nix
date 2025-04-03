@@ -10,11 +10,12 @@
       discord
       gearlever gimp google-chrome
       irssi isoimagewriter
-      jdk jellyfin-media-player jellyfin-mpv-shim jetbrains-toolbox jflap
+      jdk /* jellyfin-media-player */ /* jellyfin-mpv-shim */ jetbrains-toolbox jflap
       kdePackages.filelight kdePackages.kate kdePackages.kolourpaint kdePackages.konversation
       libreoffice-fresh
-      mangohud mediainfo mesa-demos
-      (mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
+      mangohud mediainfo mediainfo-gui mesa-demos
+      #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
+      #( mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; extraMakeWrapperArgs = [ "--prefix" "LD_LIBRARY_PATH" ":" "/run/opengl-driver/lib:${lib.makeLibraryPath [ ocl-icd ]}" ]; } )
       plex-desktop plex-mpv-shim protonplus protontricks
       qalculate-qt quasselClient qbittorrent
       remmina
@@ -22,6 +23,21 @@
       vlc vscodium
       wine
       zapzap zoom-us
+
+      #( jellyfin-mpv-shim.override { mpv = pkgs.mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; }; })
+      #( jellyfin-mpv-shim.override { mpv = pkgs.svp.mpv; } )
+      #( jellyfin-mpv-shim.override { mpv = mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; }; } )
     ];
   };
+
+  # Jellyfin vapoursynth
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     mpv-unwrapped =
+  #       super.mpv-unwrapped.override { vapoursynthSupport = true; };
+  #     youtubeSupport = true;
+  #   })
+  # ];
+    
+
 }
