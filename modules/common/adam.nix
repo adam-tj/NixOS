@@ -8,7 +8,7 @@
       appimage-run
       bottles
       discord
-      gearlever gimp google-chrome
+      gamemode gearlever gimp google-chrome
       irssi isoimagewriter
       jdk /* jellyfin-media-player */ /* jellyfin-mpv-shim */ jetbrains-toolbox jflap
       kdePackages.filelight kdePackages.kate kdePackages.kolourpaint kdePackages.konversation
