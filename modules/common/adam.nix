@@ -19,7 +19,7 @@
       plex-desktop plex-mpv-shim protonplus protontricks
       qalculate-qt quasselClient qbittorrent
       remmina
-      skypeforlinux smplayer svp
+      skypeforlinux smplayer #svp
       vlc vscodium
       wine
       zapzap zoom-us
