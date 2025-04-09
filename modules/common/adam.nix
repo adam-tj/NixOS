@@ -11,7 +11,6 @@
       gamemode gearlever gimp google-chrome
       irssi isoimagewriter
       jdk /* jellyfin-media-player */ /* jellyfin-mpv-shim */ jetbrains-toolbox jflap
-      kdePackages.filelight kdePackages.kate kdePackages.kolourpaint kdePackages.konversation
       libreoffice-fresh
       mangohud mediainfo mediainfo-gui mesa-demos
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
@@ -28,7 +27,13 @@
       #( jellyfin-mpv-shim.override { mpv = pkgs.mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; }; })
       #( jellyfin-mpv-shim.override { mpv = pkgs.svp.mpv; } )
       #( jellyfin-mpv-shim.override { mpv = mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; }; } )
-    ];
+    ] ++ (with kdePackages; [
+      filelight
+      merkuro
+      kate
+      kolourpaint
+      konversation
+    ]);
   };
 
   # Jellyfin vapoursynth
