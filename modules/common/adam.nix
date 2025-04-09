@@ -20,6 +20,7 @@
       qalculate-qt quasselClient qbittorrent
       remmina
       skypeforlinux smplayer #svp
+      tor-browser
       vlc vscodium
       wine
       zapzap zoom-us
