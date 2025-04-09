@@ -32,6 +32,7 @@
       merkuro
       kate
       kolourpaint
+      korganizer
       konversation
     ]);
   };
