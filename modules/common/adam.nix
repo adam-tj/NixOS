@@ -11,7 +11,7 @@
       gamemode gearlever gimp google-chrome
       irssi isoimagewriter
       jdk /* jellyfin-media-player */ /* jellyfin-mpv-shim */ jetbrains-toolbox jflap
-      libreoffice-fresh
+      # libreoffice-fresh
       mangohud mediainfo mediainfo-gui mesa-demos
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
       #( mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; extraMakeWrapperArgs = [ "--prefix" "LD_LIBRARY_PATH" ":" "/run/opengl-driver/lib:${lib.makeLibraryPath [ ocl-icd ]}" ]; } )
@@ -19,7 +19,7 @@
       qalculate-qt quasselClient qbittorrent
       remmina
       skypeforlinux smplayer #svp
-      tor-browser
+      thunderbird tor-browser
       vlc vscodium
       wine
       zapzap zoom-us
@@ -29,11 +29,8 @@
       #( jellyfin-mpv-shim.override { mpv = mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; }; } )
     ] ++ (with kdePackages; [
       filelight
-      merkuro
       kate
       kolourpaint
-      korganizer
-      konversation
     ]);
   };
 
