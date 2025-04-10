@@ -8,7 +8,7 @@
       appimage-run
       bottles
       discord
-      gamemode gearlever gimp gnome-calendar google-chrome
+      gamemode gearlever gimp google-chrome
       irssi isoimagewriter
       jdk /* jellyfin-media-player */ /* jellyfin-mpv-shim */ jetbrains-toolbox jflap
       libreoffice-fresh
@@ -19,7 +19,7 @@
       qalculate-qt quasselClient qbittorrent
       remmina
       skypeforlinux smplayer #svp
-      tor-browser
+      thunderbird tor-browser
       vlc vscodium
       wine
       zapzap zoom-us
@@ -29,15 +29,9 @@
       #( jellyfin-mpv-shim.override { mpv = mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; }; } )
     ] ++ (with kdePackages; [
       filelight
-      merkuro
       kate
       kolourpaint
-      korganizer
-      konversation
     ]);
-
-  services.gnome.gnome-online-accounts.enable = true;
-
   };
 
   # Jellyfin vapoursynth
