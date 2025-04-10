@@ -8,7 +8,7 @@
       appimage-run
       bottles
       discord
-      gamemode gearlever gimp google-chrome
+      gamemode gearlever gimp gnome-calendar google-chrome
       irssi isoimagewriter
       jdk /* jellyfin-media-player */ /* jellyfin-mpv-shim */ jetbrains-toolbox jflap
       libreoffice-fresh
@@ -35,6 +35,9 @@
       korganizer
       konversation
     ]);
+
+  services.gnome.gnome-online-accounts.enable = true;
+
   };
 
   # Jellyfin vapoursynth
