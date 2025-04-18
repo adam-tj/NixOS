@@ -29,6 +29,8 @@
     ] ++ (with kdePackages; [
       dolphin-plugins
       filelight
+      kaccounts-integration
+      kaccounts-providers
       kio
       kio-extras
       kio-fuse
