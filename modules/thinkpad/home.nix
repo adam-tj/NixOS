@@ -71,7 +71,7 @@
       #     pkgs-unstable.umu-launcher
       #     pkgs-unstable.lutris
       #     pkgs-unstable.kdePackages.krdc
-
+        pkgs-unstable.zapzap
     ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

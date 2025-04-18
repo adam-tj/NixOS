@@ -11,7 +11,6 @@
       gamemode gearlever gimp google-chrome
       irssi isoimagewriter
       jdk /* jellyfin-media-player */ /* jellyfin-mpv-shim */ jetbrains-toolbox jflap
-      # libreoffice-fresh
       mangohud mediainfo mediainfo-gui mesa-demos
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
       #( mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; extraMakeWrapperArgs = [ "--prefix" "LD_LIBRARY_PATH" ":" "/run/opengl-driver/lib:${lib.makeLibraryPath [ ocl-icd ]}" ]; } )
@@ -22,7 +21,7 @@
       thunderbird tor-browser
       vlc vscodium
       wine
-      zapzap zoom-us
+      zoom-us
 
       #( jellyfin-mpv-shim.override { mpv = pkgs.mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; }; })
       #( jellyfin-mpv-shim.override { mpv = pkgs.svp.mpv; } )
