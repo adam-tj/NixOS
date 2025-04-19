@@ -6,16 +6,20 @@ let
   lib = pkgs.lib;
 
   # Declare the Flatpaks you *want* on your system
-  desiredFlatpaks = [
-      "net.lutris.Lutris"
-    # "org.openscopeproject.TrguiNG"
-      "org.libreoffice.LibreOffice"
-    # Manually installed runtimes
-      "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08"
-      "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08"
-      "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08"
-      "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
-  ];
+  # desiredFlatpaks = [
+  #     "net.lutris.Lutris"
+  #   # "org.openscopeproject.TrguiNG"
+  #     "org.libreoffice.LibreOffice"
+  #   # Manually installed runtimes
+  #     "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08"
+  #     "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08"
+  #     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08"
+  #     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
+  # ];
+
+  sharedPackages = import ../common/flatpak-shared-packages.nix;
+  desktopPackages = import ./flatpak-desktop-packages.nix;
+  desiredFlatpaks = lib.unique (sharedPackages ++ desktopPackages);
 
   flatpakScript = pkgs.writeScript "flatpak-management" ''
     #!${pkgs.bash}/bin/bash
