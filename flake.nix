@@ -53,12 +53,12 @@
                     slippi-launcher.useMonthlySubfolders = true;
                     slippi-launcher.enableJukebox = true;
                     slippi-launcher.useNetplayBeta = false;
-                    slippi-launcher.netplayVersion = "3.4.0";
-                    slippi-launcher.netplayHash =
-                      "sha256-iCBdlcBPSRT8m772sqI+gSfNmVNAug0SfkSwVUE6+fE=";
-                    slippi-launcher.playbackVersion = "3.4.0";
-                    slippi-launcher.playbackHash =
-                      "sha256-iCBdlcBPSRT8m772sqI+gSfNmVNAug0SfkSwVUE6+fE=";
+                    # slippi-launcher.netplayVersion = "3.4.0";
+                    # slippi-launcher.netplayHash =
+                    #   "sha256-iCBdlcBPSRT8m772sqI+gSfNmVNAug0SfkSwVUE6+fE=";
+                    # slippi-launcher.playbackVersion = "3.4.0";
+                    # slippi-launcher.playbackHash =
+                    #   "sha256-iCBdlcBPSRT8m772sqI+gSfNmVNAug0SfkSwVUE6+fE=";
                   }
                 ];
               };
