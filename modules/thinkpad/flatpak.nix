@@ -6,15 +6,11 @@ let
   lib = pkgs.lib;
 
   # Declare the Flatpaks you *want* on your system
-  desiredFlatpaks = [
-    /* Lutris       */ "net.lutris.Lutris"
-    /* TrguiNG      */ # "org.openscopeproject.TrguiNG"
-    # Manually installed runtimes
-     "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08"
-     "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08"
-     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08"
-     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
+  sharedPackages = import ../common/flatpak-shared-packages.nix;
+  thinkpadPackages = [
+    "org.openscopeproject.TrguiNG"
   ];
+  desiredFlatpaks = lib.unique (sharedPackages ++ thinkpadPackages);
 
   flatpakScript = pkgs.writeScript "flatpak-management" ''
     #!${pkgs.bash}/bin/bash

@@ -17,8 +17,10 @@ let
   #     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
   # ];
 
+  # Declare the Flatpaks you *want* on your system
   sharedPackages = import ../common/flatpak-shared-packages.nix;
-  desktopPackages = import ./flatpak-desktop-packages.nix;
+  desktopPackages = [
+  ];
   desiredFlatpaks = lib.unique (sharedPackages ++ desktopPackages);
 
   flatpakScript = pkgs.writeScript "flatpak-management" ''
@@ -59,15 +61,15 @@ in
       RemainAfterExit = "yes";
       ExecStart = "${flatpakScript}";
     };
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
   };
 
-#   systemd.timers.flatpak-management = {
-#     description = "Run flatpak management periodically";
-#     timerConfig = {
-#       OnCalendar = "daily";
-#       Persistent = "true";
-#     };
-#     wantedBy = ["timers.target"];
-#   };
+  #   systemd.timers.flatpak-management = {
+  #     description = "Run flatpak management periodically";
+  #     timerConfig = {
+  #       OnCalendar = "daily";
+  #       Persistent = "true";
+  #     };
+  #     wantedBy = ["timers.target"];
+  #   };
 }
