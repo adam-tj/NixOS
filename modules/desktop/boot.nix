@@ -4,7 +4,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_6_12;
     plymouth = {
-      enable = true;
+      enable = false;
       theme = "spinner_alt";
       themePackages = with pkgs;
         [ # By default we would install all themes
@@ -18,8 +18,8 @@
     consoleLogLevel = 0;
     initrd.verbose = false;
     kernelParams = [
-      "quiet"
-      "splash"
+      #"quiet"
+      #"splash"
       "boot.shell_on_fail"
       "loglevel=3"
       "rd.systemd.show_status=false"
@@ -34,7 +34,7 @@
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
-    loader.timeout = 3;
+    loader.timeout = 10;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 
