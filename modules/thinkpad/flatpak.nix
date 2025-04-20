@@ -6,11 +6,11 @@ let
   lib = pkgs.lib;
 
   # Declare the Flatpaks you *want* on your system
-  sharedPackages = import ../common/flatpak-shared-packages.nix;
-  thinkpadPackages = [
+  sharedPackages = import ../common/flatpak-shared.nix;
+  localPackages = [
     "org.openscopeproject.TrguiNG"
   ];
-  desiredFlatpaks = lib.unique (sharedPackages ++ thinkpadPackages);
+  desiredFlatpaks = lib.unique (sharedPackages ++ localPackages);
 
   flatpakScript = pkgs.writeScript "flatpak-management" ''
     #!${pkgs.bash}/bin/bash

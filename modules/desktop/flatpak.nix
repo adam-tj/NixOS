@@ -18,10 +18,10 @@ let
   # ];
 
   # Declare the Flatpaks you *want* on your system
-  sharedPackages = import ../common/flatpak-shared-packages.nix;
-  desktopPackages = [
+  sharedPackages = import ../common/flatpak-shared.nix;
+  localPackages = [
   ];
-  desiredFlatpaks = lib.unique (sharedPackages ++ desktopPackages);
+  desiredFlatpaks = lib.unique (sharedPackages ++ localPackages);
 
   flatpakScript = pkgs.writeScript "flatpak-management" ''
     #!${pkgs.bash}/bin/bash
