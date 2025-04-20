@@ -2,9 +2,9 @@
 
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_12;
+    #kernelPackages = pkgs.linuxPackages_6_12; # See nvidia-gpu.nix
     plymouth = {
-      enable = false;
+      enable = true;
       theme = "spinner_alt";
       themePackages = with pkgs;
         [ # By default we would install all themes
@@ -18,8 +18,8 @@
     consoleLogLevel = 0;
     initrd.verbose = false;
     kernelParams = [
-      #"quiet"
-      #"splash"
+      "quiet"
+      "splash"
       "boot.shell_on_fail"
       "loglevel=3"
       "rd.systemd.show_status=false"

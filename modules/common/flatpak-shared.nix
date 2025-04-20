@@ -9,19 +9,16 @@
   "org.libreoffice.LibreOffice"
   "net.lutris.Lutris"
   "net.mediaarea.MediaInfo"
+  "com.nextcloud.desktopclient.nextcloud"
   "org.freedesktop.Piper"
   "tv.plex.PlexDesktop"
   "com.vysp3r.ProtonPlus"
   "com.github.Matoking.protontricks"
+  "io.github.Qalculate.qalculate-qt"
   "org.quassel_irc.QuasselClient"
   "org.remmina.Remmina"
   "com.skype.Client"
   "org.mozilla.Thunderbird"
+  "com.rtosta.zapzap"
   "us.zoom.Zoom"
-
-  # Manually installed runtimes
-  "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08"
-  "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08"
-  "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08"
-  "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
 ]

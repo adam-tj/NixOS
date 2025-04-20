@@ -26,6 +26,9 @@
         thinkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = commonModules ++ [
+            {
+              nixpkgs.config.allowUnfree = true;
+            }
             ./hosts/thinkpad.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-l13
             {
@@ -70,7 +73,7 @@
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs slippi; };
-          modules = commonModules ++ [
+          modules = commonModules ++ [            
             ./hosts/desktop.nix
             #            ./modules/common/slippi.nix
             {
