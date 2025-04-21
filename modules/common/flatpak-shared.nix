@@ -16,6 +16,7 @@
   "com.github.Matoking.protontricks"
   "io.github.Qalculate.qalculate-qt"
   "org.quassel_irc.QuasselClient"
+  "com.github.ryonakano.reco"
   "org.remmina.Remmina"
   "com.skype.Client"
   "org.mozilla.Thunderbird"
