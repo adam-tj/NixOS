@@ -69,12 +69,12 @@ in
     wantedBy = [ "multi-user.target" ];
   };
 
-  #   systemd.timers.flatpak-management = {
-  #     description = "Run flatpak management periodically";
-  #     timerConfig = {
-  #       OnCalendar = "daily";
-  #       Persistent = "true";
-  #     };
-  #     wantedBy = ["timers.target"];
-  #   };
+    systemd.timers.flatpak-management = {
+      description = "Run flatpak management periodically";
+      timerConfig = {
+        OnCalendar = "daily";
+        Persistent = "true";
+      };
+      wantedBy = ["timers.target"];
+    };
 }

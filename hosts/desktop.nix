@@ -41,7 +41,7 @@
     ../modules/services/cups.nix
     ../modules/services/locate.nix
     ../modules/services/podman.nix
-    ../modules/services/jellyfin.nix
+    #../modules/services/jellyfin.nix
 
   ];
 
