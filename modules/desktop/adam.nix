@@ -8,7 +8,6 @@
     packages = with pkgs; [
       obs-studio
       r2modman
-      tts
     ];
   };
 }
