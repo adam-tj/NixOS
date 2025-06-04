@@ -19,6 +19,10 @@
       vlc vscodium
       wine
 
+      #jellyfin-media-player.override { 
+   #   mpv = svp.passthru.mpv; 
+   #}
+
       #( jellyfin-mpv-shim.override { mpv = pkgs.mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; }; })
       #( jellyfin-mpv-shim.override { mpv = pkgs.svp.mpv; } )
       #( jellyfin-mpv-shim.override { mpv = mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; }; } )
@@ -30,6 +34,10 @@
       kolourpaint
     ]);
   };
+
+
+
+  
 
   # Jellyfin vapoursynth
   # nixpkgs.overlays = [
