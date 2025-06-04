@@ -1,30 +1,124 @@
-{ config, pkgs, ... }:
+{
+  lib,
+  fetchFromGitHub,
+  mkDerivation,
+  stdenv,
+  Cocoa,
+  CoreAudio,
+  CoreFoundation,
+  MediaPlayer,
+  SDL2,
+  cmake,
+  libGL,
+  libX11,
+  libXrandr,
+  libvdpau,
+  # mpv, # Original mpv, no longer needed
+  ninja,
+  pkg-config,
+  python3,
+  qtbase,
+  qtwayland,
+  qtwebchannel,
+  qtwebengine,
+  qtx11extras,
+  jellyfin-web,
+  withDbus ? stdenv.hostPlatform.isLinux,
+  callPackage, # Added to allow calling mpv.nix
+}:
 
 let
-  # Create an overlay to modify packages
-  customOverlays = [
-    (self: super: {
-      jellyfin-media-player = super.jellyfin-media-player.override {
-        mpv = self.svp.passthru.mpv;
-      };
-    })
-  ];
-in {
-  nixpkgs.overlays = customOverlays;
-  
-  environment.systemPackages = with pkgs; [
-    svp             # SVP manager (required for interpolation)
-    jellyfin-media-player  # Modified player using SVP's MPV
+  # Import the specific mpv derivation from the same path as svp.nix
+  # Assuming mpv.nix is in the same directory or accessible via this relative path.
+  mpvForSVP = callPackage ./mpv.nix { };
+in
+
+mkDerivation rec {
+  pname = "jellyfin-media-player";
+  version = "1.11.1";
+
+  src = fetchFromGitHub {
+    owner = "jellyfin";
+    repo = "jellyfin-media-player";
+    rev = "v${version}";
+    sha256 = "sha256-Jsn4kWQzUaQI9MpbsLJr6JSJk9ZSnMEcrebQ2DYegSU=";
+  };
+
+  patches = [
+    # fix the location of the jellyfin-web path
+    ./fix-web-path.patch
+    # disable update notifications since the end user can't simply download the release artifacts to update
+    ./disable-update-notifications.patch
   ];
 
-  # Optional: Autostart SVP Manager with display
-  systemd.user.services.svp-manager = {
-    enable = true;
-    description = "SVP Manager";
-    serviceConfig = {
-      ExecStart = "${pkgs.svp}/bin/SVPManager";
-      Restart = "on-failure";
-    };
-    wantedBy = [ "graphical-session.target" ];
+  buildInputs =
+    [
+      SDL2
+      libGL
+      libX11
+      libXrandr
+      libvdpau
+      mpvForSVP # Replaced the generic mpv with the one from svp.nix
+      qtbase
+      qtwebchannel
+      qtwebengine
+      qtx11extras
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
+      qtwayland
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [
+      Cocoa
+      CoreAudio
+      CoreFoundation
+      MediaPlayer
+    ];
+
+  nativeBuildInputs = [
+    cmake
+    ninja
+    pkg-config
+    python3
+  ];
+
+  cmakeFlags =
+    [
+      "-DQTROOT=${qtbase}"
+      "-GNinja"
+    ]
+    ++ lib.optionals (!withDbus) [
+      "-DLINUX_X11POWER=ON"
+    ];
+
+  preConfigure = ''
+    # link the jellyfin-web files to be copied by cmake (see fix-web-path.patch)
+    ln -s ${jellyfin-web}/share/jellyfin-web .
+  '';
+
+  postInstall = lib.optionalString stdenv.isDarwin ''
+    mkdir -p $out/bin $out/Applications
+    mv "$out/Jellyfin Media Player.app" $out/Applications
+    ln -s "$out/Applications/Jellyfin Media Player.app/Contents/MacOS/Jellyfin Media Player" $out/bin/jellyfinmediaplayer
+  '';
+
+  meta = with lib; {
+    homepage = "https://github.com/jellyfin/jellyfin-media-player";
+    description = "Jellyfin Desktop Client based on Plex Media Player";
+    license = with licenses; [
+      gpl2Only
+      mit
+    ];
+    platforms = [
+      "aarch64-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    maintainers = with maintainers; [
+      jojosch
+      kranzes
+      paumr
+    ];
+    mainProgram = "jellyfinmediaplayer";
   };
 }

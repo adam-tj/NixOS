@@ -18,7 +18,7 @@
     # ../modules/common/firefox.nix
     ../modules/desktop/coolercontrol.nix
     ../modules/common/virtualbox.nix
-    ../modules/common/svp.nix
+    ../modules/common/test.nix
 
     # GUI
     ../modules/services/sddm.nix
