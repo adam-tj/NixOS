@@ -4,7 +4,7 @@ let
   # Define a custom package set that includes your local packages
   myPkgs = pkgs.extend (final: prev: {
     # Import your custom jellyfin-media-player package
-    jellyfin-media-player = final.callPackage ./nix-packages/jellyfin-media-player.nix { };
+    jellyfin-media-player = final.callPackage ../test.nix { };
     # If mpv.nix also needs to be exposed or called directly elsewhere, you could do:
     # mpvForSVP = final.callPackage ./nix-packages/mpv.nix { };
   });
