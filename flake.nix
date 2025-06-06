@@ -17,19 +17,24 @@
     let
       # Common parameters for both systems
       commonModules = [
-        #       ./hosts/common.nix
+        # ./hosts/common.nix
         home-manager.nixosModules.home-manager
       ];
 
-      # Custom package overlay
-      jellyfinSvpOverlay = import ./nix-overlays/jellyfin-media-player/overlay.nix {
-        inherit (nixpkgs) pkgs; # Pass the original pkgs set to the overlay if it needs it (not strictly needed here but good practice)
+      # Define your custom overlay for SVP and MPV
+      # This function takes 'final' (the final package set) and 'prev' (the previous package set)
+      myCustomSvpOverlay = final: prev: {
+        # Call your package.nix file using prev.callPackage.
+        # This will make the 'svp-with-mpv' and 'mpvWithSVP' derivations
+        # available in the 'pkgs' set of your system.
+        inherit (prev.callPackage ./package.nix {}) svp-with-mpv mpvWithSVP;
       };
 
-      # Custom package overlay
-
-
     in {
+      # Make your custom overlay available as part of this flake's outputs.
+      # You can now reference this overlay from other flakes or your system config.
+      overlays.default = myCustomSvpOverlay;
+
       nixosConfigurations = {
         # Laptop Configuration
         thinkpad = nixpkgs.lib.nixosSystem {
@@ -37,6 +42,8 @@
           modules = commonModules ++ [
             {
               nixpkgs.config.allowUnfree = true;
+              # Apply your custom SVP overlay here for the thinkpad configuration
+              nixpkgs.overlays = [ myCustomSvpOverlay ];
             }
             ./hosts/thinkpad.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-l13
@@ -82,24 +89,12 @@
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs slippi; };
-          modules = commonModules ++ [            
+          modules = commonModules ++ [
+            {
+              # Apply your custom SVP overlay here for the desktop configuration
+              nixpkgs.overlays = [ myCustomSvpOverlay ];
+            }
             ./hosts/desktop.nix
-
-
-
-
-            ({ config, pkgs, ... }: {
-              nixpkgs.overlays = [ jellyfinSvpOverlay ]; # Use the imported overlay
-              nixpkgs.config.allowUnfree = true; # Allow unfree packages for this system if needed
-            })
-
-            # Add the new package to system packages
-            ({ config, pkgs, ... }: {
-              environment.systemPackages = [ pkgs.jellyfin-media-player-svp ]; # Use the overridden package
-            })
-
-
-            #            ./modules/common/slippi.nix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -111,7 +106,6 @@
                   config.allowUnfree = true;
                 };
               };
-
             }
             {
               home-manager.users.adam = {

@@ -1,18 +1,17 @@
 # ./nix-overlays/jellyfin-media-player/default.nix
-# This is a slightly modified version of the original jellyfin-media-player derivation.
-# It will automatically use the `mpv` provided by the Nixpkgs overlay it's applied within.
+# (Your existing header with arguments and imports will remain the same)
 
 {
   lib,
   fetchFromGitHub,
-  stdenv, # stdenv provides mkDerivation
+  stdenv,
   SDL2,
   cmake,
   libGL,
   libX11,
   libXrandr,
   libvdpau,
-  mpv, # This 'mpv' input will now be our custom SVP-configured mpv from the overlay
+  mpv,
   ninja,
   pkg-config,
   python3,
@@ -23,10 +22,11 @@
   qtx11extras,
   jellyfin-web,
   withDbus ? stdenv.hostPlatform.isLinux,
+  wrapQtAppsHook,
 }:
 
-stdenv.mkDerivation rec { # Correctly uses stdenv.mkDerivation
-  pname = "jellyfin-media-player";
+stdenv.mkDerivation rec {
+  pname = "jellyfin-media-player-svp"; # <--- CHANGE THIS: Rename the package part in the Nix store path
   version = "1.12.0";
 
   src = fetchFromGitHub {
@@ -63,6 +63,7 @@ stdenv.mkDerivation rec { # Correctly uses stdenv.mkDerivation
     ninja
     pkg-config
     python3
+    wrapQtAppsHook
   ];
 
   cmakeFlags =
@@ -81,7 +82,8 @@ stdenv.mkDerivation rec { # Correctly uses stdenv.mkDerivation
   postInstall = lib.optionalString stdenv.hostPlatform.isDarwin ''
     mkdir -p $out/bin $out/Applications
     mv "$out/Jellyfin Media Player.app" $out/Applications
-    ln -s "$out/Applications/Jellyfin Media Player.app/Contents/MacOS/Jellyfin Media Player" $out/bin/jellyfinmediaplayer
+    # <--- CHANGE THIS LINE FOR CONSISTENCY ON DARWIN:
+    ln -s "$out/Applications/Jellyfin Media Player.app/Contents/MacOS/Jellyfin Media Player" $out/bin/jellyfinmediaplayer-svp
   '';
 
   meta = with lib; {
@@ -101,6 +103,6 @@ stdenv.mkDerivation rec { # Correctly uses stdenv.mkDerivation
       kranzes
       paumr
     ];
-    mainProgram = "jellyfinmediaplayer";
+    mainProgram = "jellyfinmediaplayer-svp"; # <--- CHANGE THIS: This names the exposed executable symlink
   };
 }
