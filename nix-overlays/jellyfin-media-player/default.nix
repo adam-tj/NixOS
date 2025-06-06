@@ -1,8 +1,6 @@
-{
-  lib,
-  fetchFromGitHub,
-  mkDerivation,
+{ lib,
   stdenv,
+  fetchFromGitHub,
   SDL2,
   cmake,
   libGL,
@@ -28,30 +26,7 @@
   vapoursynth,
 }:
 
-let
-  # Recreate the SVP patching logic
-  fakeLsof = writeShellScriptBin "lsof" ''
-    for arg in "$@"; do
-      if [ -S "$arg" ]; then
-        printf %s p
-        echo '{"command": ["get_property", "pid"]}' |
-          ${socat}/bin/socat - "UNIX-CONNECT:$arg" |
-          ${jq}/bin/jq -Mr .data
-        printf '\n'
-      fi
-    done
-  '';
-
-  # Create the SVP-patched mpv version
-  mpvForSVP = callPackage ./mpv.nix {
-    inherit fakeLsof;
-    # Pass other required dependencies that might be needed by ./mpv.nix
-    inherit (stdenv) mkDerivation;
-    inherit fetchFromGitHub pkg-config;
-  };
-in
-
-mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "jellyfin-media-player";
   version = "1.12.0";
 
@@ -63,7 +38,9 @@ mkDerivation rec {
   };
 
   patches = [
+    # fix the location of the jellyfin-web path
     ./fix-web-path.patch
+    # disable update notifications since the end user can't simply download the release artifacts to update
     ./disable-update-notifications.patch
   ];
 
@@ -96,6 +73,25 @@ mkDerivation rec {
     python3
   ];
 
+  # Recreate the SVP patching logic
+  fakeLsof = writeShellScriptBin "lsof" ''
+    for arg in "$@"; do
+      if [ -S "$arg" ]; then
+        printf %s p
+        echo '{"command": ["get_property", "pid"]}' |
+          ${socat}/bin/socat - "UNIX-CONNECT:$arg" |
+          ${jq}/bin/jq -Mr .data
+        printf '\n'
+      fi
+    done
+  '';
+
+  # Create the SVP-patched mpv version
+  mpvForSVP = callPackage ./mpv.nix {
+    inherit fakeLsof;
+    inherit stdenv fetchFromGitHub pkg-config;
+  };
+
   cmakeFlags = [
     "-DQTROOT=${qtbase}"
     "-GNinja"
@@ -104,6 +100,7 @@ mkDerivation rec {
   ];
 
   preConfigure = ''
+    # link the jellyfin-web files to be copied by cmake (see fix-web-path.patch)
     ln -s ${jellyfin-web}/share/jellyfin-web .
   '';
 
