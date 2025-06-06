@@ -17,6 +17,7 @@
     let
   svpOverlay = final: prev: {
     svp-with-mpv = final.callPackage ./nix-overlays/svp-with-mpv/package.nix { };
+    jellyfin-with-svp = final.callPackage ./nix-overlays/jellyfin-with-svp/package.nix { };
   };
 
   pkgsWithSVP = import nixpkgs {

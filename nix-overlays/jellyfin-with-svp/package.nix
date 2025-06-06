@@ -1,50 +1,119 @@
-{ stdenv
-, lib
-, callPackage
-, copyDesktopItems
-, svp-with-mpv
-, jellyfin-media-player
+{ 
+  lib,
+  stdenv,
+  makeDesktopItem,
+  writeShellScriptBin,
+  callPackage,
+  # Base dependencies
+  SDL2,
+  cmake,
+  ffmpeg,
+  glibc,
+  jq,
+  libGL,
+  libX11,
+  libXrandr,
+  libmediainfo,
+  libusb1,
+  libvdpau,
+  mpv,
+  ninja,
+  ocl-icd,
+  p7zip,
+  patchelf,
+  pkg-config,
+  python3,
+  qtbase,
+  qtwayland,
+  qtwebchannel,
+  qtwebengine,
+  qtx11extras,
+  socat,
+  vapoursynth,
+  xdg-utils,
+  xorg,
+  zenity,
+  # Web dependency
+  jellyfin-web,
+  #extra deps
+  fetchurl,
+  libsForQt5,
+  buildFHSEnv,
+  copyDesktopItems
 }:
 
-stdenv.mkDerivation rec {
-  pname = "svp-and-jellyfin";
-  version = "combined-1";
-
-  # No source, just bundling two packages together
-  dontUnpack = true;
-
-  # These are the build inputs/packages we're combining
-  nativeBuildInputs = [ copyDesktopItems ];
-
-  # Depend on the existing derivations as inputs
-  buildInputs = [ svp-with-mpv jellyfin-media-player ];
-
-  # Post-install: make a place for both binaries and set symlinks
-  postInstall = ''
-    mkdir -p $out/bin
-    # Link SVPManager from svp-with-mpv package
-    ln -s ${svp-with-mpv}/bin/SVPManager $out/bin/SVPManager
-    ln -s ${svp-with-mpv}/bin/mpv $out/bin/mpv
-
-    # Link jellyfin media player binary
-    ln -s ${jellyfin-media-player}/bin/jellyfinmediaplayer $out/bin/jellyfinmediaplayer
-
-    # Copy desktop entries from both packages (optional but recommended)
-    mkdir -p $out/share/applications
-    cp ${svp-with-mpv}/share/applications/* $out/share/applications/ || true
-    cp ${jellyfin-media-player}/share/applications/* $out/share/applications/ || true
-
-    # Copy icons from both packages if needed
-    mkdir -p $out/share/icons
-    cp -r ${svp-with-mpv}/share/icons/* $out/share/icons/ || true
-    cp -r ${jellyfin-media-player}/share/icons/* $out/share/icons/ || true
+let
+  # Import original packages with modifications
+  svp-pkg = callPackage ./svp-with-mpv.nix { inherit stdenv buildFHSEnv writeShellScriptBin fetchurl callPackage
+    makeDesktopItem copyDesktopItems ffmpeg glibc jq lib libmediainfo libsForQt5 libusb1 ocl-icd p7zip patchelf
+    socat vapoursynth xdg-utils xorg zenity; };
+  
+  jellyfin-original = callPackage ./jellyfin-media-player.nix { inherit lib fetchFromGitHub mkDerivation SDL2 cmake
+    libGL libX11 libXrandr libvdpau mpv ninja pkg-config python3 qtbase qtwayland qtwebchannel qtwebengine qtx11extras
+    jellyfin-web; };
+  
+  # Override Jellyfin to use SVP's enhanced MPV
+  jellyfin-svp = jellyfin-original.overrideAttrs (old: {
+    buildInputs = old.buildInputs ++ [ svp-pkg.mpv ];
+  });
+  
+  # Combined launcher script
+  combined-launcher = writeShellScriptBin "jellyfin-svp" ''
+    #!/bin/sh
+    # Start SVP Manager in background if not running
+    if ! pgrep -x "SVPManager" >/dev/null; then
+      ${svp-pkg}/bin/SVPManager >/dev/null 2>&1 &
+      sleep 2  # Allow time to initialize
+    fi
+    
+    # Launch Jellyfin with SVP-enhanced MPV
+    exec ${jellyfin-svp}/bin/jellyfinmediaplayer "$@"
   '';
 
+in stdenv.mkDerivation rec {
+  pname = "jellyfin-svp";
+  version = "${jellyfin-svp.version}+svp-${svp-pkg.version}";
+
+  dontUnpack = true;
+  dontBuild = true;
+
+  installPhase = ''
+    mkdir -p $out/bin $out/share/applications $out/share/icons/hicolor
+    
+    # Install combined launcher
+    ln -s ${combined-launcher}/bin/jellyfin-svp $out/bin/
+    
+    # Install icons from both packages
+    cp -r --no-preserve=mode ${svp-pkg}/share/icons/hicolor/* $out/share/icons/hicolor/
+    cp -r --no-preserve=mode ${jellyfin-svp}/share/icons/hicolor/* $out/share/icons/hicolor/
+  '';
+
+  desktopItems = [
+    (makeDesktopItem {
+      name = "jellyfin-svp";
+      exec = "jellyfin-svp %U";
+      desktopName = "Jellyfin with SVP";
+      genericName = "Media Player with Frame Interpolation";
+      icon = "svp-manager4";
+      comment = "Jellyfin client with SmoothVideo Project frame interpolation";
+      categories = [ "AudioVideo" "Player" "Video" ];
+      mimeTypes = [
+        "video/x-msvideo"
+        "video/x-matroska"
+        "video/webm"
+        "video/mpeg"
+        "video/mp4"
+      ];
+      startupNotify = true;
+    })
+  ];
+
   meta = with lib; {
-    description = "Combined package for SVP with MPV and Jellyfin Media Player, so you can enjoy smooth video AND a great media client";
-    homepage = "https://www.svp-team.com/wiki/SVP:Linux and https://github.com/jellyfin/jellyfin-media-player";
-    license = licenses.unfree; # SVP is unfree, Jellyfin is GPL but unfree is stricter, so safer
-    maintainers = with maintainers; [ xddxdd jojosch ];
+    mainProgram = "jellyfin-svp";
+    description = "Integrated Jellyfin client with SVP frame interpolation";
+    homepage = "https://github.com/jellyfin/jellyfin-media-player";
     platforms = [ "x86_64-linux" ];
+    license = licenses.unfree;  # Inherits SVP's unfree license
+    maintainers = with maintainers; [ ];
   };
 }
