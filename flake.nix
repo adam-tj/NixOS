@@ -15,26 +15,22 @@
   outputs = { nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, slippi
     , ... }@inputs:
     let
+  svpOverlay = final: prev: {
+    svp-with-mpv = final.callPackage ./nix-overlays/svp-with-mpv/package.nix { };
+  };
+
+  pkgsWithSVP = import nixpkgs {
+    system = "x86_64-linux";
+    config.allowUnfree = true;
+    overlays = [ svpOverlay ];
+  };
+      
       # Common parameters for both systems
       commonModules = [
-        # ./hosts/common.nix
+        #       ./hosts/common.nix
         home-manager.nixosModules.home-manager
       ];
-
-      # Define your custom overlay for SVP and MPV
-      # This function takes 'final' (the final package set) and 'prev' (the previous package set)
-      myCustomSvpOverlay = final: prev: {
-        # Call your package.nix file using prev.callPackage.
-        # This will make the 'svp-with-mpv' and 'mpvWithSVP' derivations
-        # available in the 'pkgs' set of your system.
-        inherit (prev.callPackage ./package.nix {}) svp-with-mpv mpvWithSVP;
-      };
-
     in {
-      # Make your custom overlay available as part of this flake's outputs.
-      # You can now reference this overlay from other flakes or your system config.
-      overlays.default = myCustomSvpOverlay;
-
       nixosConfigurations = {
         # Laptop Configuration
         thinkpad = nixpkgs.lib.nixosSystem {
@@ -42,8 +38,6 @@
           modules = commonModules ++ [
             {
               nixpkgs.config.allowUnfree = true;
-              # Apply your custom SVP overlay here for the thinkpad configuration
-              nixpkgs.overlays = [ myCustomSvpOverlay ];
             }
             ./hosts/thinkpad.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-l13
@@ -88,13 +82,10 @@
         # Desktop Configuration
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs slippi; };
-          modules = commonModules ++ [
-            {
-              # Apply your custom SVP overlay here for the desktop configuration
-              nixpkgs.overlays = [ myCustomSvpOverlay ];
-            }
+          specialArgs = { inherit inputs slippi pkgsWithSVP; };
+          modules = commonModules ++ [            
             ./hosts/desktop.nix
+            #            ./modules/common/slippi.nix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -106,6 +97,7 @@
                   config.allowUnfree = true;
                 };
               };
+
             }
             {
               home-manager.users.adam = {

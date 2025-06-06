@@ -8,7 +8,8 @@
     packages = with pkgs; [
       obs-studio
       r2modman
-
+  #svp-with-mpv
+  #mpvWithSVP
       #jellyfin-media-player-svp
 
     ];
