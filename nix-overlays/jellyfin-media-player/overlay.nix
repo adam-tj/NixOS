@@ -1,20 +1,29 @@
+# ./nix-overlays/jellyfin-media-player/overlay.nix
+# This overlay provides a custom mpv and a jellyfin-media-player-svp package.
+
+{ pkgs, ... }:
+
 final: prev: {
-  jellyfin-media-player = prev.jellyfin-media-player.overrideAttrs (oldAttrs: {
-    # Use our custom derivation
-    passthru = (oldAttrs.passthru or {}) // {
-      override = drv: prev.jellyfin-media-player.override (drv // {
-        callPackage = final.callPackage;
-      });
-    };
-  });
-  
-  # Create a top-level package
+  mpv = final.callPackage ./mpv.nix {
+    inherit (prev) mpv-unwrapped ocl-icd;
+  };
+
   jellyfin-media-player-svp = final.callPackage ./default.nix {
-    # Pass dependencies from the final package set
-    inherit (final) 
-      lib fetchFromGitHub mkDerivation stdenv SDL2 cmake libGL libX11 
-      libXrandr libvdpau mpv ninja pkg-config python3 qtbase qtwayland 
-      qtwebchannel qtwebengine qtx11extras jellyfin-web callPackage 
-      writeShellScriptBin jq socat vapoursynth;
+    # Remove all individual Qt components from inherit (final)
+    inherit (final)
+      lib fetchFromGitHub stdenv SDL2 cmake libGL mpv ninja pkg-config python3 jellyfin-web;
+
+    # Pass the X.org components correctly (as we fixed previously)
+    libX11 = final.xorg.libX11;
+    libXrandr = final.xorg.libXrandr;
+    libvdpau = final.libvdpau; # Assuming it's top-level
+
+    # Explicitly pass each required Qt component from libsForQt5
+    # Assuming Qt5 as per SVP's definition and common practice for this project.
+    qtbase = final.libsForQt5.qtbase;
+    qtwayland = final.libsForQt5.qtwayland;
+    qtwebchannel = final.libsForQt5.qtwebchannel;
+    qtwebengine = final.libsForQt5.qtwebengine;
+    qtx11extras = final.libsForQt5.qtx11extras;
   };
 }

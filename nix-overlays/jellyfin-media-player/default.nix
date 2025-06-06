@@ -1,13 +1,18 @@
-{ lib,
-  stdenv,
+# ./nix-overlays/jellyfin-media-player/default.nix
+# This is a slightly modified version of the original jellyfin-media-player derivation.
+# It will automatically use the `mpv` provided by the Nixpkgs overlay it's applied within.
+
+{
+  lib,
   fetchFromGitHub,
+  stdenv, # stdenv provides mkDerivation
   SDL2,
   cmake,
   libGL,
   libX11,
   libXrandr,
   libvdpau,
-  mpv,  # Original mpv
+  mpv, # This 'mpv' input will now be our custom SVP-configured mpv from the overlay
   ninja,
   pkg-config,
   python3,
@@ -18,15 +23,9 @@
   qtx11extras,
   jellyfin-web,
   withDbus ? stdenv.hostPlatform.isLinux,
-  # New dependencies for SVP patching
-  callPackage,
-  writeShellScriptBin,
-  jq,
-  socat,
-  vapoursynth,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation rec { # Correctly uses stdenv.mkDerivation
   pname = "jellyfin-media-player";
   version = "1.12.0";
 
@@ -38,9 +37,7 @@ stdenv.mkDerivation rec {
   };
 
   patches = [
-    # fix the location of the jellyfin-web path
     ./fix-web-path.patch
-    # disable update notifications since the end user can't simply download the release artifacts to update
     ./disable-update-notifications.patch
   ];
 
@@ -51,6 +48,7 @@ stdenv.mkDerivation rec {
       libX11
       libXrandr
       libvdpau
+      mpv
       qtbase
       qtwebchannel
       qtwebengine
@@ -58,12 +56,6 @@ stdenv.mkDerivation rec {
     ]
     ++ lib.optionals stdenv.hostPlatform.isLinux [
       qtwayland
-      # Use patched mpv for Linux, original for others
-      mpvForSVP
-      vapoursynth
-    ]
-    ++ lib.optionals (!stdenv.hostPlatform.isLinux) [
-      mpv  # Original mpv for non-Linux
     ];
 
   nativeBuildInputs = [
@@ -73,34 +65,16 @@ stdenv.mkDerivation rec {
     python3
   ];
 
-  # Recreate the SVP patching logic
-  fakeLsof = writeShellScriptBin "lsof" ''
-    for arg in "$@"; do
-      if [ -S "$arg" ]; then
-        printf %s p
-        echo '{"command": ["get_property", "pid"]}' |
-          ${socat}/bin/socat - "UNIX-CONNECT:$arg" |
-          ${jq}/bin/jq -Mr .data
-        printf '\n'
-      fi
-    done
-  '';
-
-  # Create the SVP-patched mpv version
-  mpvForSVP = callPackage ./mpv.nix {
-    inherit fakeLsof;
-    inherit stdenv fetchFromGitHub pkg-config;
-  };
-
-  cmakeFlags = [
-    "-DQTROOT=${qtbase}"
-    "-GNinja"
-  ] ++ lib.optionals (!withDbus) [
-    "-DLINUX_X11POWER=ON"
-  ];
+  cmakeFlags =
+    [
+      "-DQTROOT=${qtbase}"
+      "-GNinja"
+    ]
+    ++ lib.optionals (!withDbus) [
+      "-DLINUX_X11POWER=ON"
+    ];
 
   preConfigure = ''
-    # link the jellyfin-web files to be copied by cmake (see fix-web-path.patch)
     ln -s ${jellyfin-web}/share/jellyfin-web .
   '';
 
@@ -112,10 +86,21 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "https://github.com/jellyfin/jellyfin-media-player";
-    description = "Jellyfin Desktop Client based on Plex Media Player";
-    license = with licenses; [ gpl2Only mit ];
-    platforms = [ "aarch64-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ];
-    maintainers = with maintainers; [ jojosch kranzes paumr ];
+    description = "Jellyfin Desktop Client based on Plex Media Player (with SVP-enabled MPV)";
+    license = with licenses; [
+      gpl2Only
+      mit
+    ];
+    platforms = [
+      "aarch64-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+    ];
+    maintainers = with maintainers; [
+      jojosch
+      kranzes
+      paumr
+    ];
     mainProgram = "jellyfinmediaplayer";
   };
 }

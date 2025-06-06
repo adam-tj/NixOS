@@ -22,20 +22,11 @@
       ];
 
       # Custom package overlay
-      customOverlay = final: prev: {
-        jellyfin-media-player-svp = prev.callPackage ./nix-overlays/jellyfin-media-player {
-          inherit (inputs.nixpkgs) lib;
-          inherit (prev) 
-            fetchFromGitHub stdenv SDL2 cmake libGL libX11 
-            libXrandr libvdpau mpv ninja pkg-config python3 qtbase qtwayland 
-            qtwebchannel qtwebengine qtx11extras jellyfin-web callPackage 
-            writeShellScriptBin jq socat vapoursynth;
-          # Add mkDerivation from stdenv
-          mkDerivation = prev.stdenv.mkDerivation;
-        };
+      jellyfinSvpOverlay = import ./nix-overlays/jellyfin-media-player/overlay.nix {
+        inherit (nixpkgs) pkgs; # Pass the original pkgs set to the overlay if it needs it (not strictly needed here but good practice)
       };
 
-
+      # Custom package overlay
 
 
     in {
@@ -94,14 +85,17 @@
           modules = commonModules ++ [            
             ./hosts/desktop.nix
 
-            # Add our custom overlay
+
+
+
             ({ config, pkgs, ... }: {
-              nixpkgs.overlays = [ customOverlay ];
+              nixpkgs.overlays = [ jellyfinSvpOverlay ]; # Use the imported overlay
+              nixpkgs.config.allowUnfree = true; # Allow unfree packages for this system if needed
             })
-            
-            # Add to system packages
+
+            # Add the new package to system packages
             ({ config, pkgs, ... }: {
-              environment.systemPackages = [ pkgs.jellyfin-media-player-svp ];
+              environment.systemPackages = [ pkgs.jellyfin-media-player-svp ]; # Use the overridden package
             })
 
 
