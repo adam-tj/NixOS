@@ -1,7 +1,6 @@
 {
   lib,
   fetchFromGitHub,
-  mkDerivation,
   stdenv,
   SDL2,
   cmake,
@@ -9,7 +8,7 @@
   libX11,
   libXrandr,
   libvdpau,
-  mpv,
+  mpvForSVP, # mpvForSVP now has .passthru.vapoursynthScripts
   ninja,
   pkg-config,
   python3,
@@ -20,9 +19,11 @@
   qtx11extras,
   jellyfin-web,
   withDbus ? stdenv.hostPlatform.isLinux,
+  wrapQtAppsHook,
+  pkgs, # Still needed to access pkgs.vapoursynth and pkgs.python3.sitePackages
 }:
 
-mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "jellyfin-media-player";
   version = "1.12.0";
 
@@ -34,9 +35,7 @@ mkDerivation rec {
   };
 
   patches = [
-    # fix the location of the jellyfin-web path
     ./fix-web-path.patch
-    # disable update notifications since the end user can't simply download the release artifacts to update
     ./disable-update-notifications.patch
   ];
 
@@ -47,7 +46,7 @@ mkDerivation rec {
       libX11
       libXrandr
       libvdpau
-      mpv
+      mpvForSVP # Keep here
       qtbase
       qtwebchannel
       qtwebengine
@@ -62,7 +61,11 @@ mkDerivation rec {
     ninja
     pkg-config
     python3
+    wrapQtAppsHook
   ];
+
+  # *** MODIFIED: REMOVED propagatedBuildInputs for mpvForSVP, vapoursynth, numpy. ***
+  # *** Instead, we're using qtWrapperArgs for explicit environment control. ***
 
   cmakeFlags =
     [
@@ -74,7 +77,6 @@ mkDerivation rec {
     ];
 
   preConfigure = ''
-    # link the jellyfin-web files to be copied by cmake (see fix-web-path.patch)
     ln -s ${jellyfin-web}/share/jellyfin-web .
   '';
 
@@ -83,6 +85,19 @@ mkDerivation rec {
     mv "$out/Jellyfin Media Player.app" $out/Applications
     ln -s "$out/Applications/Jellyfin Media Player.app/Contents/MacOS/Jellyfin Media Player" $out/bin/jellyfinmediaplayer
   '';
+
+  # *** ADDED: Explicitly set environment variables for the wrapped executable ***
+  qtWrapperArgs = [
+    # Ensure mpvForSVP's bin directory is in PATH for the wrapped jellyfinmediaplayer
+    "--prefix" "PATH" ":" "${mpvForSVP}/bin"
+
+    # Propagate Vapoursynth's Python script path from mpvForSVP's internal definition
+    "--prefix" "PYTHONPATH" ":" "${mpvForSVP.passthru.vapoursynthScripts}/${pkgs.python3.sitePackages}"
+
+    # Propagate Vapoursynth's native library path
+    "--prefix" "LD_LIBRARY_PATH" ":" "${pkgs.vapoursynth}/lib"
+  ];
+  # *****************************************************************************
 
   meta = with lib; {
     homepage = "https://github.com/jellyfin/jellyfin-media-player";
