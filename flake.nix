@@ -23,7 +23,7 @@
 
       # Custom package overlay
       customOverlay = final: prev: {
-        jellyfin-media-player-svp = prev.callPackage ./packages/jellyfin-media-player {
+        jellyfin-media-player-svp = prev.callPackage ./nix-overlays/jellyfin-media-player {
           inherit (inputs.nixpkgs) lib;
           inherit (prev) fetchFromGitHub mkDerivation stdenv SDL2 cmake libGL libX11 
             libXrandr libvdpau mpv ninja pkg-config python3 qtbase qtwayland 
