@@ -8,6 +8,9 @@
     packages = with pkgs; [
       obs-studio
       r2modman
+
+      jellyfin-media-player-svp
+
     ];
   };
 }

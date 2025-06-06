@@ -20,6 +20,20 @@
         #       ./hosts/common.nix
         home-manager.nixosModules.home-manager
       ];
+
+      # Custom package overlay
+      customOverlay = final: prev: {
+        jellyfin-media-player-svp = prev.callPackage ./packages/jellyfin-media-player {
+          inherit (inputs.nixpkgs) lib;
+          inherit (prev) fetchFromGitHub mkDerivation stdenv SDL2 cmake libGL libX11 
+            libXrandr libvdpau mpv ninja pkg-config python3 qtbase qtwayland 
+            qtwebchannel qtwebengine qtx11extras jellyfin-web callPackage 
+            writeShellScriptBin jq socat vapoursynth;
+        };
+      };
+
+
+
     in {
       nixosConfigurations = {
         # Laptop Configuration
@@ -75,6 +89,18 @@
           specialArgs = { inherit inputs slippi; };
           modules = commonModules ++ [            
             ./hosts/desktop.nix
+
+            # Add our custom overlay
+            ({ config, pkgs, ... }: {
+              nixpkgs.overlays = [ customOverlay ];
+            })
+            
+            # Add to system packages
+            ({ config, pkgs, ... }: {
+              environment.systemPackages = [ pkgs.jellyfin-media-player-svp ];
+            })
+
+
             #            ./modules/common/slippi.nix
             {
               home-manager.useGlobalPkgs = true;

@@ -1,28 +1,37 @@
+# jellyfin-mpv-shim-config.nix
+# This file defines a NixOS module to add the customized jellyfin-mpv-shim, SVP, and SVP's mpv.
+
+# A NixOS module's top-level function accepts standard arguments like:
+# 'config': The evaluated configuration up to this point.
+# 'pkgs': The Nixpkgs package set.
+# 'lib': The Nixpkgs utility library.
+# '...': Catches any other arguments (like 'inputs' in flakes) that we might not explicitly use.
 { config, pkgs, lib, ... }:
 
 let
-  # Define a custom package set that includes your local packages
-  myPkgs = pkgs.extend (final: prev: {
-    # Import your custom jellyfin-media-player package
-    jellyfin-media-player = final.callPackage ../test.nix { };
-    # If mpv.nix also needs to be exposed or called directly elsewhere, you could do:
-    # mpvForSVP = final.callPackage ./nix-packages/mpv.nix { };
-  });
+  # Get the specific mpv derivation used by SVP.
+  # 'pkgs.svp' is now directly available from the module arguments.
+  mpvFromSVP = pkgs.svp.mpv;
+
+  # First, override the default jellyfin-mpv-shim package to use the custom mpv.
+  #jellyfinMpvShimBase = pkgs.jellyfin-mpv-shim.override {
+  #  mpv = mpvFromSVP;
+  #};
+
+  # Then, use .overrideAttrs on the result to add pkgs.ffmpeg to its buildInputs
+  # and attempt to force mpv IPC server configuration, and add the python 'mpv' module.
+
 in
 {
-  imports = [
-    # Your other imports, e.g., ./hardware-configuration.nix
-  ];
-
-  # Make sure to set the NIX_PATH or use an absolute path for ./nix-packages/
-  # A simpler way is to place the nix-packages directory next to your configuration.nix
-  # and use relative path like ./nix-packages/jellyfin-media-player.nix
-
-  # Add jellyfin-media-player to your system packages
-  environment.systemPackages = with pkgs; [
-    # ... other packages you want ...
-    myPkgs.jellyfin-media-player
-  ];
-
-  # ... rest of your configuration ...
+  # The 'config' attribute set defines the configuration options provided by this module.
+  config = {
+    # Add our customized jellyfin-mpv-shim, SVP, and SVP's mpv to the list of system packages.
+    # NixOS will automatically merge lists from different modules.
+    environment.systemPackages = [
+      pkgs.jellyfin-mpv-shim
+      #jellyfinMpvShimBase # This is the correctly customized jellyfin-mpv-shim
+      pkgs.svp # Add the SVP package here
+      mpvFromSVP # Add the specific mpv derivation used by SVP here (for standalone use)
+    ];
+  };
 }
