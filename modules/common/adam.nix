@@ -30,7 +30,7 @@
       #( jellyfin-mpv-shim.override { mpv = mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; }; } )
     ] ++ (with pkgsWithSVP; [
       svp-with-mpv
-      jellyfin-with-svp.jellyfin-media-player
+      #jellyfin-with-svp.jellyfin-media-player
     ]) ++ (with kdePackages; [
       filelight
       kaccounts-integration
