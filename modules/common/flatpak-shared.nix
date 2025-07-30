@@ -18,7 +18,6 @@
   "org.quassel_irc.QuasselClient"
   "com.github.ryonakano.reco"
   "org.remmina.Remmina"
-  "com.skype.Client"
   "org.mozilla.Thunderbird"
   "com.rtosta.zapzap"
   "us.zoom.Zoom"
