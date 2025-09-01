@@ -6,6 +6,7 @@
   "org.mozilla.firefox"
   "it.mijorus.gearlever"
   "org.gimp.GIMP"
+  "com.google.EarthPro"
   "org.libreoffice.LibreOffice"
   "net.lutris.Lutris"
   "net.mediaarea.MediaInfo"

@@ -9,7 +9,7 @@
       gamemode
       irssi isoimagewriter
       jdk jflap   jellyfin-mpv-shim jetbrains-toolbox
-      mangohud mediainfo mesa-demos
+      mangohud mediainfo mesa-demos mesen
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
       #( mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; extraMakeWrapperArgs = [ "--prefix" "LD_LIBRARY_PATH" ":" "/run/opengl-driver/lib:${lib.makeLibraryPath [ ocl-icd ]}" ]; } )
       plex-mpv-shim
