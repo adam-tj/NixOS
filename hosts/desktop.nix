@@ -35,6 +35,7 @@
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix
+    ../modules/services/auto-gc-90d.nix
 
     # Services
     ../modules/services/bluetooth.nix

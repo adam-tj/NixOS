@@ -83,7 +83,8 @@
         # Desktop Configuration
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs slippi pkgsWithSVP; };
+          # specialArgs = { inherit inputs slippi pkgsWithSVP; };
+          specialArgs = { inherit inputs pkgsWithSVP; };
           modules = commonModules ++ [            
             ./hosts/desktop.nix
             #            ./modules/common/slippi.nix
@@ -115,6 +116,11 @@
                   }
                 ];
               };
+                home-manager.users.adam = {
+                  nix.gc.automatic = true;
+                  nix.gc.options = "--delete-older-than 30d";
+                  nix.gc.dates = "daily";
+                };
             }
           ];
         };
