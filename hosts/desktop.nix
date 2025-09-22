@@ -17,7 +17,7 @@
     ../modules/common/plex-portal.nix
     # ../modules/common/firefox.nix
     ../modules/desktop/coolercontrol.nix
-    ../modules/common/virtualbox.nix
+    #../modules/common/virtualbox.nix
     ../modules/common/virt-manager.nix
     #../modules/common/test.nix
 
