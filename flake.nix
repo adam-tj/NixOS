@@ -119,7 +119,7 @@
                 home-manager.users.adam = {
                   nix.gc.automatic = true;
                   nix.gc.options = "--delete-older-than 30d";
-                  nix.gc.dates = "daily";
+                  nix.gc.frequency = "daily";
                 };
             }
           ];
