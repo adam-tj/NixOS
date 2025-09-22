@@ -7,7 +7,7 @@
     ../modules/thinkpad/intel-igpu.nix
     ../modules/common/gamecube-controller.nix
     ../modules/common/xbox-controller.nix
-    ../modules/services/piper-rules.nix
+    # ../modules/services/piper-rules.nix
 
     # User
     ../modules/common/adam.nix

@@ -1,4 +1,3 @@
-{ config, lib, ... }:
 {
 
   imports = [
@@ -19,6 +18,7 @@
     # ../modules/common/firefox.nix
     ../modules/desktop/coolercontrol.nix
     ../modules/common/virtualbox.nix
+    ../modules/common/virt-manager.nix
     #../modules/common/test.nix
 
     # GUI

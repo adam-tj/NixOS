@@ -11,7 +11,6 @@
   "net.lutris.Lutris"
   "net.mediaarea.MediaInfo"
   "com.nextcloud.desktopclient.nextcloud"
-  "org.freedesktop.Piper"
   "tv.plex.PlexDesktop"
   "com.vysp3r.ProtonPlus"
   "com.github.Matoking.protontricks"
