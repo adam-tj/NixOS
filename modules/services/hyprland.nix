@@ -10,7 +10,7 @@
   ];
 
   imports = [
-    ../common/fonts.nix
+    #../common/fonts.nix
     ../common/tiling_pkgs.nix
   ];
 }

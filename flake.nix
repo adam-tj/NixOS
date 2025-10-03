@@ -36,6 +36,7 @@
         # Laptop Configuration
         thinkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = { inherit inputs pkgsWithSVP; };
           modules = commonModules ++ [
             {
               nixpkgs.config.allowUnfree = true;
@@ -75,6 +76,10 @@
                     #   "sha256-iCBdlcBPSRT8m772sqI+gSfNmVNAug0SfkSwVUE6+fE=";
                   }
                 ];
+                # Garbage collection
+                  nix.gc.automatic = true;
+                  nix.gc.options = "--delete-older-than 120d";
+                  nix.gc.frequency = "daily";
               };
             }
           ];
@@ -118,7 +123,7 @@
               };
                 home-manager.users.adam = {
                   nix.gc.automatic = true;
-                  nix.gc.options = "--delete-older-than 30d";
+                  nix.gc.options = "--delete-older-than 120d";
                   nix.gc.frequency = "daily";
                 };
             }
