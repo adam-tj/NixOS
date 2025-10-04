@@ -15,7 +15,6 @@
       piper plex-mpv-shim
       qbittorrent
       smplayer #svp
-      tor-browser
       vlc vscodium
       wine
 

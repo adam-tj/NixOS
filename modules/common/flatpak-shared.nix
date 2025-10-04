@@ -11,14 +11,14 @@
   "net.lutris.Lutris"
   "net.mediaarea.MediaInfo"
   "com.nextcloud.desktopclient.nextcloud"
-  "tv.plex.PlexDesktop"
   "com.vysp3r.ProtonPlus"
   "com.github.Matoking.protontricks"
   "io.github.Qalculate.qalculate-qt"
   "org.quassel_irc.QuasselClient"
-  "com.github.ryonakano.reco"
+  "com.github.ryonakano.reco" # Audio recorder
   "org.remmina.Remmina"
   "org.mozilla.Thunderbird"
+  "org.torproject.torbrowser-launcher"
   "com.rtosta.zapzap"
   "us.zoom.Zoom"
 ]

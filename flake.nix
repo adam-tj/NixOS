@@ -12,26 +12,34 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, slippi
-    , ... }@inputs:
+  outputs =
+    {
+      nixpkgs,
+      nixpkgs-unstable,
+      nixos-hardware,
+      home-manager,
+      slippi,
+      ...
+    }@inputs:
     let
-  svpOverlay = final: prev: {
-    svp-with-mpv = final.callPackage ./nix-overlays/svp-with-mpv/package.nix { };
-    jellyfin-with-svp = final.callPackage ./nix-overlays/jellyfin-with-svp/package.nix { };
-  };
+      svpOverlay = final: prev: {
+        svp-with-mpv = final.callPackage ./nix-overlays/svp-with-mpv/package.nix { };
+        jellyfin-with-svp = final.callPackage ./nix-overlays/jellyfin-with-svp/package.nix { };
+      };
 
-  pkgsWithSVP = import nixpkgs {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-    overlays = [ svpOverlay ];
-  };
-      
+      pkgsWithSVP = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+        overlays = [ svpOverlay ];
+      };
+
       # Common parameters for both systems
       commonModules = [
         #       ./hosts/common.nix
         home-manager.nixosModules.home-manager
       ];
-    in {
+    in
+    {
       nixosConfigurations = {
         # Laptop Configuration
         thinkpad = nixpkgs.lib.nixosSystem {
@@ -61,25 +69,18 @@
                 imports = [
                   slippi.homeManagerModules.default
                   {
-                    slippi-launcher.isoPath =
-                      "/home/adam/Games/ROMS/animelee.iso";
+                    slippi-launcher.isoPath = "/home/adam/Games/ROMS/animelee.iso";
                     slippi-launcher.rootSlpPath = "/home/adam/Games/Slippi";
                     slippi-launcher.launchMeleeOnPlay = false;
                     slippi-launcher.useMonthlySubfolders = true;
                     slippi-launcher.enableJukebox = true;
                     slippi-launcher.useNetplayBeta = false;
-                    # slippi-launcher.netplayVersion = "3.4.0";
-                    # slippi-launcher.netplayHash =
-                    #   "sha256-iCBdlcBPSRT8m772sqI+gSfNmVNAug0SfkSwVUE6+fE=";
-                    # slippi-launcher.playbackVersion = "3.4.0";
-                    # slippi-launcher.playbackHash =
-                    #   "sha256-iCBdlcBPSRT8m772sqI+gSfNmVNAug0SfkSwVUE6+fE=";
                   }
                 ];
                 # Garbage collection
-                  nix.gc.automatic = true;
-                  nix.gc.options = "--delete-older-than 120d";
-                  nix.gc.frequency = "daily";
+                nix.gc.automatic = true;
+                nix.gc.options = "--delete-older-than 10d";
+                nix.gc.frequency = "daily";
               };
             }
           ];
@@ -90,7 +91,7 @@
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = { inherit inputs pkgsWithSVP; };
-          modules = commonModules ++ [            
+          modules = commonModules ++ [
             ./hosts/desktop.nix
             #            ./modules/common/slippi.nix
             {
@@ -111,8 +112,7 @@
                 imports = [
                   slippi.homeManagerModules.default
                   {
-                    slippi-launcher.isoPath =
-                      "/home/adam/Games/ROMS/animelee.iso";
+                    slippi-launcher.isoPath = "/home/adam/Games/ROMS/animelee.iso";
                     slippi-launcher.rootSlpPath = "/home/adam/Games/Slippi";
                     slippi-launcher.launchMeleeOnPlay = false;
                     slippi-launcher.useMonthlySubfolders = true;
@@ -120,12 +120,10 @@
                     slippi-launcher.useNetplayBeta = false;
                   }
                 ];
+                nix.gc.automatic = true;
+                nix.gc.options = "--delete-older-than 10d";
+                nix.gc.frequency = "daily";
               };
-                home-manager.users.adam = {
-                  nix.gc.automatic = true;
-                  nix.gc.options = "--delete-older-than 120d";
-                  nix.gc.frequency = "daily";
-                };
             }
           ];
         };
