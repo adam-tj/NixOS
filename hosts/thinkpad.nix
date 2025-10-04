@@ -20,7 +20,7 @@
     # GUI
     ../modules/services/sddm.nix
     ../modules/services/plasma6.nix
-    ../modules/common/exclude-plasma6-packages.nix
+    ../modules/thinkpad/exclude-plasma6-packages-except-discover.nix
     ../modules/services/hyprland.nix
     ../modules/services/xserver.nix
 
