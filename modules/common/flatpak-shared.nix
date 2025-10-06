@@ -17,7 +17,6 @@
   "org.quassel_irc.QuasselClient"
   "com.github.ryonakano.reco" # Audio recorder
   "org.remmina.Remmina"
-  "org.mozilla.Thunderbird"
   "org.torproject.torbrowser-launcher"
   "com.rtosta.zapzap"
   "us.zoom.Zoom"

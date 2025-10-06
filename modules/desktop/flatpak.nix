@@ -25,6 +25,7 @@ let
     "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08"
     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08"
     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
+    "org.vinegarhq.Sober" # Roblox
   ];
   desiredFlatpaks = lib.unique (sharedPackages ++ localPackages);
 
