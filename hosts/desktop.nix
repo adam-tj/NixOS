@@ -37,6 +37,7 @@
     ../modules/common/fish.nix
     ../modules/services/auto-gc-90d.nix
     ../modules/common/whitelist-insecure-packages.nix
+    ../modules/common/polkit.nix
 
     # Services
     ../modules/services/bluetooth.nix

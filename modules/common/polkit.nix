@@ -2,7 +2,7 @@
   security.polkit.extraConfig = ''
         polkit.addRule(function(action, subject) {
         if ((action.id == "org.freedesktop.policykit.exec") &&
-            subject.isInGroup("sudo"))
+            subject.isInGroup("wheel"))
         {
             return polkit.Result.YES;
         }
