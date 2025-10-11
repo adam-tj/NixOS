@@ -15,7 +15,21 @@
       #( mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; extraMakeWrapperArgs = [ "--prefix" "LD_LIBRARY_PATH" ":" "/run/opengl-driver/lib:${lib.makeLibraryPath [ ocl-icd ]}" ]; } )
       piper plex-mpv-shim
       qbittorrent
-      retroarch-full
+          (retroarch.withCores (cores: with libretro; [
+            beetle-psx-hw
+      bsnes
+      citra
+      desmume
+      dolphin
+      mame
+      mesen
+      mgba
+      mupen64plus
+      pcsx2
+      ppsspp
+      sameboy
+    ]))
+      libretro.mesen
       smplayer #svp
       vlc vscodium
       wine

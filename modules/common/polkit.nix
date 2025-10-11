@@ -1,0 +1,11 @@
+{
+  security.polkit.extraConfig = ''
+        polkit.addRule(function(action, subject) {
+        if ((action.id == "org.freedesktop.policykit.exec") &&
+            subject.isInGroup("sudo"))
+        {
+            return polkit.Result.YES;
+        }
+    });
+  '';
+}
