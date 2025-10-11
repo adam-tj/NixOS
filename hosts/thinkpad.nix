@@ -30,6 +30,7 @@
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix
+    ../modules/common/whitelist-insecure-packages.nix
 
     # Services
     ../modules/services/bluetooth.nix

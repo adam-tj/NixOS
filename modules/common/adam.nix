@@ -15,6 +15,7 @@
       #( mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; extraMakeWrapperArgs = [ "--prefix" "LD_LIBRARY_PATH" ":" "/run/opengl-driver/lib:${lib.makeLibraryPath [ ocl-icd ]}" ]; } )
       piper plex-mpv-shim
       qbittorrent
+      retroarch-full
       smplayer #svp
       vlc vscodium
       wine
