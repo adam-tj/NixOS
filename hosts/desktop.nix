@@ -36,6 +36,7 @@
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix
     ../modules/services/auto-gc-90d.nix
+    ../modules/common/whitelist-insecure-packages.nix
 
     # Services
     ../modules/services/bluetooth.nix

@@ -6,6 +6,7 @@
     description = "Adam";
     packages = with pkgs; [
       appimage-run
+      emulationstation-de
       gamemode
       irssi isoimagewriter
       jdk jflap   jellyfin-mpv-shim jetbrains-toolbox
