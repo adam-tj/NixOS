@@ -8,7 +8,7 @@
   "org.gimp.GIMP"
   "com.google.EarthPro"
   "org.libreoffice.LibreOffice"
-  "net.lutris.Lutris"
+  #"net.lutris.Lutris"
   "net.mediaarea.MediaInfo"
   "com.nextcloud.desktopclient.nextcloud"
   "com.vysp3r.ProtonPlus"

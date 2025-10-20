@@ -9,6 +9,7 @@ let
   sharedPackages = import ../common/flatpak-shared.nix;
   localPackages = [
     "com.github.iwalton3.jellyfin-media-player"
+    "net.lutris.Lutris"
     "org.openscopeproject.TrguiNG"
   ];
   desiredFlatpaks = lib.unique (sharedPackages ++ localPackages);
