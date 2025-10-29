@@ -52,6 +52,7 @@
       kaccounts-integration
       kaccounts-providers
       kate
+      kclock
       kolourpaint
     ])
     ;
