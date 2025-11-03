@@ -12,6 +12,7 @@
       jdk jflap   jellyfin-mpv-shim jetbrains-toolbox
       lutris
       mangohud mediainfo mesa-demos mesen
+      nix-ld
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
       #( mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; extraMakeWrapperArgs = [ "--prefix" "LD_LIBRARY_PATH" ":" "/run/opengl-driver/lib:${lib.makeLibraryPath [ ocl-icd ]}" ]; } )
       piper plex-mpv-shim
@@ -58,7 +59,23 @@
     ;
   };
 
-
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    gdk-pixbuf
+    xorg.libSM
+    xorg.libICE
+    xorg.libX11
+    xorg.libXext
+    xorg.libXrandr
+    freetype
+    SDL2
+    gtk3
+    pango
+    harfbuzz
+    atk
+    cairo
+    glib
+  ];
 
   
 

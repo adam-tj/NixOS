@@ -59,10 +59,10 @@ let
 
   svp-dist = stdenv.mkDerivation rec {
     pname = "svp-dist";
-    version = "4.6.263";
+    version = "4.7.305";
     src = fetchurl {
       url = "https://www.svp-team.com/files/svp4-linux.${version}.tar.bz2";
-      sha256 = "sha256-HyRDVFHVmTan/Si3QjGQpC3za30way10d0Hk79oXG98=";
+      sha256 = "sha256-PWAcm/hIA4JH2QtJPP+gSJdJLRdfdbZXIVdWELazbxQ=";
     };
 
     nativeBuildInputs = [
@@ -77,9 +77,9 @@ let
 
     buildPhase = ''
       mkdir installer
-      LANG=C grep --only-matching --byte-offset --binary --text  $'7z\xBC\xAF\x27\x1C' "svp4-linux-64.run" |
+      LANG=C grep --only-matching --byte-offset --binary --text  $'7z\xBC\xAF\x27\x1C' "svp4-linux.run" |
         cut -f1 -d: |
-        while read ofs; do dd if="svp4-linux-64.run" bs=1M iflag=skip_bytes status=none skip=$ofs of="installer/bin-$ofs.7z"; done
+        while read ofs; do dd if="svp4-linux.run" bs=1M iflag=skip_bytes status=none skip=$ofs of="installer/bin-$ofs.7z"; done
     '';
 
     installPhase = ''
