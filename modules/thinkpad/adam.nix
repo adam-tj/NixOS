@@ -6,11 +6,10 @@
     description = "Adam";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      (mpv-unwrapped.wrapper {
-        mpv = mpv-unwrapped.override { vapoursynthSupport = true; };
-        youtubeSupport = true;
-      })
-      svp
+      # (mpv-unwrapped.wrapper {
+      #   mpv = mpv-unwrapped.override { vapoursynthSupport = true; };
+      #   youtubeSupport = true;
+      # })
 
     ];
   };
