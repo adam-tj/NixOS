@@ -9,7 +9,7 @@
       emulationstation-de
       gamemode
       irssi isoimagewriter
-      jdk jflap   jellyfin-mpv-shim jetbrains-toolbox
+      jdk   jellyfin-mpv-shim jetbrains-toolbox
       lutris
       mangohud mediainfo mesa-demos mesen
       nix-ld
