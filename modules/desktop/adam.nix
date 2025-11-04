@@ -6,7 +6,7 @@
     description = "Adam";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      lutris
+      nix-ld
       obs-studio
       r2modman
   #svp-with-mpv
