@@ -19,6 +19,7 @@
   "com.github.ryonakano.reco" # Audio recorder
   "org.remmina.Remmina"
   "org.torproject.torbrowser-launcher"
+  "org.openscopeproject.TrguiNG"
   "dev.vencord.Vesktop"
   "com.rtosta.zapzap"
   "us.zoom.Zoom"
