@@ -33,7 +33,7 @@
     ]))
       libretro.mesen
       smplayer #svp
-      vlc vscodium
+      vlc vorbis-tools vscodium
       wine
 
 #jellyfin-media-player

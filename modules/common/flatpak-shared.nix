@@ -1,11 +1,12 @@
 [
   "com.google.Chrome"
   "com.usebottles.bottles"
-  "com.discordapp.Discord"
+  # "com.discordapp.Discord"
   "im.riot.Riot" # Element
   "org.mozilla.firefox"
   "it.mijorus.gearlever"
   "org.gimp.GIMP"
+  "io.github.milkshiift.GoofCord"
   "com.google.EarthPro"
   "org.libreoffice.LibreOffice"
   #"net.lutris.Lutris"
@@ -18,6 +19,7 @@
   "com.github.ryonakano.reco" # Audio recorder
   "org.remmina.Remmina"
   "org.torproject.torbrowser-launcher"
+  "dev.vencord.Vesktop"
   "com.rtosta.zapzap"
   "us.zoom.Zoom"
 ]
