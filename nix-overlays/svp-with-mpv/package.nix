@@ -14,9 +14,12 @@
   libsForQt5,
   libusb1,
   ocl-icd,
+  openssl,
   p7zip,
   patchelf,
+  qt6,
   socat,
+  udev,
   vapoursynth,
   xdg-utils,
   xorg,
@@ -43,15 +46,21 @@ let
     glibc
     zenity
     libmediainfo
-    libsForQt5.qtbase
-    libsForQt5.qtwayland
-    libsForQt5.qtdeclarative
-    libsForQt5.qtscript
-    libsForQt5.qtsvg
+    # libsForQt5.qtbase
+    # libsForQt5.qtwayland
+    # libsForQt5.qtdeclarative
+    # libsForQt5.qtscript
+    # libsForQt5.qtsvg
     libusb1
     mpvForSVP
     ocl-icd
+    openssl
     (lib.getLib stdenv.cc.cc)
+    qt6.qtbase
+    qt6.qtdeclarative
+    qt6.qtsvg
+    qt6.qtwayland
+    udev
     vapoursynth
     xdg-utils
     xorg.libX11
