@@ -11,7 +11,6 @@
   jq,
   lib,
   libmediainfo,
-  libsForQt5,
   libusb1,
   ocl-icd,
   openssl,
