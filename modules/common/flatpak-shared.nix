@@ -1,6 +1,7 @@
 [
   "com.google.Chrome"
   "com.usebottles.bottles"
+  "org.deluge_torrent.deluge"
   # "com.discordapp.Discord"
   "im.riot.Riot" # Element
   "org.mozilla.firefox"
