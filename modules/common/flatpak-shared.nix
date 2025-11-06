@@ -7,7 +7,7 @@
   "org.mozilla.firefox"
   "it.mijorus.gearlever"
   "org.gimp.GIMP"
-  "io.github.milkshiift.GoofCord"
+  "io.github.milkshiift.GoofCord" # Third Party Discord Client
   "com.google.EarthPro"
   #"org.libreoffice.LibreOffice"
   #"net.lutris.Lutris"
@@ -21,7 +21,7 @@
   "org.remmina.Remmina"
   "org.torproject.torbrowser-launcher"
   "org.openscopeproject.TrguiNG"
-  "dev.vencord.Vesktop"
+  "dev.vencord.Vesktop"  # Third Party Discord Client
   "com.rtosta.zapzap"
   "us.zoom.Zoom"
 ]
