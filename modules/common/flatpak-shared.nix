@@ -9,7 +9,7 @@
   "org.gimp.GIMP"
   "io.github.milkshiift.GoofCord"
   "com.google.EarthPro"
-  "org.libreoffice.LibreOffice"
+  #"org.libreoffice.LibreOffice"
   #"net.lutris.Lutris"
   "net.mediaarea.MediaInfo"
   "com.nextcloud.desktopclient.nextcloud"
