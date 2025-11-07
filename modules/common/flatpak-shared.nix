@@ -13,6 +13,7 @@
   #"net.lutris.Lutris"
   "net.mediaarea.MediaInfo"
   "com.nextcloud.desktopclient.nextcloud"
+  "org.prismlauncher.PrismLauncher" # Minecraft
   "com.vysp3r.ProtonPlus"
   "com.github.Matoking.protontricks"
   "io.github.Qalculate.qalculate-qt"
