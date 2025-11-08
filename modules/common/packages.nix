@@ -37,11 +37,9 @@
     usbutils
     vim vlc vorbis-tools vscodium vulkan-tools
     wine wget
-    #jellyfin jellyfin-web jellyfin-ffmpeg
     ]  ++ (with pkgsUnstable; [    
     ]) ++ (with pkgsWithSVP; [
       svp-with-mpv
-      #jellyfin-with-svp.jellyfin-media-player
     ]) ++ (with kdePackages; [
       filelight
       kaccounts-integration
