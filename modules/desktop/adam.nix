@@ -9,6 +9,7 @@
       nix-ld
       obs-studio
       r2modman
+      tes3cmd
   #svp-with-mpv
   #mpvWithSVP
       #jellyfin-media-player-svp

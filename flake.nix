@@ -3,6 +3,8 @@
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
   inputs.nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+  inputs.openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
+  #inputs.openmw-nix.follows = "nixpkgs";
   # inputs.nix-vscode-extensions = {
   #   url = "github:nix-community/nix-vscode-extensions?ref=master";
   #   inputs.nixpkgs.follows = "nixpkgs";
@@ -19,6 +21,7 @@
       nixos-hardware,
       home-manager,
       slippi,
+      openmw-nix,
       ...
     }@inputs:
     let
@@ -90,7 +93,9 @@
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
-          specialArgs = { inherit inputs pkgsWithSVP; };
+          specialArgs = {
+            inherit inputs pkgsWithSVP;
+            openmwPkgs = openmw-nix.packages.x86_64-linux; };
           modules = commonModules ++ [
             ./hosts/desktop.nix
             #            ./modules/common/slippi.nix

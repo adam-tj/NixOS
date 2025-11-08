@@ -1,4 +1,4 @@
-{ pkgs, pkgsWithSVP, ... }:
+{ pkgs, pkgsWithSVP, openmwPkgs, ... }:
 
 {
   users.users.adam = {
@@ -17,23 +17,25 @@
       #( mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; extraMakeWrapperArgs = [ "--prefix" "LD_LIBRARY_PATH" ":" "/run/opengl-driver/lib:${lib.makeLibraryPath [ ocl-icd ]}" ]; } )
       piper plex-mpv-shim
       qbittorrent
-          (retroarch.withCores (cores: with libretro; [
+      (retroarch.withCores (cores: with libretro; [
             beetle-psx-hw
-      bsnes
-      citra
-      desmume
-      dolphin
-      mame
-      mesen
-      mgba
-      mupen64plus
-      pcsx2
-      ppsspp
-      sameboy
-    ]))
+            bsnes
+            citra
+            desmume
+            dolphin
+            mame
+            mesen
+            mgba
+            mupen64plus
+            pcsx2
+            ppsspp
+            sameboy
+          ]))
       smplayer #svp
       vlc vorbis-tools vscodium
       wine
+
+      
 
 
 
@@ -72,6 +74,13 @@
       it_IT
       sv-se
       sv_SE
+    ]) ++ (with openmwPkgs; [
+      delta-plugin
+      groundcoverify
+      momw-configurator
+      openmw-validator
+      s3lightfixes
+      umo
     ])
     ;
   };  

@@ -1,8 +1,11 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "adam";
   home.homeDirectory = "/home/adam";
 
@@ -15,38 +18,25 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
-  nixpkgs.config.allowUnfree = true;
+  home.packages = with pkgs; [
+    pkgs-unstable.openmw
+    # # Adds the 'hello' command to your environment. It prints a friendly
+    # # "Hello, world!" when run.
+    # pkgs.hello
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+    # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # overrides. You can do that directly here, just don't forget the
+    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-
-  home.packages = with pkgs;
-    [
-
-      # # Adds the 'hello' command to your environment. It prints a friendly
-      # # "Hello, world!" when run.
-      # pkgs.hello
-
-      # # It is sometimes useful to fine-tune packages, for example, by applying
-      # # overrides. You can do that directly here, just don't forget the
-      # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-      # # fonts?
-      # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-      # # You can also create simple shell scripts directly inside your
-      # # configuration. For example, this adds a command 'my-hello' to your
-      # # environment:
-      # (pkgs.writeShellScriptBin "my-hello" ''
-      #   echo "Hello, ${config.home.username}!"
-      # '')
-
-      #     (nixgl.nixGLNvidia.override { inherit (pkgs) mesa; }).wrapApp
-      #     nixgl.auto.nixGLNvidia
-      #     pkgs-unstable.umu-launcher
-      #      pkgs-unstable.kdePackages.krdc
-      # pkgs-unstable.zapzap
-    ];
+    # # You can also create simple shell scripts directly inside your
+    # # configuration. For example, this adds a command 'my-hello' to your
+    # # environment:
+    # (pkgs.writeShellScriptBin "my-hello" ''
+    #   echo "Hello, ${config.home.username}!"
+    # '')
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -79,7 +69,9 @@
   #
   #  /etc/profiles/per-user/adam/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = { EDITOR = "vim"; };
+  home.sessionVariables = {
+    EDITOR = "vim";
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

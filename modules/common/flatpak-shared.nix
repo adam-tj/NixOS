@@ -9,7 +9,6 @@
   "io.github.milkshiift.GoofCord"       # Third Party Discord Client
   "com.google.EarthPro"
   "net.mediaarea.MediaInfo"
-  "org.openmw.OpenMW"
   "com.nextcloud.desktopclient.nextcloud"
   "org.prismlauncher.PrismLauncher"     # Minecraft Launcher
   "com.vysp3r.ProtonPlus"

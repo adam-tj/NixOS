@@ -1,8 +1,6 @@
 { config, pkgs, pkgs-unstable, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "adam";
   home.homeDirectory = "/home/adam";
 
@@ -14,11 +12,7 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
-
-  nixpkgs.config.allowUnfree = true;
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+  
   home.packages = with pkgs;
     [
 
@@ -38,40 +32,6 @@
       # (pkgs.writeShellScriptBin "my-hello" ''
       #   echo "Hello, ${config.home.username}!"
       # '')
-
-      #     appimage-run
-      #     bottles
-      #     discord
-      #     flameshot
-      #     gearlever gimp google-chrome
-      #     irssi isoimagewriter
-      #     jetbrains-toolbox jflap
-      #     kdePackages.filelight kdePackages.kate kdePackages.kolourpaint kdePackages.konversation
-      # #     kdePackages.kalk
-      # #     gnome-calculator
-      # #     kdePackages.krdc
-      # #     kodi
-      #     libreoffice-qt6-fresh # lutris
-      #     mangohud mediainfo # mesa-demos mesen
-      #     (mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
-      #     nixd nixfmt
-      # #     networkmanagerapplet
-      #     piper plex-desktop plex-mpv-shim protonplus protontricks
-      # #     protonup-qt
-      #     qalculate-qt quasselClient qbittorrent
-      #     remmina
-      # #     sameboy
-      # #     slippi-netplay
-      #     smplayer svp
-      #     tor-browser
-      #     vlc vscodium
-      #     wine
-      #     zapzap zoom-us
-
-      #     pkgs-unstable.umu-launcher
-      #     pkgs-unstable.lutris
-      #     pkgs-unstable.kdePackages.krdc
-        pkgs-unstable.zapzap
     ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -109,24 +69,5 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  #     gtk = {
-  #     enable = true;
-  #
-  #     theme = {
-  #       package = pkgs.flat-remix-gtk;
-  #       name = "Flat-Remix-GTK-Grey-Darkest";
-  #     };
-  #
-  #     iconTheme = {
-  #       package = pkgs.gnome.adwaita-icon-theme;
-  #       name = "Adwaita";
-  #     };
-  #
-  #     font = {
-  #       name = "Sans";
-  #       size = 11;
-  #     };
-  #   };
 
 }
