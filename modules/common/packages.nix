@@ -10,7 +10,7 @@
     gamemode gh git gnugrep
     htop hunspell
     irssi isoimagewriter
-    jdk   jellyfin-mpv-shim jetbrains-toolbox
+    jdk jellyfin-mpv-shim jetbrains-toolbox
     killall
     libreoffice-qt lsof lutris
     mangohud mediainfo mesa-demos mesen mlocate

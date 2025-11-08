@@ -159,6 +159,23 @@ stdenv.mkDerivation {
       terminal = false;
       startupNotify = true;
     })
+    (makeDesktopItem {
+      name = "mpv";
+      exec = "${fhs}/bin/mpv --player-operation-mode=pseudo-gui %f";
+      desktopName = "mpv";
+      genericName = "A free, open source, and cross-platform media player";
+      icon = "mpv";
+      categories = [ "AudioVideo" "Player" "Video" ];
+      mimeTypes = [
+        "video/x-msvideo"
+        "video/x-matroska"
+        "video/webm"
+        "video/mpeg"
+        "video/mp4"
+      ];
+      terminal = false;
+      startupNotify = true;
+    })
   ];
 
   meta = with lib; {
