@@ -15,11 +15,9 @@
     ../modules/desktop/flatpak.nix
     ../modules/common/steam.nix
     ../modules/common/plex-portal.nix
-    # ../modules/common/firefox.nix
     ../modules/desktop/coolercontrol.nix
     #../modules/common/virtualbox.nix
-    ../modules/common/virt-manager.nix
-    #../modules/common/test.nix
+    ../modules/common/virt-manager.nix  
 
     # GUI
     ../modules/services/sddm.nix
@@ -30,12 +28,11 @@
 
     # System
     ../modules/desktop/boot.nix
-    ../modules/desktop/system-packages.nix
+    ../modules/desktop/packages.nix
     ../modules/desktop/firewall.nix
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix
-    ../modules/common/packages.nix
     ../modules/services/auto-gc-90d.nix
     ../modules/common/whitelist-insecure-packages.nix
     ../modules/common/polkit.nix

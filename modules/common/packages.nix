@@ -39,7 +39,6 @@
     wine wget
     #jellyfin jellyfin-web jellyfin-ffmpeg
     ] ++ (with pkgsUnstable; [
-      openmw
       #jellyfin-with-svp.jellyfin-media-player    
     ]) ++ (with pkgsWithSVP; [
       svp-with-mpv
@@ -70,13 +69,6 @@
       it_IT
       sv-se
       sv_SE
-    ]) ++ (with openmwPkgs; [
-      delta-plugin
-      groundcoverify
-      momw-configurator
-      openmw-validator
-      s3lightfixes
-      umo
     ])
 ;
 }

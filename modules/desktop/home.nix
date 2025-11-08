@@ -19,7 +19,6 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    #pkgs-unstable.openmw
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -51,7 +50,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  };
+    };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -71,7 +70,7 @@
   #
   home.sessionVariables = {
     EDITOR = "vim";
-  };
+    };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
