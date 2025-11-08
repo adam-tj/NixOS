@@ -38,8 +38,7 @@
     vim vlc vorbis-tools vscodium vulkan-tools
     wine wget
     #jellyfin jellyfin-web jellyfin-ffmpeg
-    ] ++ (with pkgsUnstable; [
-      #jellyfin-with-svp.jellyfin-media-player    
+    ]  ++ (with pkgsUnstable; [    
     ]) ++ (with pkgsWithSVP; [
       svp-with-mpv
       #jellyfin-with-svp.jellyfin-media-player
