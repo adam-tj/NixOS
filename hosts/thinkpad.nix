@@ -11,11 +11,9 @@
 
     # User
     ../modules/common/adam.nix
-    ../modules/thinkpad/adam.nix
     ../modules/thinkpad/flatpak.nix
     ../modules/common/steam.nix
     ../modules/common/plex-portal.nix
-    ../modules/common/firefox.nix
 
     # GUI
     ../modules/services/sddm.nix
@@ -26,7 +24,7 @@
 
     # System
     ../modules/thinkpad/boot.nix
-    ../modules/thinkpad/system-packages.nix
+    ../modules/thinkpad/packages.nix
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix

@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, pkgsWithSVP, openmwPkgs, ... }:
+{ pkgs, pkgsUnstable, pkgsWithSVP, ... }:
 
 {
   environment.systemPackages = with pkgs; [

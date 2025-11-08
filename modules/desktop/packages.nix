@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, ... }:
+{ pkgs, pkgsUnstable, openmwPkgs, ... }:
 {
 
   imports = [

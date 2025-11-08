@@ -11,7 +11,6 @@
 
     # User
     ../modules/common/adam.nix
-    ../modules/desktop/adam.nix
     ../modules/desktop/flatpak.nix
     ../modules/common/steam.nix
     ../modules/common/plex-portal.nix
