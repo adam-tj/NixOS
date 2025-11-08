@@ -13,7 +13,7 @@
     jdk jellyfin-mpv-shim jetbrains-toolbox
     killall
     libreoffice-qt lsof lutris
-    mangohud mediainfo mesa-demos mesen mlocate
+    mangohud mediainfo mesa-demos mesen mlocate# (mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
     nixd nixfmt-rfc-style
     ocl-icd opencl-headers # openrgb-with-all-plugins
     pciutils piper plex-mpv-shim
@@ -37,9 +37,10 @@
     usbutils
     vim vlc vorbis-tools vscodium vulkan-tools
     wine wget
-    ]  ++ (with pkgsUnstable; [    
+    ]  ++ (with pkgsUnstable; [  
+    # svp  
     ]) ++ (with pkgsWithSVP; [
-      svp-with-mpv
+    svp-with-mpv
     ]) ++ (with kdePackages; [
       filelight
       kaccounts-integration
