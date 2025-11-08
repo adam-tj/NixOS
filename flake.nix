@@ -35,6 +35,14 @@
         overlays = [ svpOverlay ];
       };
 
+      mpvWithVapoursynth = nixpkgs.mpv.override {
+        vapoursynthSupport = true;
+      };
+
+      jellyfinMediaPlayerVapoursynth = nixpkgs.callPackage ./nix-overlays/jellyfin-media-player-vapoursynth.nix {
+        mpvWithVapoursynth = mpvWithVapoursynth;
+      };
+
       pkgsUnstable = import nixpkgs-unstable {
         system = "x86_64-linux";
         config.allowUnfree = true;

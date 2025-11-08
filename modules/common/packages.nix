@@ -1,5 +1,13 @@
 { pkgs, pkgsUnstable, pkgsWithSVP, ... }:
+let
+      mpvWithVapoursynth = pkgs.mpv.override {
+        vapoursynthSupport = true;
+      };
 
+      jellyfinMediaPlayerVapoursynth = pkgs.callPackage ../../nix-overlays/jellyfin-media-player-vapoursynth/jellyfin-media-player-vapoursynth.nix {
+        mpvWithVapoursynth = mpvWithVapoursynth;
+      };
+in
 {
   environment.systemPackages = with pkgs; [
     appimage-run
@@ -10,7 +18,7 @@
     gamemode gh git gnugrep
     htop hunspell
     irssi isoimagewriter
-    jdk jellyfin-mpv-shim jetbrains-toolbox
+    jdk jellyfinMediaPlayerVapoursynth jellyfin-mpv-shim jetbrains-toolbox
     killall
     libreoffice-qt lsof lutris
     mangohud mediainfo mesa-demos mesen mlocate# (mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
