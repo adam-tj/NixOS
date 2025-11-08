@@ -1,5 +1,106 @@
-{ pkgs, mpvWithVapoursynth }:
+{
+  lib,
+  fetchFromGitHub,
+  stdenv,
+  SDL2,
+  cmake,
+  libGL,
+  libX11,
+  libXrandr,
+  libvdpau,
+  #mpv,
+  mpvWithVapoursynth,
+  ninja,
+  pkg-config,
+  python3,
+  qt6,
+  # qtbase,
+  # qtwayland,
+  # qtwebchannel,
+  # qtwebengine,
+  #qtx11extras,
+  jellyfin-web,
+  withDbus ? stdenv.hostPlatform.isLinux,
+}:
 
-pkgs.jellyfin-media-player.override {
-  mpv = mpvWithVapoursynth;
+stdenv.mkDerivation rec {
+  pname = "jellyfin-media-player-vs";
+  version = "1.12.0";
+
+  src = fetchFromGitHub {
+    owner = "jellyfin";
+    repo = "jellyfin-media-player";
+    rev = "v${version}";
+    sha256 = "sha256-IXinyenadnW+a+anQ9e61h+N8vG2r77JPboHm5dN4Iw=";
+  };
+
+  patches = [
+    # fix the location of the jellyfin-web path
+    ./fix-web-path.patch
+    # disable update notifications since the end user can't simply download the release artifacts to update
+    ./disable-update-notifications.patch
+  ];
+
+  buildInputs = [
+    SDL2
+    libGL
+    libX11
+    libXrandr
+    libvdpau
+    #mpv
+    mpvWithVapoursynth
+    qt6.qtbase
+    qt6.qtwebchannel
+    qt6.qtwebengine
+  ]
+  ++ lib.optionals stdenv.hostPlatform.isLinux [
+    qt6.qtwayland
+  ];
+
+  nativeBuildInputs = [
+    cmake
+    ninja
+    pkg-config
+    python3
+  ];
+
+  cmakeFlags = [
+    "-DQTROOT=${qt6.qtbase}"
+    "-GNinja"
+  ]
+  ++ lib.optionals (!withDbus) [
+    "-DLINUX_X11POWER=ON"
+  ];
+
+  preConfigure = ''
+    # link the jellyfin-web files to be copied by cmake (see fix-web-path.patch)
+    ln -s ${jellyfin-web}/share/jellyfin-web .
+  '';
+
+  postInstall = lib.optionalString stdenv.hostPlatform.isDarwin ''
+    mkdir -p $out/bin $out/Applications
+    mv "$out/Jellyfin Media Player.app" $out/Applications
+    ln -s "$out/Applications/Jellyfin Media Player.app/Contents/MacOS/Jellyfin Media Player" $out/bin/jellyfinmediaplayer
+  '';
+
+  meta = with lib; {
+    homepage = "https://github.com/jellyfin/jellyfin-media-player";
+    description = "Jellyfin Desktop Client based on Plex Media Player";
+    license = with licenses; [
+      gpl2Only
+      mit
+    ];
+    platforms = [
+      "aarch64-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    maintainers = with maintainers; [
+      jojosch
+      kranzes
+      paumr
+    ];
+    mainProgram = "jellyfinmediaplayer";
+  };
 }

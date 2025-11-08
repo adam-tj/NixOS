@@ -1,13 +1,5 @@
-{ pkgs, pkgsUnstable, pkgsWithSVP, ... }:
-let
-      mpvWithVapoursynth = pkgs.mpv.override {
-        vapoursynthSupport = true;
-      };
+{ pkgs, pkgsUnstable, pkgsWithSVP, pkgsWithJmpvs , ... }:
 
-      jellyfinMediaPlayerVapoursynth = pkgs.callPackage ../../nix-overlays/jellyfin-media-player-vapoursynth/jellyfin-media-player-vapoursynth.nix {
-        mpvWithVapoursynth = mpvWithVapoursynth;
-      };
-in
 {
   environment.systemPackages = with pkgs; [
     appimage-run
@@ -18,7 +10,7 @@ in
     gamemode gh git gnugrep
     htop hunspell
     irssi isoimagewriter
-    jdk jellyfinMediaPlayerVapoursynth jellyfin-mpv-shim jetbrains-toolbox
+    jdk jellyfin-mpv-shim jetbrains-toolbox
     killall
     libreoffice-qt lsof lutris
     mangohud mediainfo mesa-demos mesen mlocate# (mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
@@ -49,7 +41,10 @@ in
     # svp  
     ]) ++ (with pkgsWithSVP; [
     svp-with-mpv
-    ]) ++ (with kdePackages; [
+    ]) ++ (with pkgsWithJmpvs; [
+      jellyfin-media-player-vs
+    ])
+     ++ (with kdePackages; [
       filelight
       kaccounts-integration
       kaccounts-providers

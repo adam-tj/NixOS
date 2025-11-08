@@ -29,18 +29,23 @@
         svp-with-mpv = final.callPackage ./nix-overlays/svp-with-mpv/package.nix { };
       };
 
+      jmpVsOverlay = final: prev: {
+        jellyfin-media-player-vs = final.callPackage ./nix-overlays/jellyfin-media-player-vapoursynth/jellyfin-media-player-vapoursynth.nix { };
+        mpvWithVapoursynth = prev.mpv-unwrapped.override {
+          vapoursynthSupport = true;
+          };
+      };
+
       pkgsWithSVP = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
         overlays = [ svpOverlay ];
       };
 
-      mpvWithVapoursynth = nixpkgs.mpv.override {
-        vapoursynthSupport = true;
-      };
-
-      jellyfinMediaPlayerVapoursynth = nixpkgs.callPackage ./nix-overlays/jellyfin-media-player-vapoursynth.nix {
-        mpvWithVapoursynth = mpvWithVapoursynth;
+      pkgsWithJmpvs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+        overlays = [ jmpVsOverlay ];
       };
 
       pkgsUnstable = import nixpkgs-unstable {
@@ -106,7 +111,7 @@
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
-            inherit inputs pkgsWithSVP pkgsUnstable;
+            inherit inputs pkgsWithSVP pkgsUnstable pkgsWithJmpvs;
             openmwPkgs = openmw-nix.packages.x86_64-linux; };
           modules = commonModules ++ [
             ./hosts/desktop.nix
