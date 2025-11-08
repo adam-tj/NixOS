@@ -36,6 +36,11 @@
         overlays = [ svpOverlay ];
       };
 
+      pkgsUnstable = import nixpkgs-unstable {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+
       # Common parameters for both systems
       commonModules = [
         #       ./hosts/common.nix
@@ -94,7 +99,7 @@
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
-            inherit inputs pkgsWithSVP;
+            inherit inputs pkgsWithSVP pkgsUnstable;
             openmwPkgs = openmw-nix.packages.x86_64-linux; };
           modules = commonModules ++ [
             ./hosts/desktop.nix

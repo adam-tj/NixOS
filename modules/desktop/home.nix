@@ -19,7 +19,7 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    pkgs-unstable.openmw
+    #pkgs-unstable.openmw
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello

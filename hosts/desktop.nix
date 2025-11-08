@@ -35,6 +35,7 @@
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix
+    ../modules/common/packages.nix
     ../modules/services/auto-gc-90d.nix
     ../modules/common/whitelist-insecure-packages.nix
     ../modules/common/polkit.nix
