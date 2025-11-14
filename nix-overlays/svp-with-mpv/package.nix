@@ -135,7 +135,7 @@ stdenv.mkDerivation {
   postInstall = ''
     mkdir -p $out/bin $out/share $out/usr/bin
     ln -s ${fhs}/bin/svp-with-mpv-env $out/bin/SVPManager
-    ln -s ${mpvForSVP}/bin/mpv $out/bin/mpv
+    ln -s ${mpvForSVP}/bin/mpv $out/bin/mpv-svp
     ln -s ${svp-dist}/share/icons $out/share/icons
   '';
 
@@ -161,7 +161,7 @@ stdenv.mkDerivation {
     })
     (makeDesktopItem {
       name = "mpv";
-      exec = "${fhs}/bin/mpv --player-operation-mode=pseudo-gui %f";
+      exec = "${fhs}/bin/mpv-svp --player-operation-mode=pseudo-gui %f";
       desktopName = "mpv";
       genericName = "A free, open source, and cross-platform media player";
       icon = "mpv";

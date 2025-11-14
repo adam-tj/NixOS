@@ -8,17 +8,18 @@
   libX11,
   libXrandr,
   libvdpau,
-  #mpv,
-  mpvWithVapoursynth,
+  mpv-vapoursynth,
+  #mpvWithVapoursynth,
   ninja,
   pkg-config,
   python3,
-  qt6,
-  # qtbase,
-  # qtwayland,
-  # qtwebchannel,
-  # qtwebengine,
-  #qtx11extras,
+  #qt6,
+  qtbase,
+  qtwayland,
+  qtwebchannel,
+  qtwebengine,
+  qtx11extras,
+  wrapQtAppsHook,
   jellyfin-web,
   withDbus ? stdenv.hostPlatform.isLinux,
 }:
@@ -47,14 +48,16 @@ stdenv.mkDerivation rec {
     libX11
     libXrandr
     libvdpau
-    #mpv
-    mpvWithVapoursynth
-    qt6.qtbase
-    qt6.qtwebchannel
-    qt6.qtwebengine
+    mpv-vapoursynth
+    #mpvWithVapoursynth
+    qtbase
+    qtwebchannel
+    qtwebengine
+    qtx11extras
+    wrapQtAppsHook
   ]
   ++ lib.optionals stdenv.hostPlatform.isLinux [
-    qt6.qtwayland
+    qtwayland
   ];
 
   nativeBuildInputs = [
@@ -65,7 +68,7 @@ stdenv.mkDerivation rec {
   ];
 
   cmakeFlags = [
-    "-DQTROOT=${qt6.qtbase}"
+    "-DQTROOT=${qtbase}"
     "-GNinja"
   ]
   ++ lib.optionals (!withDbus) [

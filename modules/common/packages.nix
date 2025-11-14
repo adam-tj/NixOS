@@ -11,9 +11,11 @@
     htop hunspell
     irssi isoimagewriter
     jdk jellyfin-mpv-shim jetbrains-toolbox
+    #jellyfin-media-player
     killall
     libreoffice-qt lsof lutris
-    mangohud mediainfo mesa-demos mesen mlocate# (mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
+    mangohud mediainfo mesa-demos mesen mlocate mpv-vapoursynth
+    #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
     nixd nixfmt-rfc-style
     ocl-icd opencl-headers # openrgb-with-all-plugins
     pciutils piper plex-mpv-shim
@@ -35,16 +37,15 @@
     ]))
     smplayer
     usbutils
-    vim vlc vorbis-tools vscodium vulkan-tools
+    vapoursynth vapoursynth-mvtools vim vlc vorbis-tools vscodium vulkan-tools
     wine wget
     ]  ++ (with pkgsUnstable; [  
-    # svp  
+    #svp  
     ]) ++ (with pkgsWithSVP; [
     svp-with-mpv
     ]) ++ (with pkgsWithJmpvs; [
-      jellyfin-media-player-vs
-    ])
-     ++ (with kdePackages; [
+    #jellyfin-media-player-vs
+    ]) ++ (with kdePackages; [
       filelight
       kaccounts-integration
       kaccounts-providers
