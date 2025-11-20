@@ -18,6 +18,7 @@
   "org.quassel_irc.QuasselClient"       # Remote IRC
   "com.github.ryonakano.reco"           # Audio recorder
   "org.remmina.Remmina"                 # Remote desktop
+  "com.github.KRTirtho.Spotube"         # YouTube Music
   "org.torproject.torbrowser-launcher"
   "org.openscopeproject.TrguiNG"        # Transmission Remote Client
   "dev.vencord.Vesktop"                 # Third Party Discord Client

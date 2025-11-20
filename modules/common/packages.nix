@@ -39,6 +39,7 @@
     usbutils
     vapoursynth vapoursynth-mvtools vim vlc vorbis-tools vscodium vulkan-tools
     wine wget
+    zed-editor-fhs
     ]  ++ (with pkgsUnstable; [  
     #svp  
     ]) ++ (with pkgsWithSVP; [
