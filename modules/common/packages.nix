@@ -1,52 +1,92 @@
-{ pkgs, pkgsUnstable, pkgsWithSVP, pkgsWithJmpvs , ... }:
+{
+  pkgs,
+  pkgsUnstable,
+  pkgsWithSVP,
+  pkgsWithJmpvs,
+  ...
+}:
 
 {
-  environment.systemPackages = with pkgs; [
-    appimage-run
-    btop
-    distrobox
-    emulationstation-de
-    fastfetch
-    gamemode gh git gnugrep
-    htop hunspell
-    irssi isoimagewriter
-    jdk jellyfin-mpv-shim jetbrains-toolbox
-    #jellyfin-media-player
-    killall
-    libreoffice-qt lsof lutris
-    mangohud mediainfo mesa-demos mesen mlocate mpv-vapoursynth
-    #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
-    nixd nixfmt-rfc-style
-    ocl-icd opencl-headers # openrgb-with-all-plugins
-    pciutils piper plex-mpv-shim
-    qbittorrent
-    rar
-    (retroarch.withCores (cores: with libretro; [
-      beetle-psx-hw
-      bsnes
-      citra
-      desmume
-      dolphin
-      mame
+  environment.systemPackages =
+    with pkgs;
+    [
+      appimage-run
+      btop
+      distrobox
+      dysk
+      emulationstation-de
+      fastfetch
+      gamemode
+      gh
+      git
+      gnugrep
+      htop
+      hunspell
+      irssi
+      isoimagewriter
+      jdk
+      jellyfin-mpv-shim
+      jetbrains-toolbox
+      #jellyfin-media-player
+      killall
+      libreoffice-qt
+      lsof
+      lutris
+      mangohud
+      mediainfo
+      mesa-demos
       mesen
-      mgba
-      mupen64plus
-      pcsx2
-      ppsspp
-      sameboy
-    ]))
-    smplayer
-    usbutils
-    vapoursynth vapoursynth-mvtools vim vlc vorbis-tools vscodium vulkan-tools
-    wine wget
-    zed-editor-fhs
-    ]  ++ (with pkgsUnstable; [  
-    #svp  
-    ]) ++ (with pkgsWithSVP; [
-    svp-with-mpv
-    ]) ++ (with pkgsWithJmpvs; [
-    #jellyfin-media-player-vs
-    ]) ++ (with kdePackages; [
+      mlocate
+      mpv-vapoursynth
+      #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
+      nixd
+      nixfmt-rfc-style
+      ocl-icd
+      opencl-headers # openrgb-with-all-plugins
+      pciutils
+      piper
+      plex-mpv-shim
+      qbittorrent
+      rar
+      (retroarch.withCores (
+        cores: with libretro; [
+          beetle-psx-hw
+          bsnes
+          citra
+          desmume
+          dolphin
+          mame
+          mesen
+          mgba
+          mupen64plus
+          pcsx2
+          ppsspp
+          sameboy
+        ]
+      ))
+      smplayer
+      usbutils
+      vapoursynth
+      vapoursynth-mvtools
+      vim
+      vlc
+      vorbis-tools
+      vscodium
+      vulkan-tools
+      wine
+      wget
+      zed-editor-fhs
+    ]
+    ++ (with pkgsUnstable; [
+      #svp
+    ])
+    ++ (with pkgsWithSVP; [
+      svp-with-mpv
+    ])
+    ++ (with pkgsWithJmpvs; [
+      #jellyfin-media-player-vs
+    ])
+    ++ (with kdePackages; [
       filelight
       kaccounts-integration
       kaccounts-providers
@@ -54,7 +94,8 @@
       kclock
       kolourpaint
       partitionmanager
-    ]) ++ (with hunspellDicts; [
+    ])
+    ++ (with hunspellDicts; [
       de_DE
       en-gb-ise
       en-gb-ize
@@ -72,6 +113,5 @@
       it_IT
       sv-se
       sv_SE
-    ])
-;
+    ]);
 }
