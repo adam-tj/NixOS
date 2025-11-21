@@ -1,10 +1,4 @@
-{
-  pkgs,
-  pkgsUnstable,
-  pkgsWithSVP,
-  pkgsWithJmpvs,
-  ...
-}:
+{ pkgs, pkgsUnstable, pkgsWithSVP, pkgsWithJmpvs, ... }:
 
 {
   environment.systemPackages =
@@ -12,40 +6,20 @@
     [
       appimage-run
       btop
-      distrobox
-      dysk
+      distrobox dysk
       emulationstation-de
       fastfetch
-      gamemode
-      gh
-      git
-      gnugrep
-      htop
-      hunspell
-      irssi
-      isoimagewriter
-      jdk
-      jellyfin-mpv-shim
-      jetbrains-toolbox
-      #jellyfin-media-player
+      gamemode gh git gnugrep
+      htop hunspell
+      irssi isoimagewriter
+      jdk jellyfin-mpv-shim jetbrains-toolbox #jellyfin-media-player
       killall
-      libreoffice-qt
-      lsof
-      lutris
-      mangohud
-      mediainfo
-      mesa-demos
-      mesen
-      mlocate
-      mpv-vapoursynth
+      libreoffice-qt lsof lutris
+      mangohud mediainfo mesa-demos mesen mlocate mpv-vapoursynth
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
-      nixd
-      nixfmt-rfc-style
-      ocl-icd
-      opencl-headers # openrgb-with-all-plugins
-      pciutils
-      piper
-      plex-mpv-shim
+      nixd nixfmt-rfc-style neovim-qt-unwrapped
+      ocl-icd opencl-headers # openrgb-with-all-plugins
+      pciutils piper plex-mpv-shim
       qbittorrent
       rar
       (retroarch.withCores (
@@ -63,29 +37,23 @@
           ppsspp
           sameboy
         ]
-      ))
+       ))
       smplayer
       usbutils
-      vapoursynth
-      vapoursynth-mvtools
-      vim
-      vlc
-      vorbis-tools
-      vscodium
-      vulkan-tools
-      wine
-      wget
+      vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium vulkan-tools
+      wine wget
       zed-editor-fhs
     ]
     ++ (with pkgsUnstable; [
       #svp
-    ])
+      #vimPlugins.LazyVim
+     ])
     ++ (with pkgsWithSVP; [
       svp-with-mpv
-    ])
+     ])
     ++ (with pkgsWithJmpvs; [
       #jellyfin-media-player-vs
-    ])
+     ])
     ++ (with kdePackages; [
       filelight
       kaccounts-integration
@@ -94,7 +62,7 @@
       kclock
       kolourpaint
       partitionmanager
-    ])
+     ])
     ++ (with hunspellDicts; [
       de_DE
       en-gb-ise
@@ -113,5 +81,5 @@
       it_IT
       sv-se
       sv_SE
-    ]);
+     ]);
 }
