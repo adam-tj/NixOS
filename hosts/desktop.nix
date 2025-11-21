@@ -17,7 +17,6 @@
     ../modules/desktop/coolercontrol.nix
     #../modules/common/virtualbox.nix
     ../modules/common/virt-manager.nix
-    ../modules/common/nvim.nix
 
     # GUI
     ../modules/services/sddm.nix
