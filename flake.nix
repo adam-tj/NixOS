@@ -92,13 +92,13 @@ jmpVsOverlay = final: prev:
         # Laptop Configuration
         thinkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs pkgsWithSVP; };
+          specialArgs = { inherit inputs pkgsWithSVP pkgsUnstable pkgsWithJmpvs; };
           modules = commonModules ++ [
-            {
-              nixpkgs.config.allowUnfree = true;
-            }
             ./hosts/thinkpad.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-l13
+            chaotic.nixosModules.nyx-cache
+            chaotic.nixosModules.nyx-overlay
+            chaotic.nixosModules.nyx-registry
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
