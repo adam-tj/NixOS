@@ -6,18 +6,6 @@ let
   lib = pkgs.lib;
 
   # Declare the Flatpaks you *want* on your system
-  # desiredFlatpaks = [
-  #     "net.lutris.Lutris"
-  #   # "org.openscopeproject.TrguiNG"
-  #     "org.libreoffice.LibreOffice"
-  #   # Manually installed runtimes
-  #     "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/24.08"
-  #     "org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08"
-  #     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08"
-  #     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
-  # ];
-
-  # Declare the Flatpaks you *want* on your system
   sharedPackages = import ../common/flatpak-shared.nix;
   localPackages = [
     # Manually installed runtimes
@@ -31,6 +19,9 @@ let
   ];
   desiredFlatpaks = lib.unique (sharedPackages ++ localPackages);
 
+  # Declare desired language packs
+  desiredLanguages = "en;sv;hu;de;it";
+
   flatpakScript = pkgs.writeScript "flatpak-management" ''
     #!${pkgs.bash}/bin/bash
     set -euo pipefail
@@ -39,6 +30,9 @@ let
 
     # Get currently installed Flatpaks
     installedFlatpaks=$(${pkgs.flatpak}/bin/flatpak list --app --columns=application)
+
+    # Set desired languages
+    ${pkgs.flatpak}/bin/flatpak config --set languages "${desiredLanguages}"
 
     # Remove Flatpaks not in the desired list
     for installed in $installedFlatpaks; do
