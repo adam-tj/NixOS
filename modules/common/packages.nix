@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, pkgsWithSVP, pkgsWithJmpvs, ... }:
+{ pkgs, pkgsUnstable, pkgsWithSVP, pkgsWithJmpvs, pkgsWithBgrt, ... }:
 
 {
   environment.systemPackages =
@@ -16,7 +16,7 @@
       lsof lutris
       mangohud mediainfo mesa-demos mesen mlocate mpv-vapoursynth
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
-      nixd nixfmt-rfc-style nixos-bgrt-plymouth neovim-unwrapped neovim-qt-unwrapped
+      nixd nixfmt-rfc-style neovim-unwrapped neovim-qt-unwrapped
       ocl-icd opencl-headers # openrgb-with-all-plugins
       pciutils piper plex-mpv-shim
       qbittorrent
@@ -53,7 +53,10 @@
     ++ (with pkgsWithJmpvs; [
       #jellyfin-media-player-vs
      ])
-    ++ (with kdePackages; [
+    ++ (with pkgsWithBgrt; [
+      nixos-bgrt-plymouth-no-firmware
+       ])
+    ++ (with kdeP ackages; [
       filelight
       kaccounts-integration
       kaccounts-providers

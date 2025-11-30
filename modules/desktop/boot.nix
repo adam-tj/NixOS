@@ -8,14 +8,7 @@
     kernelPackages = pkgs.linuxPackages_cachyos;
     plymouth = {
       enable = true;
-#      theme = "spinner_alt";
       theme = "bgrt";
-#      themePackages = pkgs.nixos-bgrt-plymouth;
-#      themePackages = with pkgs;
-#        [ # By default we would install all themes
-#          (adi1090x-plymouth-themes.override {
-#            selected_themes = [ "spinner_alt" ];
-#          })
     };
 
     # Enable "Silent Boot"

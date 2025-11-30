@@ -30,6 +30,9 @@
       svpOverlay = final: prev: {
         svp-with-mpv = final.callPackage ./nix-overlays/svp-with-mpv/package.nix { };
       };
+      bgrtOverlay = final: prev: {
+        nixos-bgrt-plymouth-no-firmware = final.callPackage ./nix-overlays/nixos-bgrt-plymouth-no-firmware/package.nix { };
+      };
 
 #      jmpVsOverlay = final: prev: {
 #        jellyfin-media-player-vs = final.callPackage ./nix-overlays/jellyfin-media-player-vapoursynth/jellyfin-media-player-vapoursynth.nix { };
@@ -70,6 +73,12 @@ jmpVsOverlay = final: prev:
         overlays = [ svpOverlay ];
       };
 
+      pkgsWithBgrt = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+        overlays = [bgrtOverlay ];
+      };
+
       pkgsWithJmpvs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
@@ -92,7 +101,7 @@ jmpVsOverlay = final: prev:
         # Laptop Configuration
         thinkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs pkgsWithSVP pkgsUnstable pkgsWithJmpvs; };
+          specialArgs = { inherit inputs pkgsWithSVP pkgsUnstable pkgsWithJmpvs pkgsWithBgrt; };
           modules = commonModules ++ [
             ./hosts/thinkpad.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-l13

@@ -5,13 +5,13 @@
     kernelPackages = pkgs.linuxPackages_6_12;
     plymouth = {
       enable = true;
-      theme = "spinner_alt";
-      themePackages = with pkgs;
-        [ # By default we would install all themes
-          (adi1090x-plymouth-themes.override {
-            selected_themes = [ "spinner_alt" ];
-          })
-        ];
+      theme = "breeze";
+      themePackages = with pkgs; [
+        kdePackages.breeze-plymouth
+        nixos-bgrt-plymouth
+        plymouth-matrix-theme
+      ];
+      #logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake.png";
     };
 
     # Enable "Silent Boot"
@@ -29,7 +29,7 @@
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
-    loader.timeout = 3;
+    loader.timeout = 0;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     initrd.systemd.enable = true;
