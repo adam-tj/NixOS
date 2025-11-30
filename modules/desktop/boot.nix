@@ -4,16 +4,18 @@
   boot = {
     #kernelPackages = pkgs.linuxPackages_6_12; # See nvidia-gpu.nix
     #kernelPackages = pkgs.linuxPackages_6_16; # See nvidia-gpu.nix
-    kernelPackages = pkgs.linuxPackages_latest; # See nvidia-gpu.nix
+    #kernelPackages = pkgs.linuxPackages_latest; # See nvidia-gpu.nix
+    kernelPackages = pkgs.linuxPackages_cachyos;
     plymouth = {
       enable = true;
-      theme = "spinner_alt";
-      themePackages = with pkgs;
-        [ # By default we would install all themes
-          (adi1090x-plymouth-themes.override {
-            selected_themes = [ "spinner_alt" ];
-          })
-        ];
+#      theme = "spinner_alt";
+      theme = "bgrt";
+#      themePackages = pkgs.nixos-bgrt-plymouth;
+#      themePackages = with pkgs;
+#        [ # By default we would install all themes
+#          (adi1090x-plymouth-themes.override {
+#            selected_themes = [ "spinner_alt" ];
+#          })
     };
 
     # Enable "Silent Boot"
@@ -30,13 +32,13 @@
       "nvidia.NVreg_EnableGpuFirmware=0"
       "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       "kvm.enable_virt_at_load=0"
-      #       "nvidia_drm.fbdev=0"
+      "nvidia_drm.fbdev=0"
       #       "nvidia_drm.modeset=1"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
-    loader.timeout = 10;
+    loader.timeout = 0;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 

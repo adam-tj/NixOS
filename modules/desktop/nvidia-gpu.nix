@@ -1,5 +1,5 @@
 # { config, ... }:
-# { 
+# {
 #   #hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable; # Default
 #   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 # }
@@ -100,13 +100,11 @@
 #     powerManagement.enable = true;
 #     open = false;
 #     nvidiaSettings = true;
-    
+
 #     # This now points to the unstable version because we modified kernelPackages
 #     package = config.boot.kernelPackages.nvidiaPackages.beta;
-    
+
 #   };
 
 #   services.xserver.videoDrivers = [ "nvidia" ];
 # }
-
-
