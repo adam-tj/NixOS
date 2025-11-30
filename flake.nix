@@ -1,6 +1,6 @@
 {
   inputs.slippi.url = "github:lytedev/slippi-nix";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
   inputs.nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   inputs.openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
@@ -11,7 +11,7 @@
   #   inputs.nixpkgs.follows = "nixpkgs";
   # };
   inputs.home-manager = {
-    url = "github:nix-community/home-manager/release-25.05";
+    url = "github:nix-community/home-manager/release-25.11";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -128,7 +128,7 @@ jmpVsOverlay = final: prev:
                 # Garbage collection
                 nix.gc.automatic = true;
                 nix.gc.options = "--delete-older-than 10d";
-                nix.gc.frequency = "daily";
+                nix.gc.dates = "daily";
               };
             }
           ];
@@ -185,7 +185,7 @@ nixpkgs.overlays = [
                 ];
                 nix.gc.automatic = true;
                 nix.gc.options = "--delete-older-than 10d";
-                nix.gc.frequency = "daily";
+                nix.gc.dates = "daily";
               };
             }
           ];

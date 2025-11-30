@@ -7,7 +7,6 @@
       appimage-run
       btop
       distrobox dysk
-      emulationstation-de
       fastfetch
       gamemode gcc gh git gnugrep gnumake
       htop hunspell
