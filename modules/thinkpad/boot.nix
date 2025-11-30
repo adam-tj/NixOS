@@ -1,15 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, pkgsWithBgrt, ... }:
 
 {
   boot = {
     kernelPackages = pkgs.linuxPackages_6_12;
     plymouth = {
       enable = true;
-      theme = "breeze";
-      themePackages = with pkgs; [
-        kdePackages.breeze-plymouth
-        nixos-bgrt-plymouth
-        plymouth-matrix-theme
+      theme = "nixos-bgrt";
+      themePackages = with pkgsWithBgrt; [
+        nixos-bgrt-plymouth-no-firmware
       ];
       #logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake.png";
     };
