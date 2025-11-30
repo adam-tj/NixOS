@@ -56,7 +56,7 @@
     ++ (with pkgsWithBgrt; [
       nixos-bgrt-plymouth-no-firmware
        ])
-    ++ (with kdeP ackages; [
+    ++ (with kdePackages; [
       filelight
       kaccounts-integration
       kaccounts-providers
