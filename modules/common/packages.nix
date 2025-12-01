@@ -53,9 +53,6 @@
     ++ (with pkgsWithJmpvs; [
       #jellyfin-media-player-vs
      ])
-    ++ (with pkgsWithBgrt; [
-      nixos-bgrt-plymouth-no-firmware
-       ])
     ++ (with kdePackages; [
       filelight
       kaccounts-integration

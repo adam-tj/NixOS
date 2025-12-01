@@ -11,9 +11,10 @@
       nix-ld
       r2modman
       tes3cmd
+      openmw
     ]
     ++ (with pkgsUnstable; [
-      openmw
+#      openmw
     ])
     ++ (with openmwPkgs; [
       delta-plugin
