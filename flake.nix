@@ -76,7 +76,7 @@ jmpVsOverlay = final: prev:
       pkgsWithBgrt = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
-        overlays = [bgrtOverlay ];
+        overlays = [ bgrtOverlay ];
       };
 
       pkgsWithJmpvs = import nixpkgs {

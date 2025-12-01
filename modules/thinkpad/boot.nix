@@ -8,6 +8,7 @@
       theme = "nixos-bgrt";
       themePackages = [
         pkgsWithBgrt.nixos-bgrt-plymouth-no-firmware
+        pkgs.nixos-bgrt-plymouth
         pkgs.plymouth-matrix-theme
         pkgs.plymouth-blahaj-theme
         pkgs.kdePackages.breeze-plymouth

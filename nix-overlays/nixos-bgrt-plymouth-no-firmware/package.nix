@@ -6,14 +6,14 @@
 }:
 
 stdenv.mkDerivation {
-  name = "nixos-bgrt-plymouth";
+  name = "nixos-bgrt-nofw-plymouth";
   version = "0-unstable-2024-10-25";
 
   src = fetchFromGitHub {
     repo = "plymouth-theme-nixos-bgrt";
     owner = "adam-tj";
-    rev = "1f289613e57f585690695c3c1a2f667d1cccdcca";
-    hash = "sha256-xe6/C54fz7T16FK7hjOQleuoeBEIdecRxt+fL2165nc=";
+    rev = "132bab883b1da7490684d796860f763a11b01a7c";
+    hash = "sha256-5zibBwS3yGoUFRtu4lzF7FXdzHsYaLAjTYXsNTdYMFI=";
   };
 
   dontConfigure = true;
