@@ -1,4 +1,4 @@
 {
   services.desktopManager.plasma6.enable = true;
-  include = [ ../common/plasma-workspace-overlay.nix ];
+  imports = [ ../common/plasma-workspace-overlay.nix ];
 }

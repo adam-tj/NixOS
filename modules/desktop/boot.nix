@@ -3,7 +3,6 @@
 {
   boot = {
     #kernelPackages = pkgs.linuxPackages_6_12; # See nvidia-gpu.nix
-    #kernelPackages = pkgs.linuxPackages_6_16; # See nvidia-gpu.nix
     #kernelPackages = pkgs.linuxPackages_latest; # See nvidia-gpu.nix
     kernelPackages = pkgs.linuxPackages_cachyos;
     plymouth = {

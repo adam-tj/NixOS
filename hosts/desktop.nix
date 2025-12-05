@@ -6,7 +6,7 @@
     ../modules/desktop/hardware.nix
     ../modules/desktop/nvidia-gpu.nix
     ../modules/common/gamecube-controller.nix
-    ../modules/common/xbox-controller.nix
+    #../modules/common/xbox-controller.nix
     ../modules/services/piper-rules.nix
 
     # User
@@ -36,6 +36,7 @@
     ../modules/common/whitelist-insecure-packages.nix
     ../modules/common/polkit.nix
     ../modules/common/nix-ld.nix
+    ../modules/common/docker.nix
 
     # Services
     ../modules/services/bluetooth.nix

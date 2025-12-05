@@ -45,7 +45,7 @@
     ]
     ++ (with pkgsUnstable; [
       #svp
-      #vimPlugins.LazyVim
+      winboat
      ])
     ++ (with pkgsWithSVP; [
       svp-with-mpv
