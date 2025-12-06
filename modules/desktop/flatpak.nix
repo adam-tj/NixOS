@@ -14,7 +14,6 @@ let
     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08"
     "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/23.08"
     "org.diasurgical.DevilutionX"
-    "com.github.wwmm.easyeffects" # Easy Effects
     "org.vinegarhq.Sober" # Roblox
   ];
   desiredFlatpaks = lib.unique (sharedPackages ++ localPackages);

@@ -21,7 +21,6 @@
   "com.github.KRTirtho.Spotube"         # YouTube Music
   "org.torproject.torbrowser-launcher"
   "org.openscopeproject.TrguiNG"        # Transmission Remote Client
-  "dev.vencord.Vesktop"                 # Third Party Discord Client
   "com.rtosta.zapzap"                   # WhatsApp
   "us.zoom.Zoom"
 ]
