@@ -38,7 +38,7 @@
     ../modules/services/locate.nix
     ../modules/services/podman.nix
     ../modules/services/wireguard-client.nix
-    ../modules/services/auto-gc-120d.nix
+    ../modules/services/auto-gc-35d.nix
 
   ];
 

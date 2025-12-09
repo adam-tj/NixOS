@@ -68,8 +68,9 @@ in
     systemd.timers.flatpak-management = {
       description = "Run flatpak management periodically";
       timerConfig = {
-        # OnCalendar = "daily";
-        OnCalendar = "*-*-* */6:00:00";
+        OnCalendar = "daily";
+        #OnCalendar = "*-*-* */6:00:00";
+        OnBootSec = "1min";
         Persistent = "true";
       };
       wantedBy = ["timers.target"];
