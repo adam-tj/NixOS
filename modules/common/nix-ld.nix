@@ -16,5 +16,13 @@
     atk
     cairo
     glib
+    #firefox deps
+    alsa-lib
+    libxcb
+    libxcomposite
+    libxcursor
+    libxdamage
+    libxfixes
+    libxi
   ];
 }

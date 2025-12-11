@@ -6,9 +6,11 @@
     [
       appimage-run
       btop
+      cryfs
       distrobox dysk
+      encfs
       fastfetch
-      gamemode gcc gh git gnugrep gnumake
+      gamemode gcc gh git gnugrep gnumake gocryptfs
       htop hunspell
       irssi isoimagewriter
       jdk jellyfin-mpv-shim jetbrains-toolbox #jellyfin-media-player
@@ -61,6 +63,7 @@
       kclock
       kolourpaint
       partitionmanager
+      plasma-vault
      ])
     ++ (with hunspellDicts; [
       de_DE
