@@ -16,11 +16,11 @@
       jdk jellyfin-mpv-shim jetbrains-toolbox #jellyfin-media-player
       killall
       lsof lutris
-      mangohud mediainfo mesa-demos mesen mlocate mpv-vapoursynth
+      mangohud mediainfo mesa-demos mesen mlocate #mpv-vapoursynth
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
       nixd nixfmt-rfc-style neovim-unwrapped neovim-qt-unwrapped
       ocl-icd opencl-headers # openrgb-with-all-plugins
-      pciutils piper plex-mpv-shim
+      pciutils piper plex-mpv-shim proton-ge-custom
       qbittorrent
       rar
       (retroarch.withCores (

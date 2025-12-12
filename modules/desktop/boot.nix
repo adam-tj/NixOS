@@ -1,10 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, nix-cachyos-kernel, ... }:
 
 {
+  nixpkgs.overlays = [ nix-cachyos-kernel.overlay ];
   boot = {
     #kernelPackages = pkgs.linuxPackages_6_12; # See nvidia-gpu.nix
     #kernelPackages = pkgs.linuxPackages_latest; # See nvidia-gpu.nix
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    #kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
     plymouth = {
       enable = true;
       theme = "bgrt";

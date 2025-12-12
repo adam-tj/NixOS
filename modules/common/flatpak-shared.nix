@@ -21,7 +21,7 @@
   "com.github.KRTirtho.Spotube"         # YouTube Music
   "org.torproject.torbrowser-launcher"
   "org.openscopeproject.TrguiNG"        # Transmission Remote Client
-  "o.github.mpobaschnig.Vaults"         # Adwaita Vault
+  "io.github.mpobaschnig.Vaults"        # Adwaita Vault
   "com.rtosta.zapzap"                   # WhatsApp
   "us.zoom.Zoom"
 ]
