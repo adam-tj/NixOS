@@ -2,11 +2,12 @@
 
 {
   nixpkgs.overlays = [ nix-cachyos-kernel.overlay ];
+  nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
+  nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
   boot = {
     #kernelPackages = pkgs.linuxPackages_6_12; # See nvidia-gpu.nix
-    #kernelPackages = pkgs.linuxPackages_latest; # See nvidia-gpu.nix
-    #kernelPackages = pkgs.linuxPackages_cachyos;
-    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+    kernelPackages = pkgs.linuxPackages_latest; # See nvidia-gpu.nix
+    #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
     plymouth = {
       enable = true;
       theme = "bgrt";

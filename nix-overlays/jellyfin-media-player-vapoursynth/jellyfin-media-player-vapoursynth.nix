@@ -8,8 +8,8 @@
   libX11,
   libXrandr,
   libvdpau,
-  mpv-vapoursynth,
-  #mpvWithVapoursynth,
+  #mpv-vapoursynth,
+  mpvWithVapoursynth,
   ninja,
   pkg-config,
   python3,
@@ -48,8 +48,8 @@ stdenv.mkDerivation rec {
     libX11
     libXrandr
     libvdpau
-    mpv-vapoursynth
-    #mpvWithVapoursynth
+    #mpv-vapoursynth
+    mpvWithVapoursynth
     qtbase
     qtwebchannel
     qtwebengine

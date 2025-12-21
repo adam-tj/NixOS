@@ -32,7 +32,15 @@
       bgrtOverlay = final: prev: {
         nixos-bgrt-plymouth-no-firmware = final.callPackage ./nix-overlays/nixos-bgrt-plymouth-no-firmware/package.nix { };
       };
-
+      mpvVsOverlay = final: prev: {
+          mpv-vs =
+              (final.mpv-unwrapped.wrapper {
+                  mpv = final.mpv-unwrapped.override {
+                  vapoursynthSupport = true;
+                  vapoursynth = final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ];
+              };
+          });
+      };
 #      jmpVsOverlay = final: prev: {
 #        jellyfin-media-player-vs = final.callPackage ./nix-overlays/jellyfin-media-player-vapoursynth/jellyfin-media-player-vapoursynth.nix { };
 #        mpvWithVapoursynth = prev.mpv-unwrapped.override {
@@ -43,13 +51,16 @@
       jmpVsOverlay = final: prev:
         let
           # Define the custom MPV package first, using 'prev' (the current package set)
-          mpvWithVapoursynth = (prev.mpv-unwrapped.wrapper {
-            mpv = prev.mpv-unwrapped.override {
+          mpvWithVapoursynth =
+            (final.mpv-unwrapped.wrapper {
+              mpv = final.mpv-unwrapped.override {
               vapoursynthSupport = true;
-            };
-          });
+              vapoursynth = final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ];
+          };
+      });
         in
         {
+          permittedInsecurePackagess = [ "qtwebengine-5.15.19" ];
           jellyfin-media-player-vs = final.libsForQt5.callPackage ./nix-overlays/jellyfin-media-player-vapoursynth/jellyfin-media-player-vapoursynth.nix {
             inherit mpvWithVapoursynth;
 
@@ -64,6 +75,12 @@
             qtx11extras = final.libsForQt5.qtx11extras;
           };
         };
+
+      pkgsWithMpvVs = import nixpkgs {
+       system = "x86_64-linux";
+       config.allowUnfree = true;
+       overlays = [ mpvVsOverlay ];
+      };
 
 
       pkgsWithSVP = import nixpkgs {
@@ -81,6 +98,7 @@
       pkgsWithJmpvs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
+        config.permittedInsecurePackages = [ "qtwebengine-5.15.19"];
         overlays = [ jmpVsOverlay ];
       };
 
@@ -147,7 +165,7 @@
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
-            inherit inputs pkgsWithSVP pkgsUnstable pkgsWithJmpvs nix-cachyos-kernel;
+            inherit inputs pkgsWithSVP pkgsUnstable pkgsWithJmpvs nix-cachyos-kernel pkgsWithMpvVs;
             openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [

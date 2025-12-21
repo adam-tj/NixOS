@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, pkgsWithSVP, pkgsWithJmpvs, pkgsWithBgrt, ... }:
+{ pkgs, pkgsUnstable, pkgsWithSVP, pkgsWithJmpvs, pkgsWithBgrt, pkgsWithMpvVs, ... }:
 
 {
   environment.systemPackages =
@@ -15,7 +15,7 @@
       irssi isoimagewriter
       jdk jellyfin-mpv-shim jetbrains-toolbox #jellyfin-media-player
       killall
-      lsof lutris
+      lsof lutris-unwrapped
       mangohud mediainfo mesa-demos mesen mlocate #mpv-vapoursynth
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
       nixd nixfmt-rfc-style neovim-unwrapped neovim-qt-unwrapped
@@ -39,14 +39,14 @@
           sameboy
         ]
        ))
-      smplayer
+      smplayer #svp
       usbutils
       vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium vulkan-tools
       wine wget
       zed-editor-fhs
     ]
     ++ (with pkgsUnstable; [
-      #svp
+      #proton-ge-bin
       winboat
      ])
     ++ (with pkgsWithSVP; [
@@ -55,6 +55,9 @@
     ++ (with pkgsWithJmpvs; [
       #jellyfin-media-player-vs
      ])
+    ++ (with pkgsWithMpvVs; [
+      mpv-vs
+    ])
     ++ (with kdePackages; [
       filelight
       kaccounts-integration
@@ -63,7 +66,6 @@
       kclock
       kolourpaint
       partitionmanager
-      plasma-vault
      ])
     ++ (with hunspellDicts; [
       de_DE
