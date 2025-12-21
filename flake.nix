@@ -5,7 +5,6 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -21,7 +20,6 @@
       home-manager,
       slippi,
       openmw-nix,
-      chaotic,
       nix-cachyos-kernel,
       ...
     }@inputs:
@@ -76,13 +74,10 @@
         # Laptop Configuration
         thinkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs pkgsWithSVP pkgsUnstable pkgsWithJmpvs pkgsWithBgrt; };
+          specialArgs = { inherit inputs pkgsWithSVP pkgsUnstable pkgsWithBgrt; };
           modules = commonModules ++ [
             ./hosts/thinkpad.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-l13
-            chaotic.nixosModules.nyx-cache
-            chaotic.nixosModules.nyx-overlay
-            chaotic.nixosModules.nyx-registry
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -123,14 +118,11 @@
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
-            inherit inputs pkgsWithSVP pkgsUnstable pkgsWithJmpvs nix-cachyos-kernel pkgsWithMpvVs;
+            inherit inputs pkgsWithSVP pkgsUnstable nix-cachyos-kernel pkgsWithMpvVs;
             openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [
             ./hosts/desktop.nix
-            chaotic.nixosModules.nyx-cache
-            chaotic.nixosModules.nyx-overlay
-            chaotic.nixosModules.nyx-registry
             #            ./modules/common/slippi.nix
             {
               home-manager.useGlobalPkgs = true;

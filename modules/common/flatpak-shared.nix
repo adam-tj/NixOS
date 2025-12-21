@@ -4,6 +4,7 @@
   "com.usebottles.bottles"
   "org.deluge_torrent.deluge"
   "im.riot.Riot"                        # Element
+  "org.gabmus.gfeeds"                   # GNOME RSS Reader
   "org.mozilla.firefox"
   "it.mijorus.gearlever"                # AppImage Manager
   "org.gimp.GIMP"
@@ -20,6 +21,7 @@
   "org.quassel_irc.QuasselClient"       # Remote IRC
   "com.github.ryonakano.reco"           # Audio recorder
   "org.remmina.Remmina"                 # Remote desktop
+  "io.github.martinrotter.rssguardlite" # RSS Reader
   "com.github.KRTirtho.Spotube"         # YouTube Music
   "org.torproject.torbrowser-launcher"
   "org.openscopeproject.TrguiNG"        # Transmission Remote Client

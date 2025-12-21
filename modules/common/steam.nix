@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgsUnstable, ...}:
 
 {
   programs.steam = {
@@ -7,8 +7,8 @@
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
     gamescopeSession.enable = true;
-   extraCompatPackages = with pkgs; [
-      proton-ge-custom
+   extraCompatPackages = with pkgsUnstable; [
+      proton-ge-bin
     ];
   };
 }

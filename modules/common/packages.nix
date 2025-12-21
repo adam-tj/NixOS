@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, pkgsWithSVP, pkgsWithJmpvs, pkgsWithBgrt, pkgsWithMpvVs, ... }:
+{ pkgs, pkgsUnstable, pkgsWithSVP, pkgsWithBgrt, pkgsWithMpvVs, ... }:
 
 {
   environment.systemPackages =
@@ -20,7 +20,7 @@
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
       nixd nixfmt-rfc-style neovim-unwrapped neovim-qt-unwrapped
       ocl-icd opencl-headers # openrgb-with-all-plugins
-      pciutils piper plex-mpv-shim proton-ge-custom
+      pciutils piper plex-mpv-shim
       qbittorrent
       rar
       (retroarch.withCores (
@@ -51,9 +51,6 @@
      ])
     ++ (with pkgsWithSVP; [
       svp-with-mpv
-     ])
-    ++ (with pkgsWithJmpvs; [
-      #jellyfin-media-player-vs
      ])
     ++ (with pkgsWithMpvVs; [
       mpv-vs
