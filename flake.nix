@@ -41,47 +41,12 @@
               };
           });
       };
-#      jmpVsOverlay = final: prev: {
-#        jellyfin-media-player-vs = final.callPackage ./nix-overlays/jellyfin-media-player-vapoursynth/jellyfin-media-player-vapoursynth.nix { };
-#        mpvWithVapoursynth = prev.mpv-unwrapped.override {
-#          vapoursynthSupport = true;
-#          };
-#      };
-
-      jmpVsOverlay = final: prev:
-        let
-          # Define the custom MPV package first, using 'prev' (the current package set)
-          mpvWithVapoursynth =
-            (final.mpv-unwrapped.wrapper {
-              mpv = final.mpv-unwrapped.override {
-              vapoursynthSupport = true;
-              vapoursynth = final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ];
-          };
-      });
-        in
-        {
-          permittedInsecurePackagess = [ "qtwebengine-5.15.19" ];
-          jellyfin-media-player-vs = final.libsForQt5.callPackage ./nix-overlays/jellyfin-media-player-vapoursynth/jellyfin-media-player-vapoursynth.nix {
-            inherit mpvWithVapoursynth;
-
-            # Explicitly pass required top-level functions/hooks
-            wrapQtAppsHook = final.libsForQt5.wrapQtAppsHook;
-
-            # Explicitly pass Qt5 dependencies (to fix the previous 'qtbase' error)
-            qtbase = final.libsForQt5.qtbase;
-            qtwayland = final.libsForQt5.qtwayland;
-            qtwebchannel = final.libsForQt5.qtwebchannel;
-            qtwebengine = final.libsForQt5.qtwebengine;
-            qtx11extras = final.libsForQt5.qtx11extras;
-          };
-        };
 
       pkgsWithMpvVs = import nixpkgs {
        system = "x86_64-linux";
        config.allowUnfree = true;
        overlays = [ mpvVsOverlay ];
       };
-
 
       pkgsWithSVP = import nixpkgs {
         system = "x86_64-linux";
@@ -93,13 +58,6 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
         overlays = [ bgrtOverlay ];
-      };
-
-      pkgsWithJmpvs = import nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-        config.permittedInsecurePackages = [ "qtwebengine-5.15.19"];
-        overlays = [ jmpVsOverlay ];
       };
 
       pkgsUnstable = import nixpkgs-unstable {
@@ -174,24 +132,6 @@
             chaotic.nixosModules.nyx-overlay
             chaotic.nixosModules.nyx-registry
             #            ./modules/common/slippi.nix
-
-#              nixpkgs.overlays = [
-#                (final: prev: {
-#                  jellyfin-media-player = prev.jellyfin-media-player.override {
-#                    # 2. OVERRIDE the 'mpv' input of jellyfin-media-player
-#                    # This explicitly tells the jellyfin package to use your custom mpv
-#                    mpv = chaotic.packages.${final.system}.mpv-vapoursynth;
-#                  };
-#                })
-#              ];
-
-            #(
-            #  { pkgs, ... }:
-            #  {
-            #    nixpkgs.overlays = [ nix-cachyos-kernel.overlay ];
-            #    boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
-            #  }
-            #)
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

@@ -1,32 +1,30 @@
-{ 
+{
   stdenv,
+  lib,
   buildFHSEnv,
   writeShellScriptBin,
   fetchurl,
   callPackage,
   makeDesktopItem,
   copyDesktopItems,
-  ffmpeg,
-  glibc,
+  socat,
   jq,
-  lib,
+  kdePackages,
+  ffmpeg,
   libmediainfo,
   libusb1,
   ocl-icd,
+  vapoursynth,
+  xorg,
+  systemdLibs,
   openssl,
   p7zip,
-  patchelf,
-  qt6,
-  socat,
-  udev,
-  vapoursynth,
-  xdg-utils,
-  xorg,
-  zenity,
 }:
 let
   mpvForSVP = callPackage ./mpv.nix { };
 
+  # Script provided by GitHub user @xrun1
+  # https://github.com/xddxdd/nur-packages/issues/31#issuecomment-1812591688
   fakeLsof = writeShellScriptBin "lsof" ''
     for arg in "$@"; do
       if [ -S "$arg" ]; then
@@ -39,48 +37,44 @@ let
     done
   '';
 
+  # SVP expects findmnt to return path to storage device for software protection.
+  # Workaround for tmp-as-root and encrypted root use cases, by returning first storage device on system.
+  fakeFindmnt = writeShellScriptBin "findmnt" ''
+    find /dev/ -name 'nvme*n*p*' -or -name 'sd*' -or -name 'vd*' 2>/dev/null | sort | head -n1
+  '';
+
   libraries = [
-    fakeLsof
-    ffmpeg.bin
-    glibc
-    zenity
-    libmediainfo
-    # libsForQt5.qtbase
-    # libsForQt5.qtwayland
-    # libsForQt5.qtdeclarative
-    # libsForQt5.qtscript
-    # libsForQt5.qtsvg
-    libusb1
     mpvForSVP
-    ocl-icd
-    openssl
+    fakeLsof
+    fakeFindmnt
     (lib.getLib stdenv.cc.cc)
-    qt6.qtbase
-    qt6.qtdeclarative
-    qt6.qtsvg
-    qt6.qtwayland
-    udev
+    kdePackages.qtbase
+    kdePackages.qtdeclarative
+    ffmpeg.bin
+    libmediainfo
+    libusb1
+    ocl-icd
     vapoursynth
-    xdg-utils
     xorg.libX11
+    systemdLibs
+    openssl
   ];
 
-  svp-dist = stdenv.mkDerivation rec {
+  svp-dist = stdenv.mkDerivation (finalAttrs: {
     pname = "svp-dist";
     version = "4.7.305";
     src = fetchurl {
-      url = "https://www.svp-team.com/files/svp4-linux.${version}.tar.bz2";
-      sha256 = "sha256-PWAcm/hIA4JH2QtJPP+gSJdJLRdfdbZXIVdWELazbxQ=";
+      url = "https://www.svp-team.com/files/svp4-linux.${finalAttrs.version}.tar.bz2";
+      hash = "sha256-PWAcm/hIA4JH2QtJPP+gSJdJLRdfdbZXIVdWELazbxQ=";
     };
 
     nativeBuildInputs = [
       p7zip
-      patchelf
     ];
     dontFixup = true;
 
     unpackPhase = ''
-      tar xf ${src}
+      tar xf ${finalAttrs.src}
     '';
 
     buildPhase = ''
@@ -102,10 +96,10 @@ let
       done
       rm -f $out/opt/{add,remove}-menuitem.sh
     '';
-  };
+  });
 
   fhs = buildFHSEnv {
-    pname = "svp-with-mpv-env";
+    pname = "SVPManager";
     inherit (svp-dist) version;
     targetPkgs = pkgs: libraries;
     runScript = "${svp-dist}/opt/SVPManager";
@@ -115,17 +109,10 @@ let
     unshareNet = false;
     unshareUts = false;
     unshareCgroup = false;
-
-extraBuildCommands = ''
-  mkdir -p $out/usr/bin
-  rm -f $out/usr/bin/mpv
-  ln -s ${mpvForSVP}/usr/bin/umpv $out/usr/bin/mpv
-'';
-
   };
 in
 stdenv.mkDerivation {
-  pname = "svp-with-mpv";
+  pname = "svp";
   inherit (svp-dist) version;
 
   dontUnpack = true;
@@ -133,9 +120,8 @@ stdenv.mkDerivation {
   nativeBuildInputs = [ copyDesktopItems ];
 
   postInstall = ''
-    mkdir -p $out/bin $out/share $out/usr/bin
-    ln -s ${fhs}/bin/svp-with-mpv-env $out/bin/SVPManager
-    ln -s ${mpvForSVP}/bin/mpv $out/bin/mpv-svp
+    mkdir -p $out/bin $out/share
+    ln -s ${fhs}/bin/SVPManager $out/bin/SVPManager
     ln -s ${svp-dist}/share/icons $out/share/icons
   '';
 
@@ -148,24 +134,11 @@ stdenv.mkDerivation {
       desktopName = "SVP 4 Linux";
       genericName = "Real time frame interpolation";
       icon = "svp-manager4";
-      categories = [ "AudioVideo" "Player" "Video" ];
-      mimeTypes = [
-        "video/x-msvideo"
-        "video/x-matroska"
-        "video/webm"
-        "video/mpeg"
-        "video/mp4"
+      categories = [
+        "AudioVideo"
+        "Player"
+        "Video"
       ];
-      terminal = false;
-      startupNotify = true;
-    })
-    (makeDesktopItem {
-      name = "mpv";
-      exec = "${fhs}/bin/mpv-svp --player-operation-mode=pseudo-gui %f";
-      desktopName = "mpv";
-      genericName = "A free, open source, and cross-platform media player";
-      icon = "mpv";
-      categories = [ "AudioVideo" "Player" "Video" ];
       mimeTypes = [
         "video/x-msvideo"
         "video/x-matroska"
@@ -178,13 +151,13 @@ stdenv.mkDerivation {
     })
   ];
 
-  meta = with lib; {
+  meta = {
     mainProgram = "SVPManager";
-    description = "SmoothVideo Project 4 (SVP4) with integrated MPV — converts any video to high frame rate in real time";
+    description = "SmoothVideo Project 4 (SVP4) converts any video to 60 fps (and even higher) and performs this in real time right in your favorite video player";
     homepage = "https://www.svp-team.com/wiki/SVP:Linux";
     platforms = [ "x86_64-linux" ];
-    license = licenses.unfree;
-    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
+    license = lib.licenses.unfree;
+    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
     maintainers = with lib.maintainers; [ xddxdd ];
   };
 }
