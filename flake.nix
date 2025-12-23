@@ -74,7 +74,7 @@
         # Laptop Configuration
         thinkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs pkgsWithSVP pkgsUnstable pkgsWithBgrt; };
+          specialArgs = { inherit inputs pkgsWithSVP pkgsUnstable pkgsWithBgrt pkgsWithMpvVs; };
           modules = commonModules ++ [
             ./hosts/thinkpad.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-l13
