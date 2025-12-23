@@ -11,6 +11,7 @@
   "io.github.milkshiift.GoofCord"       # Third Party Discord Client
   "com.google.EarthPro"                 # Google Earth
   "com.heroicgameslauncher.hgl"         # Heroic Games Launcher
+  "io.itch.itch"                        # itch.io Launcher
   "net.mediaarea.MediaInfo"
   "com.nextcloud.desktopclient.nextcloud"
   "com.obsproject.Studio"

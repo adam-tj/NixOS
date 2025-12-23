@@ -15,7 +15,7 @@
       irssi isoimagewriter
       jdk jellyfin-mpv-shim jetbrains-toolbox #jellyfin-media-player
       killall
-      lsof lutris-unwrapped
+      lsof lutris
       mangohud mediainfo mesa-demos mesen mlocate #mpv-vapoursynth
       #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
       nixd nixfmt-rfc-style neovim-unwrapped neovim-qt-unwrapped
