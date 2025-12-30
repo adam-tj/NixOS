@@ -4,7 +4,8 @@
 
     # Hardware
     ../modules/desktop/hardware.nix
-    ../modules/desktop/nvidia-gpu.nix
+    #../modules/desktop/nvidia-gpu.nix
+    ../modules/desktop/amdgpu.nix
     ../modules/common/gamecube-controller.nix
     #../modules/common/xbox-controller.nix
     ../modules/services/piper-rules.nix
