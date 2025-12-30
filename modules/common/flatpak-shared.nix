@@ -1,8 +1,9 @@
 [
+  "com.usebottles.bottles"
   "page.kramo.Cartridges"               # Game Launcher
   "com.google.Chrome"
-  "com.usebottles.bottles"
   "org.deluge_torrent.deluge"
+  "com.ranfdev.DistroShelf"
   "im.riot.Riot"                        # Element
   "org.gabmus.gfeeds"                   # GNOME RSS Reader
   "org.mozilla.firefox"

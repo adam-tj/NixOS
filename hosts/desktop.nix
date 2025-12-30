@@ -15,7 +15,7 @@
     ../modules/desktop/flatpak.nix
     ../modules/common/steam.nix
     ../modules/common/plex-portal.nix
-    ../modules/desktop/coolercontrol.nix
+    #../modules/desktop/coolercontrol.nix
     #../modules/common/virtualbox.nix
     ../modules/common/virt-manager.nix
 

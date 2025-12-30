@@ -4,7 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
+    #openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -19,7 +19,7 @@
       nixos-hardware,
       home-manager,
       slippi,
-      openmw-nix,
+      #openmw-nix,
       nix-cachyos-kernel,
       ...
     }@inputs:
@@ -119,7 +119,7 @@
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
             inherit inputs pkgsWithSVP pkgsUnstable nix-cachyos-kernel pkgsWithMpvVs;
-            openmwPkgs = openmw-nix.packages.x86_64-linux;
+            #openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [
             ./hosts/desktop.nix
