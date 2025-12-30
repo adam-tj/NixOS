@@ -28,7 +28,8 @@
 
     # System
     ../modules/desktop/boot.nix
-    ../modules/desktop/packages.nix
+    #../modules/desktop/packages.nix
+    ../modules/desktop/packages_temporary_unstable.nix
     ../modules/desktop/firewall.nix
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
