@@ -12,7 +12,7 @@
       fastfetch
       gamemode gcc gh git gnugrep gnumake gocryptfs
       htop hunspell
-      irssi isoimagewriter
+      irssi
       jdk jellyfin-mpv-shim jetbrains-toolbox #jellyfin-media-player
       killall
       lsof lutris
@@ -62,6 +62,7 @@
       kate
       kclock
       kolourpaint
+      isoimagewriter
       partitionmanager
      ])
     ++ (with hunspellDicts; [
