@@ -12,6 +12,10 @@
       r2modman
       tes3cmd
       openmw
+
+      unigine-superposition
+      unigine-valley
+
     ]
     ++ (with pkgsUnstable; [
 #      openmw
