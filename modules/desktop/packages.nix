@@ -3,7 +3,7 @@
 {
 
   imports = [
-    ../common/packages.nix
+    ../common/packages_temporary_unstable.nix
   ];
 
   environment.systemPackages =
