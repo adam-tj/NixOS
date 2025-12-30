@@ -114,7 +114,7 @@
         };
 
         # Desktop Configuration
-        desktop = nixpkgs.lib.nixosSystem {
+        desktop = nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
