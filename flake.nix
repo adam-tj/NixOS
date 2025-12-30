@@ -7,7 +7,7 @@
     #openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 };
