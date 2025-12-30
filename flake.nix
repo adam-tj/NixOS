@@ -8,7 +8,7 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 };
 
