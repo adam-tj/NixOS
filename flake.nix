@@ -3,9 +3,10 @@
     slippi.url = "github:lytedev/slippi-nix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-kernel.url = "github:nixos/nixpkgs/5c2bc52fb9f8c264ed6c93bd20afa2ff5e763dce";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    #openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+    openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -16,10 +17,11 @@
     {
       nixpkgs,
       nixpkgs-unstable,
+      nixpkgs-kernel,
       nixos-hardware,
       home-manager,
       slippi,
-      #openmw-nix,
+      openmw-nix,
       nix-cachyos-kernel,
       ...
     }@inputs:
@@ -118,8 +120,8 @@
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
-            inherit inputs pkgsWithSVP pkgsUnstable nix-cachyos-kernel pkgsWithMpvVs;
-            #openmwPkgs = openmw-nix.packages.x86_64-linux;
+            inherit inputs pkgsWithSVP pkgsUnstable nix-cachyos-kernel nixpkgs-kernel pkgsWithMpvVs;
+            openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [
             ./hosts/desktop.nix

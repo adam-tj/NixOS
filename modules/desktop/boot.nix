@@ -1,4 +1,4 @@
-{ pkgs, nix-cachyos-kernel, ... }:
+{ pkgs, nix-cachyos-kernel, nixpkgs-kernel, ... }:
 
 {
   nixpkgs.overlays = [ nix-cachyos-kernel.overlay ];
@@ -6,8 +6,9 @@
   nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
   boot = {
     #kernelPackages = pkgs.linuxPackages_6_12; # See nvidia-gpu.nix
-    kernelPackages = pkgs.linuxPackages_latest; # See nvidia-gpu.nix
-    #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+    #kernelPackages = pkgs.linuxPackages_latest; # See nvidia-gpu.nix
+    #kernelPackages = nixpkgs-kernel.legacyPackages.x86_64-linux.linuxPackages_6_17;
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
     plymouth = {
       enable = true;
       theme = "bgrt";

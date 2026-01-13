@@ -1,3 +1,5 @@
+ { pkgs, ... }:
+
  {
    hardware = {
      graphics = {
@@ -5,9 +7,17 @@
        enable32Bit = true;
      };
      amdgpu = {
-#       opencl.enable = true;
+       opencl.enable = true;
        initrd.enable = true;
      };
    };
    services.lact.enable = true;
- }
+   environment.systemPackages = with pkgs; [
+     amdenc
+     amdgpu_top
+     vulkan-tools
+     clinfo
+     virtualglLib
+     gpu-viewer
+ ];
+}

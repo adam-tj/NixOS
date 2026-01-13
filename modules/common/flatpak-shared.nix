@@ -2,10 +2,10 @@
   "com.usebottles.bottles"
   "page.kramo.Cartridges"               # Game Launcher
   "com.google.Chrome"
+  "com.collaboraoffice.Office"          # Collabora Office
   "org.deluge_torrent.deluge"
   "com.ranfdev.DistroShelf"
   "im.riot.Riot"                        # Element
-  "org.gabmus.gfeeds"                   # GNOME RSS Reader
   "org.mozilla.firefox"
   "it.mijorus.gearlever"                # AppImage Manager
   "org.gimp.GIMP"
