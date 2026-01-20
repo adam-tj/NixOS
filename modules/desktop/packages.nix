@@ -1,14 +1,15 @@
-{ pkgs, pkgsUnstable, openmwPkgs, ... }:
+{ pkgs, pkgsUnstable, openmwPkgs, inputs, ... }:
 #{ pkgs, pkgsUnstable, ... }:
 {
 
   imports = [
-    ../common/packages_temporary_unstable.nix
+    ../common/packages.nix
   ];
 
   environment.systemPackages =
     with pkgs;
     [
+      inputs.sam-repo.legacyPackages.${pkgs.system}.steam-art-manager
       alpaca
       nix-ld
       r2modman
@@ -22,9 +23,6 @@
       rocmPackages.rocminfo
       rocmPackages.rocm-runtime
       mesa.opencl
-      unigine-superposition
-      unigine-valley
-
     ]
 #    ++ (with pkgsUnstable; [
 #      openmw
@@ -42,8 +40,9 @@
       enable = true;
       package = pkgs.ollama-rocm;
       loadModels = [
-        "gemma3:12b"
-        "deepseek-r1:14b"
+#        "gemma3:12b"
+#        "deepseek-r1:14b"
+        "llama3.2:3b"
       ];
     };
 }

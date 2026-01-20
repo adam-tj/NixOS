@@ -12,13 +12,12 @@
       fastfetch
       gamemode gcc gh git gnugrep gnumake gocryptfs
       htop hunspell
-      irssi isoimagewriter
-      jdk jellyfin-mpv-shim jetbrains-toolbox #jellyfin-media-player
+      irssi
+      jdk jellyfin-mpv-shim
       killall
       lsof lutris
-      mangohud mediainfo mesa-demos mesen mlocate #mpv-vapoursynth
-      #(mpv-unwrapped.wrapper { mpv = mpv-unwrapped.override { vapoursynthSupport = true; }; youtubeSupport = true; })
-      nixd nixfmt-rfc-style neovim-unwrapped neovim-qt-unwrapped
+      mangohud mediainfo mesa-demos mesen mlocate
+      nixd nixfmt neovim-unwrapped neovim-qt-unwrapped nh nom nvd nix-tree
       ocl-icd opencl-headers # openrgb-with-all-plugins
       pciutils piper plex-mpv-shim
       qbittorrent
@@ -39,56 +38,38 @@
           sameboy
         ]
        ))
-      smplayer #svp
+      smplayer svp
       usbutils
       vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium vulkan-tools
       wine wget
       zed-editor-fhs
     ]
     ++ (with pkgsUnstable; [
-      #proton-ge-bin
       winboat
-      svp
      ])
     ++ (with pkgsWithSVP; [
       #svp-with-mpv
      ])
     ++ (with pkgsWithMpvVs; [
-      mpv-vs
+      #mpv-vs
+      jellyfin-desktop
+      mpv
     ])
-    ++ (with kdePackages; [
-      filelight
-      kaccounts-integration
-      kaccounts-providers
-      kate
-      kclock
-      kolourpaint
-      partitionmanager
-     ])
+    ++ (with jetbrains; [
+      idea
+      pycharm
+    ])
     ++ (with hunspellDicts; [
       de_DE
-      en-gb-ise
-      en-gb-ize
-      en-gb-large
-      en-us
-      en-us-large
-      en_GB-ise
-      en_GB-ize
-      en_GB-large
-      en_US
-      en_US-large
-      hu-hu
-      hu_HU
-      it-it
-      it_IT
-      sv-se
-      sv_SE
+      en-gb-ise en-gb-ize en-gb-large en-us en-us-large en_GB-ise en_GB-ize en_GB-large en_US en_US-large
+      hu-hu hu_HU
+      it-it it_IT
+      sv-se sv_SE
      ])
     ++ (with nerd-fonts; [
       adwaita-mono
       bitstream-vera-sans-mono
-      dejavu-sans-mono
-      droid-sans-mono
+      dejavu-sans-mono droid-sans-mono
       hack
       jetbrains-mono
       liberation
@@ -96,8 +77,7 @@
       roboto-mono
       space-mono
       terminess-ttf
-      ubuntu-mono
-      ubuntu-sans
+      ubuntu-mono ubuntu-sans
       zed-mono
      ]);
 }

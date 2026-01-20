@@ -10,7 +10,8 @@
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-  };
+    };
+    sam-repo.url = "github:adam-tj/nixpkgs/steam-art-manager";
 };
 
   outputs =
@@ -23,6 +24,7 @@
       slippi,
       openmw-nix,
       nix-cachyos-kernel,
+      sam-repo,
       ...
     }@inputs:
     let
@@ -33,12 +35,17 @@
         nixos-bgrt-plymouth-no-firmware = final.callPackage ./nix-overlays/nixos-bgrt-plymouth-no-firmware/package.nix { };
       };
       mpvVsOverlay = final: prev: {
-          mpv-vs =
-              (final.mpv-unwrapped.wrapper {
-                  mpv = final.mpv-unwrapped.override {
-                  vapoursynthSupport = true;
-                  vapoursynth = final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ];
-              };
+        mpv-unwrapped = prev.mpv-unwrapped.override {
+            vapoursynthSupport = true;
+            vapoursynth = final.vapoursynth.withPlugins [
+              final.vapoursynth-mvtools
+            ];
+          };
+
+        jellyfin-desktop = prev.jellyfin-desktop.overrideAttrs (oldAttrs: {
+          qtWrapperArgs = (oldAttrs.qtWrapperArgs or []) ++ [
+            "--prefix PYTHONPATH : ${final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ]}/lib/python${final.python3.pythonVersion}/site-packages"
+            ];
           });
       };
 
@@ -120,7 +127,7 @@
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
-            inherit inputs pkgsWithSVP pkgsUnstable nix-cachyos-kernel nixpkgs-kernel pkgsWithMpvVs;
+            inherit inputs sam-repo pkgsWithSVP pkgsUnstable nix-cachyos-kernel nixpkgs-kernel pkgsWithMpvVs;
             openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [
