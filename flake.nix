@@ -140,7 +140,7 @@
                 backupFileExtension = "backup";
                 users.adam = ./modules/desktop/home.nix;
                 extraSpecialArgs = {
-                  inherit inputs;
+                  inherit inputs pkgsWithMpvVs;
                   pkgs-unstable = import nixpkgs-unstable {
                     system = "x86_64-linux";
                     config.allowUnfree = true;
