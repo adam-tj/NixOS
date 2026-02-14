@@ -11,7 +11,7 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    sam-repo.url = "github:adam-tj/nixpkgs/steam-art-manager";
+    #sam-repo.url = "github:adam-tj/nixpkgs/steam-art-manager";
 };
 
   outputs =
@@ -24,7 +24,7 @@
       slippi,
       openmw-nix,
       nix-cachyos-kernel,
-      sam-repo,
+      #sam-repo,
       ...
     }@inputs:
     let
@@ -127,41 +127,25 @@
           system = "x86_64-linux";
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
-            inherit inputs sam-repo pkgsWithSVP pkgsUnstable nix-cachyos-kernel nixpkgs-kernel pkgsWithMpvVs;
+            inherit inputs pkgsWithSVP pkgsUnstable nix-cachyos-kernel nixpkgs-kernel pkgsWithMpvVs;
+            #inherit inputs sam-repo pkgsWithSVP pkgsUnstable nix-cachyos-kernel nixpkgs-kernel pkgsWithMpvVs;
             openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [
             ./hosts/desktop.nix
-            #            ./modules/common/slippi.nix
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-              home-manager.users.adam = ./modules/desktop/home.nix;
-              home-manager.extraSpecialArgs = {
-                pkgs-unstable = import nixpkgs-unstable {
-                  system = "x86_64-linux";
-                  config.allowUnfree = true;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+                users.adam = ./modules/desktop/home.nix;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  pkgs-unstable = import nixpkgs-unstable {
+                    system = "x86_64-linux";
+                    config.allowUnfree = true;
+                  };
                 };
-              };
-
-            }
-            {
-              home-manager.users.adam = {
-                imports = [
-                  slippi.homeManagerModules.default
-                  {
-                    slippi-launcher.isoPath = "/home/adam/Games/ROMS/animelee.iso";
-                    slippi-launcher.rootSlpPath = "/home/adam/Games/Slippi";
-                    slippi-launcher.launchMeleeOnPlay = false;
-                    slippi-launcher.useMonthlySubfolders = true;
-                    slippi-launcher.enableJukebox = true;
-                    slippi-launcher.useNetplayBeta = false;
-                  }
-                ];
-                nix.gc.automatic = true;
-                nix.gc.options = "--delete-older-than 10d";
-                nix.gc.dates = "daily";
               };
             }
           ];

@@ -15,7 +15,7 @@
       irssi
       jdk jellyfin-mpv-shim
       killall
-      lsof lutris
+      legcord lsof lutris
       mangohud mediainfo mesa-demos mesen mlocate
       nixd nixfmt neovim-unwrapped neovim-qt-unwrapped nh nom nvd nix-tree
       ocl-icd opencl-headers # openrgb-with-all-plugins
@@ -38,10 +38,10 @@
           sameboy
         ]
        ))
-      smplayer svp
+      smplayer steam-art-manager svp
       usbutils
       vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium vulkan-tools
-      wine wget
+      wget
       zed-editor-fhs
     ]
     ++ (with pkgsUnstable; [

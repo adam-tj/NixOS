@@ -1,6 +1,5 @@
 [
   "com.usebottles.bottles"
-  "page.kramo.Cartridges"               # Game Launcher
   "com.google.Chrome"
   "com.collaboraoffice.Office"          # Collabora Office
   "org.deluge_torrent.deluge"
@@ -9,7 +8,6 @@
   "org.mozilla.firefox"
   "it.mijorus.gearlever"                # AppImage Manager
   "org.gimp.GIMP"
-  "io.github.milkshiift.GoofCord"       # Third Party Discord Client
   "com.google.EarthPro"                 # Google Earth
   "com.heroicgameslauncher.hgl"         # Heroic Games Launcher
   "io.itch.itch"                        # itch.io Launcher

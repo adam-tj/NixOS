@@ -3,11 +3,11 @@
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     gdk-pixbuf
-    xorg.libSM
-    xorg.libICE
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrandr
+    libsm
+    libice
+    libx11
+    libxext
+    libxrandr
     freetype
     SDL2
     gtk3

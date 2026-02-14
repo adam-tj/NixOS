@@ -9,7 +9,7 @@
   environment.systemPackages =
     with pkgs;
     [
-      inputs.sam-repo.legacyPackages.${pkgs.system}.steam-art-manager
+      #inputs.sam-repo.legacyPackages.${pkgs.stdenv.hostPlatform.system}.steam-art-manager
       alpaca
       nix-ld
       r2modman
