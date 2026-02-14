@@ -22,7 +22,6 @@
   "com.github.ryonakano.reco"           # Audio recorder
   "org.remmina.Remmina"                 # Remote desktop
   "io.github.martinrotter.rssguardlite" # RSS Reader
-  "com.github.KRTirtho.Spotube"         # YouTube Music
   "org.torproject.torbrowser-launcher"
   "org.openscopeproject.TrguiNG"        # Transmission Remote Client
   "io.github.mpobaschnig.Vaults"        # Adwaita Vault
