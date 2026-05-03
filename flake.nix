@@ -49,6 +49,12 @@
           });
       };
 
+      openldapOverlay = (final: prev: {
+            openldap = prev.openldap.overrideAttrs (_: {
+              doCheck = !prev.stdenv.hostPlatform.isi686;
+            });
+          });
+
       pkgsWithMpvVs = import nixpkgs {
        system = "x86_64-linux";
        config.allowUnfree = true;
@@ -128,11 +134,13 @@
           # specialArgs = { inherit inputs slippi pkgsWithSVP; };
           specialArgs = {
             inherit inputs pkgsWithSVP pkgsUnstable nix-cachyos-kernel nixpkgs-kernel pkgsWithMpvVs;
-            #inherit inputs sam-repo pkgsWithSVP pkgsUnstable nix-cachyos-kernel nixpkgs-kernel pkgsWithMpvVs;
             openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [
             ./hosts/desktop.nix
+           {
+            nixpkgs.overlays = [ openldapOverlay ];
+           }
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -144,6 +152,9 @@
                   pkgs-unstable = import nixpkgs-unstable {
                     system = "x86_64-linux";
                     config.allowUnfree = true;
+                    #config.permittedInsecurePackages = [ "googleearth-pro-7.3.6.10201" ];
+                    config.permittedInsecurePackages = import ./modules/common/whitelist-insecure-packages.nix;
+                    overlays = [ openldapOverlay ];
                   };
                 };
               };

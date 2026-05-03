@@ -10,19 +10,19 @@
     with pkgs;
     [
       #inputs.sam-repo.legacyPackages.${pkgs.stdenv.hostPlatform.system}.steam-art-manager
-      alpaca
+      #alpaca
       nix-ld
       r2modman
       tes3cmd
       openmw
-      (pkgs.ollama.override {
-         acceleration = "rocm";
-       })
-      rocmPackages.clr.icd
-      rocmPackages.clr
-      rocmPackages.rocminfo
-      rocmPackages.rocm-runtime
-      mesa.opencl
+#      (pkgs.ollama.override {
+#         acceleration = "rocm";
+#       })
+#      rocmPackages.clr.icd
+#      rocmPackages.clr
+#      rocmPackages.rocminfo
+#      rocmPackages.rocm-runtime
+#      mesa.opencl
     ]
 #    ++ (with pkgsUnstable; [
 #      openmw
@@ -36,13 +36,13 @@
       umo
     ]);
 
-    services.ollama = {
-      enable = true;
-      package = pkgs.ollama-rocm;
-      loadModels = [
+    #services.ollama = {
+    #  enable = true;
+    #  package = pkgs.ollama-rocm;
+    #  loadModels = [
 #        "gemma3:12b"
 #        "deepseek-r1:14b"
-        "llama3.2:3b"
-      ];
-    };
+    #    "llama3.2:3b"
+    #  ];
+    #};
 }

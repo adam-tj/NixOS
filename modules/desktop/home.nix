@@ -15,18 +15,32 @@
   imports = [
     inputs.slippi.homeManagerModules.default
   ];
-  slippi-launcher.enable = true; # Ensure the service/program is enabled
-  slippi-launcher.isoPath = "/home/adam/Games/ROMS/animelee.iso";
-  slippi-launcher.rootSlpPath = "/home/adam/Games/Slippi";
-  slippi-launcher.launchMeleeOnPlay = false;
-  slippi-launcher.useMonthlySubfolders = true;
-  slippi-launcher.enableJukebox = true;
-  slippi-launcher.useNetplayBeta = false;
+
+  nixpkgs.config = {
+    permittedInsecurePackages = [
+      #"freeimage-3.18.0-unstable-2024-04-18"
+      "mbedtls-2.28.10"
+      "mbedtls_2-2.28.10"
+      "qtwebengine-5.15.19"
+      "googleearth-pro-7.3.6.10201"
+    ];
+  };
+
+
+  slippi-launcher = {
+      enable = true;
+      isoPath = "/home/adam/Games/ROMS/animelee.iso";
+      rootSlpPath = "/home/adam/Games/Slippi";
+      launchMeleeOnPlay = false;
+      useMonthlySubfolders = true;
+      enableJukebox = true;
+      useNetplayBeta = false;
+    };
 
   # Lutris + ProtonGE
   programs.lutris = {
     enable = true;
-    package = pkgs-unstable.lutris;
+    #package = customLutris;
     extraPackages = with pkgs-unstable; [
       gamemode
     ];
@@ -39,13 +53,18 @@
   home.stateVersion = "24.11"; # Do not change this line.
 
   home.packages = with pkgs-unstable; [
-    gamemode
-    #hunspell
+    bottles
+    deluge discord distroshelf
+    element-desktop
+    gamemode gearlever gimp googleearth-pro goofcord
+    heroic #hunspell
+    itch
     jellyfin-mpv-shim
     legcord
-    mangohud mediainfo mesa-demos mesen
-    piper plex-mpv-shim
-    qbittorrent
+    mangohud mediainfo mediainfo-gui mesa-demos mesen
+    obs-studio
+    piper plex-mpv-shim protonplus protontricks
+    qalculate-qt qbittorrent quasselClient
     (retroarch.withCores (
         cores: with libretro; [
             beetle-psx-hw
@@ -62,10 +81,12 @@
             sameboy
           ]
     ))
+    remmina rssguard
     smplayer steam-art-manager svp
-    vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
-    zed-editor-fhs
+    tor-browser /* trgui-ng bugged at the moment */
+    vaults vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
     winboat
+    zapzap zed-editor-fhs zoom-us
     ]
     ++ (with jetbrains; [
         idea
