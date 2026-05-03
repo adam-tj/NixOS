@@ -14,7 +14,7 @@
   #"net.mediaarea.MediaInfo"
   "com.nextcloud.desktopclient.nextcloud"
   #"com.obsproject.Studio"
-  "org.prismlauncher.PrismLauncher"     # Minecraft Launcher
+  #"org.prismlauncher.PrismLauncher"     # Minecraft Launcher
   #"com.vysp3r.ProtonPlus"
   #"com.github.Matoking.protontricks"
   #"io.github.Qalculate.qalculate-qt"

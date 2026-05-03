@@ -9,7 +9,7 @@ let
   sharedPackages = import ../common/flatpak-shared.nix;
   localPackages = [
     # Manually installed runtimes
-    "org.diasurgical.DevilutionX"
+    #"org.diasurgical.DevilutionX"
   ];
   desiredFlatpaks = lib.unique (sharedPackages ++ localPackages);
 

@@ -54,7 +54,7 @@
 
   home.packages = with pkgs-unstable; [
     bottles
-    deluge discord distroshelf
+    deluge devilutionx discord distroshelf
     element-desktop
     gamemode gearlever gimp googleearth-pro goofcord
     heroic #hunspell
