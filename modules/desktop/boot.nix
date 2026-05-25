@@ -1,12 +1,13 @@
-{ pkgs, nix-cachyos-kernel, nixpkgs-kernel, ... }:
+{ pkgs, /* nix-cachyos-kernel, nixpkgs-kernel, */... }:
 
 {
-  nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
-  nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-  nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+  #nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
+  #nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
+  #nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
   boot = {
-    #kernelPackages = pkgs.linuxPackages_latest; # See nvidia-gpu.nix
-    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+    #kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages; # LTS Kernel
+    #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
     #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-x86_64-v3;
     plymouth = {
       enable = true;
@@ -33,10 +34,10 @@
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
-    loader.timeout = 0;
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-
+    loader = {
+      timeout = 0;
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
-
 }

@@ -26,7 +26,6 @@
     ];
   };
 
-
   slippi-launcher = {
       enable = true;
       isoPath = "/home/adam/Games/ROMS/animelee.iso";
@@ -56,10 +55,10 @@
     bottles
     deluge devilutionx discord distroshelf
     element-desktop
-    gamemode gearlever gimp googleearth-pro goofcord
+    gamemode gearlever gemini-cli gimp googleearth-pro goofcord
     heroic #hunspell
     itch
-    jellyfin-mpv-shim
+    joplin-desktop jellyfin-mpv-shim
     legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
     obs-studio

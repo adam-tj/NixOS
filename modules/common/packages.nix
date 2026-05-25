@@ -13,7 +13,7 @@
       gcc gh git gnugrep gnumake gocryptfs
       htop
       irssi
-      jdk
+      jdk25
       killall
       lsof
       mlocate
