@@ -52,7 +52,7 @@
   home.stateVersion = "24.11"; # Do not change this line.
 
   home.packages = with pkgs-unstable; [
-    bottles
+    #bottles
     deluge devilutionx discord distroshelf
     element-desktop
     gamemode gearlever gemini-cli gimp googleearth-pro goofcord
