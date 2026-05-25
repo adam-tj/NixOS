@@ -26,6 +26,9 @@
       ...
     }@inputs:
     let
+      # 1. MOVE THIS TO THE TOP SO EVERYTHING BELOW CAN USE IT
+      insecurePackagesList = import ./modules/common/whitelist-insecure-packages.nix;
+
       svpOverlay = final: prev: {
         svp-with-mpv = final.callPackage ./nix-overlays/svp-with-mpv/package.nix { };
       };
@@ -62,24 +65,29 @@
       pkgsWithMpvVs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
+        config.permittedInsecurePackages = insecurePackagesList;
         overlays = [ mpvVsOverlay ];
       };
 
       pkgsWithSVP = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
+        config.permittedInsecurePackages = insecurePackagesList;
         overlays = [ svpOverlay ];
       };
 
       pkgsWithBgrt = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
+        config.permittedInsecurePackages = insecurePackagesList;
         overlays = [ bgrtOverlay ];
       };
 
+      # 2. FIX: Insecure list applied directly to the global unstable instance
       pkgsUnstable = import nixpkgs-unstable {
         system = "x86_64-linux";
         config.allowUnfree = true;
+        config.permittedInsecurePackages = insecurePackagesList;
       };
 
       commonModules = [
@@ -105,6 +113,7 @@
             nixos-hardware.nixosModules.lenovo-thinkpad-l13
             {
               nixpkgs.overlays = [ openldapOverlay ];
+              nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
             }
             {
               home-manager = {
@@ -120,29 +129,12 @@
                       svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
-                    nixpkgs.config.permittedInsecurePackages = [
-                      "freeimage-3.18.0-unstable-2024-04-18"
-                      "mbedtls-2.28.10"
-                      "mbedtls_2-2.28.10"
-                      "qtwebengine-5.15.19"
-                      "googleearth-pro-7.3.6.10201"
-                    ];
+                    nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
                   }
                 ];
                 extraSpecialArgs = {
                   inherit inputs pkgsWithMpvVs;
-                  pkgs-unstable = import nixpkgs-unstable {
-                    system = "x86_64-linux";
-                    config.allowUnfree = true;
-                    config.permittedInsecurePackages = [
-                      "freeimage-3.18.0-unstable-2024-04-18"
-                      "mbedtls-2.28.10"
-                      "mbedtls_2-2.28.10"
-                      "qtwebengine-5.15.19"
-                      "googleearth-pro-7.3.6.10201"
-                    ];
-                    overlays = [ openldapOverlay ];
-                  };
+                  pkgs-unstable = pkgsUnstable; # Use the fixed instance
                 };
               };
             }
@@ -171,6 +163,7 @@
             ./hosts/desktop.nix
             {
               nixpkgs.overlays = [ openldapOverlay ];
+              nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
             }
             {
               home-manager = {
@@ -186,29 +179,12 @@
                       svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
-                    nixpkgs.config.permittedInsecurePackages = [
-                      "freeimage-3.18.0-unstable-2024-04-18"
-                      "mbedtls-2.28.10"
-                      "mbedtls_2-2.28.10"
-                      "qtwebengine-5.15.19"
-                      "googleearth-pro-7.3.6.10201"
-                    ];
+                    nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
                   }
                 ];
                 extraSpecialArgs = {
                   inherit inputs pkgsWithMpvVs;
-                  pkgs-unstable = import nixpkgs-unstable {
-                    system = "x86_64-linux";
-                    config.allowUnfree = true;
-                    config.permittedInsecurePackages = [
-                      "freeimage-3.18.0-unstable-2024-04-18"
-                      "mbedtls-2.28.10"
-                      "mbedtls_2-2.28.10"
-                      "qtwebengine-5.15.19"
-                      "googleearth-pro-7.3.6.10201"
-                    ];
-                    overlays = [ openldapOverlay ];
-                  };
+                  pkgs-unstable = pkgsUnstable; # Use the fixed instance
                 };
               };
             }

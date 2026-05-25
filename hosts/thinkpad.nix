@@ -28,7 +28,7 @@
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix
-    ../modules/common/whitelist-insecure-packages.nix
+    #../modules/common/whitelist-insecure-packages.nix
 
     # Services
     ../modules/services/bluetooth.nix
@@ -38,7 +38,7 @@
     ../modules/services/locate.nix
     ../modules/services/podman.nix
     ../modules/services/wireguard-client.nix
-    ../modules/services/auto-gc-35d.nix
+    #../modules/services/auto-gc-35d.nix
 
   ];
 
