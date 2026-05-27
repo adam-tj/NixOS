@@ -8,7 +8,7 @@ let
   # Declare the Flatpaks you *want* on your system
   sharedPackages = import ../common/flatpak-shared.nix;
   localPackages = [
-    "com.github.iwalton3.jellyfin-media-player"
+#    "com.github.iwalton3.jellyfin-media-player"
   ];
   desiredFlatpaks = lib.unique (sharedPackages ++ localPackages);
 

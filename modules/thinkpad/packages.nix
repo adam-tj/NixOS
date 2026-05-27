@@ -8,6 +8,8 @@
   environment.systemPackages =
     with pkgs;
     [
+      intel-gpu-tools
+      clinfo
     ]
     ++ (with pkgsUnstable; [
       ]);
