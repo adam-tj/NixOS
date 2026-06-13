@@ -54,6 +54,8 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 22 ];
+
   nix.settings.trusted-users = [ "root" "adam" "@wheel" ];
 
 
