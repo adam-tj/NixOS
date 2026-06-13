@@ -38,7 +38,8 @@
       allowDiscards = true;
     };
     swap = {
-      device = "/dev/disk/by-uuid/43e89e5e-75f1-4f89-a4a1-936fc913d3ed";
+      #device = "/dev/disk/by-uuid/43e89e5e-75f1-4f89-a4a1-936fc913d3ed";
+      device = "/dev/disk/by-uuid/edaaee24-600a-4da3-95a3-0f84eef449bd";
     };
   };
 
