@@ -84,7 +84,7 @@
     smplayer steam-art-manager svp
     tor-browser /* trgui-ng bugged at the moment */
     vaults vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
-    winboat
+    whatsie winboat
     zapzap zed-editor-fhs zoom-us
     ]
     ++ (with jetbrains; [
