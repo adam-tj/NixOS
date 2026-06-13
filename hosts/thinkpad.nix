@@ -54,6 +54,9 @@
     };
   };
 
+  nix.settings.trusted-users = [ "root" "adam" "@wheel" ];
+
+
   # Flakes and home-manager
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
