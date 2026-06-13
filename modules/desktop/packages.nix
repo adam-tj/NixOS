@@ -13,8 +13,8 @@
       #alpaca
       nix-ld
       r2modman
-      tes3cmd
-      openmw
+      #tes3cmd
+      #openmw
 #      (pkgs.ollama.override {
 #         acceleration = "rocm";
 #       })
@@ -28,12 +28,12 @@
 #      openmw
 #    ])
     ++ (with openmwPkgs; [
-      delta-plugin
-      groundcoverify
-      momw-configurator
-      openmw-validator
-      s3lightfixes
-      umo
+      #delta-plugin
+      #groundcoverify
+      #momw-configurator
+      #openmw-validator
+      #s3lightfixes
+      #umo
     ]);
 
     #services.ollama = {

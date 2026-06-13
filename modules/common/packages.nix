@@ -8,7 +8,6 @@
       btop
       cryfs
       distrobox dysk
-      encfs
       fastfetch
       gcc gh git gnugrep gnumake gocryptfs
       htop
