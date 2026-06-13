@@ -89,7 +89,9 @@
     ]
     ++ (with jetbrains; [
         idea
+        jdk
         pycharm
+        rust-rover
     ])
     ++ (with pkgsWithMpvVs; [
       jellyfin-desktop
