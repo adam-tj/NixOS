@@ -20,7 +20,7 @@
     ../modules/common/virt-manager.nix
 
     # GUI
-    ../modules/services/sddm.nix
+    ../modules/services/plasma-login-manager.nix
     ../modules/services/plasma6.nix
     ../modules/common/exclude-plasma6-packages.nix
     ../modules/services/fluxbox.nix
@@ -45,27 +45,10 @@
     ../modules/services/cups.nix
     ../modules/services/locate.nix
     ../modules/services/podman.nix
+    ../modules/services/sshd.nix
     #../modules/services/jellyfin.nix
 
   ];
-
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings = {
-      # For security, you can disable password login if you are strictly using SSH keys
-      PasswordAuthentication = true;
-
-      # Block root from logging in directly over SSH
-      PermitRootLogin = "no";
-    };
-  };
-
-  # Open the standard SSH port (22) in the firewall
-  networking.firewall.allowedTCPPorts = [ 22 ];
-
-
 
   # Enable flakes and home-manager
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

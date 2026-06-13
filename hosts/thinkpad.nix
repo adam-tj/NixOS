@@ -16,7 +16,7 @@
     ../modules/common/plex-portal.nix
 
     # GUI
-    ../modules/services/sddm.nix
+    ../modules/services/plasma-login-manager.nix
     ../modules/services/plasma6.nix
     ../modules/thinkpad/exclude-plasma6-packages-except-discover.nix
     ../modules/services/hyprland.nix
@@ -35,9 +35,10 @@
     ../modules/services/flatpak.nix
     ../modules/services/kdeconnect.nix
     ../modules/services/cups.nix
-    ../modules/services/locate.nix
+    #../modules/services/locate.nix
     ../modules/services/podman.nix
     ../modules/services/wireguard-client.nix
+    ../modules/services/sshd.nix
     #../modules/services/auto-gc-35d.nix
 
   ];
