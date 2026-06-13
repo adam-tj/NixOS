@@ -39,8 +39,8 @@
     ../modules/services/podman.nix
     ../modules/services/wireguard-client.nix
     ../modules/services/sshd.nix
-    #../modules/services/auto-gc-35d.nix
-
+    ../modules/services/auto-gc-30d.nix
+    ../modules/services/optimise.nix
   ];
 
   # Enable the OpenSSH daemon.
