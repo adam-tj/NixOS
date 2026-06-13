@@ -23,7 +23,7 @@
   #"org.remmina.Remmina"                 # Remote desktop
   #"io.github.martinrotter.rssguardlite" # RSS Reader
   #"org.torproject.torbrowser-launcher"
-  "org.openscopeproject.TrguiNG"        # Transmission Remote Client
+  #"org.openscopeproject.TrguiNG"        # Transmission Remote Client
   #"io.github.mpobaschnig.Vaults"        # Adwaita Vault
   #"com.rtosta.zapzap"                   # WhatsApp
   #"us.zoom.Zoom"

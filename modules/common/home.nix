@@ -82,10 +82,10 @@
     ))
     remmina rssguard
     smplayer steam-art-manager svp
-    tor-browser /* trgui-ng bugged at the moment */
+    tor-browser trgui-ng
     vaults vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
     whatsie winboat
-    zapzap zed-editor-fhs zoom-us
+    zapzap zoom-us
     ]
     ++ (with jetbrains; [
         idea
