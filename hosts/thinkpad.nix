@@ -28,6 +28,7 @@
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix
+    ../modules/services/gc+optimise.nix
     #../modules/common/whitelist-insecure-packages.nix
 
     # Services
@@ -39,8 +40,7 @@
     ../modules/services/podman.nix
     ../modules/services/wireguard-client.nix
     ../modules/services/sshd.nix
-    ../modules/services/auto-gc-30d.nix
-    ../modules/services/optimise.nix
+
   ];
 
   # Enable the OpenSSH daemon.

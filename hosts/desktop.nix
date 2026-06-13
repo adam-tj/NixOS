@@ -33,7 +33,7 @@
     ../modules/services/network-manager.nix
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix
-    ../modules/services/auto-gc-30d.nix
+    ../modules/services/gc+optimise.nix
     #../modules/common/whitelist-insecure-packages.nix
     ../modules/common/polkit.nix
     ../modules/common/nix-ld.nix
@@ -46,7 +46,7 @@
     ../modules/services/locate.nix
     ../modules/services/podman.nix
     ../modules/services/sshd.nix
-    ../modules/services/optimise.nix
+
     #../modules/services/jellyfin.nix
 
   ];
