@@ -88,6 +88,7 @@
     zapzap zoom-us
     ]
     ++ (with jetbrains; [
+        clion
         idea
         jdk
         pycharm
