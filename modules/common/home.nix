@@ -59,6 +59,7 @@
     heroic #hunspell
     itch
     joplin-desktop jellyfin-mpv-shim
+    karere
     legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
     obs-studio
@@ -84,7 +85,7 @@
     smplayer steam-art-manager svp
     tor-browser trgui-ng
     vaults vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
-    whatsie winboat
+    winboat
     zapzap zoom-us
     ]
     ++ (with jetbrains; [
