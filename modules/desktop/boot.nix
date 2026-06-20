@@ -5,8 +5,8 @@
   #nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
   #nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
   boot = {
-    #kernelPackages = pkgs.linuxPackages_latest;
-    kernelPackages = pkgs.linuxPackages; # LTS Kernel
+    kernelPackages = pkgs.linuxPackages_latest;
+    #kernelPackages = pkgs.linuxPackages; # LTS Kernel
     #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
     #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-x86_64-v3;
     plymouth = {

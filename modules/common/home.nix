@@ -52,6 +52,7 @@
   home.stateVersion = "24.11"; # Do not change this line.
 
   home.packages = with pkgs-unstable; [
+    _7kaa
     #bottles
     deluge devilutionx discord distroshelf
     element-desktop
@@ -81,7 +82,7 @@
             sameboy
           ]
     ))
-    remmina rssguard
+    r2modman remmina rssguard
     smplayer steam-art-manager svp
     tor-browser trgui-ng
     vaults vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
