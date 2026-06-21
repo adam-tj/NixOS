@@ -6,6 +6,7 @@
     nixpkgs-kernel.url = "github:nixos/nixpkgs/5c2bc52fb9f8c264ed6c93bd20afa2ff5e763dce";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
+    sops-nix.url = "github:Mic92/sops-nix";
     #nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -23,6 +24,7 @@
       home-manager,
       slippi,
       openmw-nix,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -129,7 +131,7 @@
                       svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
-                    nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
+                    #nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
                   }
                 ];
                 extraSpecialArgs = {
@@ -156,6 +158,7 @@
           };
           modules = commonModules ++ [
             ./hosts/desktop.nix
+            sops-nix.nixosModules.sops
             {
               nixpkgs.overlays = [ openldapOverlay ];
               nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
@@ -174,7 +177,7 @@
                       svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
-                    nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
+                    #nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
                   }
                 ];
                 extraSpecialArgs = {

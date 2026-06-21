@@ -4,6 +4,8 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
+      80
+      443
       3000
       9901
     ];
