@@ -53,6 +53,7 @@
 
   home.packages = with pkgs-unstable; [
     _7kaa
+    bitwarden-desktop rbw
     #bottles
     deluge devilutionx discord distroshelf
     element-desktop

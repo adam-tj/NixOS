@@ -56,36 +56,36 @@
         });
       };
 
-      openldapOverlay = (
-        final: prev: {
-          openldap = prev.openldap.overrideAttrs (_: {
-            doCheck = !prev.stdenv.hostPlatform.isi686;
-          });
-        }
-      );
+      # openldapOverlay = (
+      #   final: prev: {
+      #     openldap = prev.openldap.overrideAttrs (_: {
+      #       doCheck = !prev.stdenv.hostPlatform.isi686;
+      #     });
+      #   }
+      # );
 
       pkgsWithMpvVs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
-        config.permittedInsecurePackages = insecurePackagesList;
+        #config.permittedInsecurePackages = insecurePackagesList;
         overlays = [ mpvVsOverlay ];
       };
 
       pkgsWithSVP = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
-        config.permittedInsecurePackages = insecurePackagesList;
+        #config.permittedInsecurePackages = insecurePackagesList;
         overlays = [ svpOverlay ];
       };
 
       pkgsWithBgrt = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
-        config.permittedInsecurePackages = insecurePackagesList;
+        #config.permittedInsecurePackages = insecurePackagesList;
         overlays = [ bgrtOverlay ];
       };
 
-      # 2. FIX: Insecure list applied directly to the global unstable instance
+      
       pkgsUnstable = import nixpkgs-unstable {
         system = "x86_64-linux";
         config.allowUnfree = true;
@@ -114,7 +114,7 @@
             ./hosts/thinkpad.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-l13
             {
-              nixpkgs.overlays = [ openldapOverlay ];
+              #nixpkgs.overlays = [ openldapOverlay ];
               nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
             }
             {
@@ -127,7 +127,7 @@
                   {
                     nixpkgs.overlays = [
                       mpvVsOverlay
-                      openldapOverlay
+                      #openldapOverlay
                       svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
@@ -160,7 +160,7 @@
             ./hosts/desktop.nix
             sops-nix.nixosModules.sops
             {
-              nixpkgs.overlays = [ openldapOverlay ];
+              #nixpkgs.overlays = [ openldapOverlay ];
               nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
             }
             {
@@ -173,7 +173,7 @@
                   {
                     nixpkgs.overlays = [
                       mpvVsOverlay
-                      openldapOverlay
+                      #openldapOverlay
                       svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
