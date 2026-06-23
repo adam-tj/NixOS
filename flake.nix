@@ -7,6 +7,10 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
     sops-nix.url = "github:Mic92/sops-nix";
+    helium-browser = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     #nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -25,6 +29,7 @@
       slippi,
       openmw-nix,
       sops-nix,
+      helium-browser,
       ...
     }@inputs:
     let
@@ -107,8 +112,7 @@
               pkgsWithSVP
               pkgsUnstable
               pkgsWithBgrt
-              pkgsWithMpvVs
-              ;
+              pkgsWithMpvVs;
           };
           modules = commonModules ++ [
             ./hosts/thinkpad.nix
@@ -152,8 +156,7 @@
               pkgsWithSVP
               pkgsUnstable
               nixpkgs-kernel
-              pkgsWithMpvVs
-              ;
+              pkgsWithMpvVs;
             openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [

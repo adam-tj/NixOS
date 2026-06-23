@@ -90,6 +90,7 @@
     winboat
     zapzap zoom-us
     ]
+    ++ [ inputs.helium-browser.packages.${pkgs.system}.default ]
     ++ (with jetbrains; [
         clion
         idea
