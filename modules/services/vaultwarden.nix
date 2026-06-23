@@ -36,5 +36,9 @@
     '';
   };
 
-  systemd.services.caddy.after = [ "sops-nix.service" ];
+  #systemd.services.caddy.after = [ "sops-nix.service" ];
+  systemd.services.vaultwarden = {
+    wants = [ "sops-nix.service" ];
+    after = [ "sops-nix.service" ];
+  };
 }

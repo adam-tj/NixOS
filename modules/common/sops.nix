@@ -2,6 +2,6 @@
   sops = {
     defaultSopsFile = ../../secrets.enc.yaml;
     defaultSopsFormat = "yaml";
-    age.keyFile = "/home/adam/.secrets/agekey.txt";
+    age.keyFile = "/var/lib/sops/agekey.txt";
   };
 }
