@@ -9,6 +9,7 @@
   environment.systemPackages =
     with pkgs;
     [
+      #firefoxpwa
       #bitwarden-desktop
       #inputs.sam-repo.legacyPackages.${pkgs.stdenv.hostPlatform.system}.steam-art-manager
       #alpaca

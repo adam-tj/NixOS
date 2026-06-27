@@ -57,6 +57,7 @@
     #bottles
     deluge devilutionx discord distroshelf
     element-desktop
+    firefoxpwa
     gamemode gearlever gemini-cli gimp /* google-chrome */ googleearth-pro goofcord
     heroic #hunspell
     itch
@@ -134,6 +135,10 @@
       builtins.toJSON {
         #Path = "${pkgs.google-chrome}/share/google/chrome/WidevineCdm";
         Path = "${pkgs.widevine-cdm}/share/google/chrome/WidevineCdm";
+    };
+    ".waterfox/native-messaging-hosts" = {
+      source = "${pkgs.firefoxpwa}/lib/mozilla/native-messaging-hosts";
+      recursive = true;
     };
   };
 
