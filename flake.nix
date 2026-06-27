@@ -11,6 +11,7 @@
       url = "github:schembriaiden/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    waterfox.url = "github:Hythera/nix-waterfox";
     #nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
       url = "github:nix-community/home-manager/master";

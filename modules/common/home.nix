@@ -57,15 +57,15 @@
     #bottles
     deluge devilutionx discord distroshelf
     element-desktop
-    gamemode gearlever gemini-cli gimp googleearth-pro goofcord
+    gamemode gearlever gemini-cli gimp /* google-chrome */ googleearth-pro goofcord
     heroic #hunspell
     itch
-    joplin-desktop jellyfin-mpv-shim
+    joplin-desktop #jellyfin-mpv-shim
     karere
     legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
     obs-studio
-    piper plex-mpv-shim protonplus protontricks
+    piper /* plex-mpv-shim */ protonplus protontricks
     qalculate-qt qbittorrent quasselClient
     (retroarch.withCores (
         cores: with libretro; [
@@ -87,16 +87,20 @@
     smplayer steam-art-manager svp
     tor-browser trgui-ng
     vaults vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
-    winboat
+    widevine-cdm winboat
     zapzap zoom-us
     ]
-    ++ [ inputs.helium-browser.packages.${pkgs.system}.default ]
+    ++ [ inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default 
+      inputs.waterfox.packages.${pkgs.stdenv.hostPlatform.system}.waterfox-bin ]
     ++ (with jetbrains; [
         clion
         idea
         jdk
         pycharm
         rust-rover
+    ])
+    ++ (with pkgs; [
+        #plex-mpv-shim jellyfin-mpv-shim
     ])
     ++ (with pkgsWithMpvVs; [
       jellyfin-desktop
@@ -125,7 +129,14 @@
     ]);
 
   home.file = {
+    # Enable Widevine
+    ".config/net.imput.helium/WidevineCdm/latest-component-updated-widevine-cdm".text = 
+      builtins.toJSON {
+        #Path = "${pkgs.google-chrome}/share/google/chrome/WidevineCdm";
+        Path = "${pkgs.widevine-cdm}/share/google/chrome/WidevineCdm";
     };
+  };
+
 
   home.sessionVariables = {
     EDITOR = "vim";
