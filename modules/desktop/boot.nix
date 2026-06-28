@@ -1,4 +1,7 @@
-{ pkgs, /* nix-cachyos-kernel, nixpkgs-kernel, */... }:
+{
+  pkgs, # nix-cachyos-kernel, nixpkgs-kernel,
+  ...
+}:
 
 {
   #nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
@@ -25,11 +28,17 @@
       "rd.systemd.show_status=false"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
+      "kvm.enable_virt_at_load=0"
+
+      #AMD anti lockup
+      "amdgpu.aspm=0"
+      "amdgpu.runpm=0"
+      "amdgpu.ppfeaturemask=0xfff73fff"
+
       #"nvidia.NVreg_EnableGpuFirmware=0"
       #"nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-      "kvm.enable_virt_at_load=0"
-      # "nvidia_drm.fbdev=0"
-      #       "nvidia_drm.modeset=1"
+      #"nvidia_drm.fbdev=0"
+      #"nvidia_drm.modeset=1"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key

@@ -1,7 +1,7 @@
 [
   #"com.usebottles.bottles"
   "com.google.Chrome"
-  "com.collaboraoffice.Office"          # Collabora Office
+  #"com.collaboraoffice.Office"          # Collabora Office
   #"org.deluge_torrent.deluge"
   #"com.ranfdev.DistroShelf"
   #"im.riot.Riot"                        # Element
@@ -12,7 +12,7 @@
   #"com.heroicgameslauncher.hgl"         # Heroic Games Launcher
   #"io.itch.itch"                        # itch.io Launcher
   #"net.mediaarea.MediaInfo"
-  "com.nextcloud.desktopclient.nextcloud"
+  #"com.nextcloud.desktopclient.nextcloud"
   #"com.obsproject.Studio"
   #"org.prismlauncher.PrismLauncher"     # Minecraft Launcher
   #"com.vysp3r.ProtonPlus"

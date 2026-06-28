@@ -54,6 +54,7 @@
   home.packages = with pkgs-unstable; [
     _7kaa
     bitwarden-desktop rbw
+    collabora-desktop
     #bottles
     deluge devilutionx discord distroshelf
     element-desktop
@@ -65,6 +66,7 @@
     karere
     legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
+    nextcloud-client
     obs-studio
     piper /* plex-mpv-shim */ protonplus protontricks
     qalculate-qt qbittorrent quasselClient
