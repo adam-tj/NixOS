@@ -14,5 +14,8 @@
       kclock
       kolourpaint
       partitionmanager
+      oxygen
+      oxygen-icons
+      oxygen-sounds
     ];
 }

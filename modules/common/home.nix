@@ -64,7 +64,7 @@
     itch
     joplin-desktop #jellyfin-mpv-shim
     karere
-    legcord
+    libreoffice-qt-fresh legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
     nextcloud-client
     obs-studio
@@ -109,13 +109,9 @@
       jellyfin-desktop
       mpv
     ])
-    #++ (with hunspellDicts; [
-    #  de_DE
-    #  en-gb-ise en-gb-ize en-gb-large en-us en-us-large en_GB-ise en_GB-ize en_GB-large en_US en_US-large
-    #  hu-hu hu_HU
-    #  it-it it_IT
-    #  sv-se sv_SE
-    #])
+    ++ (with hunspellDicts; [
+     de_DE en-gb-large en-us-large hu-hu it-it sv-se
+    ])
     ++ (with nerd-fonts; [
         adwaita-mono
         bitstream-vera-sans-mono
