@@ -59,12 +59,11 @@
     deluge devilutionx discord distroshelf
     element-desktop
     firefoxpwa
-    gamemode gearlever gemini-cli gimp /* google-chrome */ googleearth-pro goofcord
+    gamemode gearlever gemini-cli gimp googleearth-pro goofcord
     heroic #hunspell
     itch
     joplin-desktop #jellyfin-mpv-shim
-    karere
-    libreoffice-qt-fresh legcord
+    libreoffice-qt-fresh #legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
     nextcloud-client
     obs-studio
@@ -86,9 +85,9 @@
             sameboy
           ]
     ))
-    r2modman remmina rssguard
-    smplayer steam-art-manager svp
-    tor-browser trgui-ng
+    r2modman remmina rpcs3 rssguard
+    smplayer starship-sf64 steam-art-manager svp
+    tor-browser tremotesf trgui-ng
     vaults vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
     widevine-cdm winboat
     zapzap zoom-us

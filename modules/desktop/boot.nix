@@ -33,7 +33,7 @@
       #AMD anti lockup
       "amdgpu.aspm=0"
       "amdgpu.runpm=0"
-      "amdgpu.ppfeaturemask=0xfff73fff"
+      "amdgpu.ppfeaturemask=0xffffffff"
 
       #"nvidia.NVreg_EnableGpuFirmware=0"
       #"nvidia.NVreg_PreserveVideoMemoryAllocations=1"

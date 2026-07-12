@@ -9,6 +9,7 @@
   environment.systemPackages =
     with pkgs;
     [
+      kdiskmark
       #firefoxpwa
       #bitwarden-desktop
       #inputs.sam-repo.legacyPackages.${pkgs.stdenv.hostPlatform.system}.steam-art-manager
@@ -37,13 +38,13 @@
       #umo
     ]);
 
-    services.ollama = {
-     enable = true;
-     package = pkgs.ollama-rocm;
-     loadModels = [
-       "gemma4:e4b"
-       "deepseek-r1:14b"
-       "llama3.2:3b"
-     ];
-    };
+    # services.ollama = {
+    #  enable = true;
+    #  package = pkgs.ollama-rocm;
+    #  loadModels = [
+    #    "gemma4:e4b"
+    #    "deepseek-r1:14b"
+    #    "llama3.2:3b"
+    #  ];
+    # };
 }
