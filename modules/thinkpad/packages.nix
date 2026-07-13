@@ -8,6 +8,7 @@
   environment.systemPackages =
     with pkgs;
     [
+      kdiskmark
       intel-gpu-tools
       clinfo
     ]
