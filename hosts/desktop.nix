@@ -37,6 +37,7 @@
     #../modules/common/whitelist-insecure-packages.nix
     ../modules/common/polkit.nix
     ../modules/common/nix-ld.nix
+    ../modules/common/denuvo-hv.nix
 
     # Services
     ../modules/services/bluetooth.nix

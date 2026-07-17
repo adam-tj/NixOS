@@ -88,7 +88,7 @@
     r2modman remmina rpcs3 rssguard
     smplayer starship-sf64 steam-art-manager svp
     tor-browser tremotesf trgui-ng
-    vaults vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
+    vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
     widevine-cdm winboat
     zapzap zoom-us
     ]

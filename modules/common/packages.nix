@@ -6,7 +6,6 @@
     [
       appimage-run
       btop
-      cryfs
       distrobox dysk
       fastfetch
       gcc gh git gnugrep gnumake gocryptfs

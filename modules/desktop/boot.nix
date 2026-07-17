@@ -1,5 +1,5 @@
 {
-  pkgs, # nix-cachyos-kernel, nixpkgs-kernel,
+  pkgs, lib, # nix-cachyos-kernel, nixpkgs-kernel,
   ...
 }:
 
@@ -35,6 +35,9 @@
       "amdgpu.runpm=0"
       "amdgpu.ppfeaturemask=0xffffffff"
 
+      #Denuvo Crack
+      "clearcpuid=umip"
+
       #"nvidia.NVreg_EnableGpuFirmware=0"
       #"nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       #"nvidia_drm.fbdev=0"
@@ -43,10 +46,19 @@
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
     # It will just not appear on screen unless a key is pressed
+
     loader = {
       timeout = 0;
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
   };
+
+  specialisation = {
+    lts-kernel.configuration = {
+      system.nixos.tags = [ "lts" ];
+      boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
+    };
+  };
+
 }
