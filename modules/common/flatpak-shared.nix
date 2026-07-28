@@ -1,11 +1,11 @@
 [
   #"com.usebottles.bottles"
-  "com.google.Chrome"
+  #"com.google.Chrome"
   #"com.collaboraoffice.Office"          # Collabora Office
   #"org.deluge_torrent.deluge"
   #"com.ranfdev.DistroShelf"
   #"im.riot.Riot"                        # Element
-  "org.mozilla.firefox"
+  #"org.mozilla.firefox"
   #"it.mijorus.gearlever"                # AppImage Manager
   #"org.gimp.GIMP"
   #"com.google.EarthPro"                 # Google Earth

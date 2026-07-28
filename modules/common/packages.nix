@@ -15,10 +15,11 @@
       killall
       lsof
       mlocate
-      nixd nixfmt nix-ld neovim-unwrapped neovim-qt-unwrapped nh nom nvd nix-tree
+      nixd nixfmt nix-ld neovim-unwrapped nh nom nvd nix-tree
       ocl-icd opencl-headers # openrgb-with-all-plugins
       pciutils
       rar
+      swtpm
       usbutils
       vulkan-tools
       wget

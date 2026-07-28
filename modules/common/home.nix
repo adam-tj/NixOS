@@ -4,6 +4,7 @@
   pkgs,
   pkgs-unstable,
   pkgsWithMpvVs,
+  lib,
   ...
 }:
 
@@ -58,16 +59,16 @@
     #bottles
     deluge devilutionx discord distroshelf
     element-desktop
-    firefoxpwa
+    #firefoxpwa
     gamemode gearlever gemini-cli gimp googleearth-pro goofcord
     heroic #hunspell
     itch
     joplin-desktop #jellyfin-mpv-shim
     libreoffice-qt-fresh #legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
-    nextcloud-client
+    neovim-qt-unwrapped nextcloud-client
     obs-studio
-    piper /* plex-mpv-shim */ protonplus protontricks
+    piper /* plex-mpv-shim */ protontricks
     qalculate-qt qbittorrent quasselClient
     (retroarch.withCores (
         cores: with libretro; [
@@ -85,10 +86,10 @@
             sameboy
           ]
     ))
-    r2modman remmina rpcs3 rssguard
+    remmina rssguard
     smplayer starship-sf64 steam-art-manager svp
     tor-browser tremotesf trgui-ng
-    vapoursynth vapoursynth-mvtools vlc vorbis-tools vscodium
+    vlc vorbis-tools vscodium
     widevine-cdm winboat
     zapzap zoom-us
     ]
@@ -104,10 +105,10 @@
     ++ (with pkgs; [
         #plex-mpv-shim jellyfin-mpv-shim
     ])
-    ++ (with pkgsWithMpvVs; [
-      jellyfin-desktop
-      mpv
-    ])
+    # ++ (with pkgsWithMpvVs; [
+    #   jellyfin-desktop
+    #   mpv
+    # ])
     ++ (with hunspellDicts; [
      de_DE en-gb-large en-us-large hu-hu it-it sv-se
     ])
@@ -133,12 +134,11 @@
         #Path = "${pkgs.google-chrome}/share/google/chrome/WidevineCdm";
         Path = "${pkgs.widevine-cdm}/share/google/chrome/WidevineCdm";
     };
-    ".waterfox/native-messaging-hosts" = {
-      source = "${pkgs.firefoxpwa}/lib/mozilla/native-messaging-hosts";
-      recursive = true;
-    };
+    # ".waterfox/native-messaging-hosts" = {
+    #   source = "${pkgs.firefoxpwa}/lib/mozilla/native-messaging-hosts";
+    #   recursive = true;
+    # };
   };
-
 
   home.sessionVariables = {
     EDITOR = "vim";

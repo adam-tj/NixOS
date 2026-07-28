@@ -40,6 +40,7 @@
     ../modules/services/podman.nix
     ../modules/services/wireguard-client.nix
     ../modules/services/sshd.nix
+    ../modules/services/envfs.nix
 
   ];
 

@@ -34,6 +34,9 @@
       "amdgpu.aspm=0"
       "amdgpu.runpm=0"
       "amdgpu.ppfeaturemask=0xffffffff"
+      "amdgpu.gfxoff=0"
+      "amdgpu.gpu_recovery=1"
+
 
       #Denuvo Crack
       "clearcpuid=umip"

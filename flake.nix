@@ -8,7 +8,7 @@
     openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
     sops-nix.url = "github:Mic92/sops-nix";
     helium-browser = {
-      url = "github:schembriaiden/helium-browser-nix-flake";
+      url = "github:adam-tj/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     waterfox.url = "github:Hythera/nix-waterfox";

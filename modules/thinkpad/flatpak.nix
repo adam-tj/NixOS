@@ -9,6 +9,8 @@ let
   sharedPackages = import ../common/flatpak-shared.nix;
   localPackages = [
 #    "com.github.iwalton3.jellyfin-media-player"
+    "com.google.Chrome"
+    "org.mozilla.firefox"
   ];
   desiredFlatpaks = lib.unique (sharedPackages ++ localPackages);
 
