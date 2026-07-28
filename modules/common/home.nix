@@ -58,7 +58,6 @@
     collabora-desktop
     #bottles
     deluge devilutionx discord distroshelf
-    element-desktop
     #firefoxpwa
     gamemode gearlever gemini-cli gimp googleearth-pro goofcord
     heroic #hunspell
