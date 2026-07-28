@@ -54,7 +54,7 @@
 
   home.packages = with pkgs-unstable; [
     _7kaa
-    bitwarden-desktop rbw
+    rbw
     collabora-desktop
     #bottles
     deluge devilutionx discord distroshelf
