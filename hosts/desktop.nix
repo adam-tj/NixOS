@@ -47,7 +47,7 @@
     ../modules/services/locate.nix
     ../modules/services/podman.nix
     ../modules/services/sshd.nix
-    ../modules/services/vaultwarden.nix
+    # ../modules/services/vaultwarden.nix
     ../modules/services/envfs.nix
 
     #../modules/services/jellyfin.nix
