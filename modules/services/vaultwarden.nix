@@ -29,6 +29,27 @@
     '';
   };
 
+# sops.templates."caddy-config.conf" = {
+#     owner = "caddy";
+#     content = ''
+#       ${config.sops.placeholder."vaultwarden/domain"} {
+#         bind 0.0.0.0
+
+#         tls {
+#           issuer acme {
+#             email ${config.sops.placeholder."vaultwarden/smtp_username"}
+#             disable_tlsalpn_challenge
+#           }
+#         }
+
+#         encode zstd gzip
+#         reverse_proxy 127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT} {
+#           header_up X-Real-IP {remote_host}
+#         }
+#       }
+#     '';
+#   };
+
   services.vaultwarden = {
     enable = true;
     backupDir = "/home/vaultwarden/backup";

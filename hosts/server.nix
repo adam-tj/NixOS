@@ -24,11 +24,15 @@
     ../modules/services/vaultwarden.nix
     ../modules/services/envfs.nix
     ../modules/common/sops.nix
+    ../modules/services/duckdns.nix
 
   ];
 
   # Enable flakes and home-manager
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.settings.trusted-users = [ "root" "adam" "@wheel" ];
+
 
   networking.hostName = "server";
 
