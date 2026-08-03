@@ -3,15 +3,15 @@
   imports = [
 
     # Hardware
-    ../modules/desktop/hardware.nix
+    ../modules/server/hardware.nix
 
     # User
     ../modules/common/adam.nix
 
     # System
-    ../modules/desktop/boot.nix
-    ../modules/desktop/packages.nix
-    ../modules/desktop/firewall.nix
+    ../modules/server/boot.nix
+    ../modules/server/packages.nix
+    ../modules/server/firewall.nix
     ../modules/services/network-manager.nix
     ../modules/common/fish.nix
     ../modules/services/gc+optimise.nix

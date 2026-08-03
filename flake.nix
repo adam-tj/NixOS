@@ -17,6 +17,10 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     #sam-repo.url = "github:adam-tj/nixpkgs/steam-art-manager";
   };
 
@@ -154,7 +158,8 @@
             inherit
               inputs;
           };
-          modules = commonModules ++ [
+          modules = [
+            inputs.home-manager-stable.nixosModules.home-manager
             ./hosts/server.nix
             sops-nix.nixosModules.sops
             {
