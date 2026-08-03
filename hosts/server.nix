@@ -1,37 +1,42 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ../modules/server/hardware.nix
-    ];
 
-  # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  imports = [
 
-  boot.kernelPackages = pkgs.linuxPackages;
+    # Hardware
+    ../modules/desktop/hardware.nix
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    # User
+    ../modules/common/adam.nix
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    # System
+    ../modules/desktop/boot.nix
+    ../modules/desktop/packages.nix
+    ../modules/desktop/firewall.nix
+    ../modules/services/network-manager.nix
+    ../modules/common/fish.nix
+    ../modules/services/gc+optimise.nix
+    ../modules/common/nix-ld.nix
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+
+    # Services
+    ../modules/services/podman.nix
+    ../modules/services/sshd.nix
+    ../modules/services/vaultwarden.nix
+    ../modules/services/envfs.nix
+    ../modules/common/sops.nix
+
+  ];
+
+  # Enable flakes and home-manager
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  networking.hostName = "server";
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "sv_SE.UTF-8";
@@ -45,48 +50,7 @@
     LC_TIME = "sv_SE.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."adam" = {
-    isNormalUser = true;
-    description = "adam";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
-  };
-
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

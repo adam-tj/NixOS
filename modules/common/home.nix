@@ -63,7 +63,7 @@
     heroic #hunspell
     itch
     joplin-desktop #jellyfin-mpv-shim
-    libreoffice-qt-fresh #legcord
+    libreoffice-qt-fresh libnotify #legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
     neovim-qt-unwrapped nextcloud-client
     obs-studio

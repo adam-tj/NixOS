@@ -7,6 +7,7 @@
       appimage-run
       btop
       distrobox dysk
+      e2fsprogs
       fastfetch
       gcc gh git gnugrep gnumake gocryptfs
       htop

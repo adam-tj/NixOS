@@ -1,7 +1,7 @@
 {
   inputs = {
     slippi.url = "github:lytedev/slippi-nix";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-kernel.url = "github:nixos/nixpkgs/5c2bc52fb9f8c264ed6c93bd20afa2ff5e763dce";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -147,7 +147,36 @@
             }
           ];
         };
-
+        # Server Configuration
+        server = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit
+              inputs;
+          };
+          modules = commonModules ++ [
+            ./hosts/server.nix
+            sops-nix.nixosModules.sops
+            {
+              #nixpkgs.overlays = [ openldapOverlay ];
+              nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
+            }
+            {
+              home-manager = {
+                useGlobalPkgs = false;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+                users.adam = ./modules/server/home.nix;
+                sharedModules = [
+                  {
+                    nixpkgs.config.allowUnfree = true;
+                    #nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
+                  }
+                ];
+              };
+            }
+          ];
+        };
         # Desktop Configuration
         desktop = nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
