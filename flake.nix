@@ -11,6 +11,9 @@
       url = "github:adam-tj/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    duckstation-appimage = {
+      url = "github:adam-tj/duckstation-appimage";
+    };
     waterfox.url = "github:Hythera/nix-waterfox";
     #nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
@@ -35,6 +38,7 @@
       openmw-nix,
       sops-nix,
       helium-browser,
+      duckstation-appimage,
       ...
     }@inputs:
     let

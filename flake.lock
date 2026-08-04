@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "duckstation-appimage": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1785810929,
+        "narHash": "sha256-mmKkSH5gqRg+KTa7ETvJFdSC7qHi8AsfjayP2TsZ4po=",
+        "owner": "adam-tj",
+        "repo": "duckstation-appimage",
+        "rev": "677764f0347be8607858572a7fb9afb70ebac631",
+        "type": "github"
+      },
+      "original": {
+        "owner": "adam-tj",
+        "repo": "duckstation-appimage",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -239,7 +257,7 @@
     },
     "nixos-hardware": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1785232496,
@@ -258,15 +276,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1767892417,
-        "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
-        "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
-        "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre924538.3497aa5c9457/nixexprs.tar.xz"
+        "lastModified": 1785692966,
+        "narHash": "sha256-vUfIeBEfpbAfZ5zjgIkYk7eHBeVfCYVjLbWnMkseYnk=",
+        "owner": "Nixos",
+        "repo": "nixpkgs",
+        "rev": "643809054d65fdd466a63e3155b8c498cb483c04",
+        "type": "github"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
+        "owner": "Nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgs-darwin": {
@@ -319,6 +340,19 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1767892417,
+        "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
+        "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre924538.3497aa5c9457/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1785734586,
         "narHash": "sha256-ODZkEK9Gy50yg6h98u7KkitZ3oc/uuTFK00bh1CRdNA=",
         "owner": "nixos",
@@ -333,7 +367,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1780749050,
         "narHash": "sha256-3av0pIjlOWQ6rDbNOmpUSvbNnJkGORQKKjb4LtCZsIY=",
@@ -349,7 +383,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1744463964,
         "narHash": "sha256-LWqduOgLHCFxiTNYi3Uj5Lgz0SR+Xhw3kr/3Xd0GPTM=",
@@ -365,7 +399,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_6": {
       "locked": {
         "lastModified": 1782175435,
         "narHash": "sha256-EMzXKmnOtBQ2MnvpiNOm7E+kOMvdPrIKaeg52Tip2Uk=",
@@ -381,7 +415,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_6": {
+    "nixpkgs_7": {
       "locked": {
         "lastModified": 1781577229,
         "narHash": "sha256-lrp67w8AulE9Ks53n27I45ADSzbOCn4H+CNW1Ck8B+8=",
@@ -401,7 +435,7 @@
       "inputs": {
         "fenix": "fenix",
         "mygui": "mygui",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "snowfall-lib": "snowfall-lib"
       },
       "locked": {
@@ -420,11 +454,12 @@
     },
     "root": {
       "inputs": {
+        "duckstation-appimage": "duckstation-appimage",
         "helium-browser": "helium-browser",
         "home-manager": "home-manager",
         "home-manager-stable": "home-manager-stable",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-kernel": "nixpkgs-kernel",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "openmw-nix": "openmw-nix",
@@ -454,7 +489,7 @@
       "inputs": {
         "git-hooks": "git-hooks",
         "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1784166278,
@@ -495,7 +530,7 @@
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1783174389,
@@ -561,7 +596,7 @@
     },
     "waterfox": {
       "inputs": {
-        "nixpkgs": "nixpkgs_6"
+        "nixpkgs": "nixpkgs_7"
       },
       "locked": {
         "lastModified": 1781707834,

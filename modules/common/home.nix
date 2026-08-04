@@ -93,7 +93,8 @@
     zapzap zoom-us
     ]
     ++ [ inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default 
-      inputs.waterfox.packages.${pkgs.stdenv.hostPlatform.system}.waterfox-bin ]
+      inputs.waterfox.packages.${pkgs.stdenv.hostPlatform.system}.waterfox-bin 
+      inputs.duckstation-appimage.packages.${pkgs.system}.default]
     ++ (with jetbrains; [
         clion
         idea
