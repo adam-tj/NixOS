@@ -481,6 +481,7 @@
         "openmw-nix": "openmw-nix",
         "slippi": "slippi",
         "sops-nix": "sops-nix",
+        "transmission": "transmission",
         "waterfox": "waterfox",
         "wg-easy": "wg-easy"
       }
@@ -605,6 +606,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "transmission": {
+      "locked": {
+        "lastModified": 1716914467,
+        "narHash": "sha256-KkT6YM/yNQqirtYj/frn6RRakliB8RDvGqVGGaNhdcU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4a3fc4cf736b7d2d288d7a8bf775ac8d4c0920b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4a3fc4cf736b7d2d288d7a8bf775ac8d4c0920b4",
         "type": "github"
       }
     },
