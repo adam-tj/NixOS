@@ -8,6 +8,6 @@
 
   # Optional: Open additional ports if you change the Web UI port to 80/8080 during setup
   networking.firewall = {
-    allowedTCPPorts = [ 80 8080 ];
+    allowedTCPPorts = [ 81 8080 ];
   };
 }
