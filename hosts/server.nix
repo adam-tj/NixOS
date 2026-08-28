@@ -25,6 +25,7 @@
     ../modules/services/envfs.nix
     ../modules/common/sops.nix
     ../modules/services/duckdns.nix
+    ../modules/services/wg-easy.nix
 
   ];
 

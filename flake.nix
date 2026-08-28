@@ -14,6 +14,7 @@
     duckstation-appimage = {
       url = "github:adam-tj/duckstation-appimage";
     };
+    wg-easy.url = "github:fnltochka/wg-easy-nix";
     waterfox.url = "github:Hythera/nix-waterfox";
     #nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
@@ -39,6 +40,7 @@
       sops-nix,
       helium-browser,
       duckstation-appimage,
+      wg-easy,
       ...
     }@inputs:
     let
