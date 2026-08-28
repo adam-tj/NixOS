@@ -14,7 +14,7 @@
     duckstation-appimage = {
       url = "github:adam-tj/duckstation-appimage";
     };
-    wg-easy.url = "github:fnltochka/wg-easy-nix";
+    wg-easy.url = "github:adam-tj/wg-easy-nix";
     waterfox.url = "github:Hythera/nix-waterfox";
     #nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
@@ -168,6 +168,7 @@
             inputs.home-manager-stable.nixosModules.home-manager
             ./hosts/server.nix
             sops-nix.nixosModules.sops
+            wg-easy.nixosModules.wg-easy
             {
               #nixpkgs.overlays = [ openldapOverlay ];
               nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
