@@ -27,6 +27,7 @@
     ../modules/services/duckdns.nix
     ../modules/services/wg-easy.nix
     ../modules/services/adguardhome.nix
+    ../modules/services/transmission.nix
 
   ];
 

@@ -16,6 +16,7 @@
     };
     wg-easy.url = "github:adam-tj/wg-easy-nix";
     waterfox.url = "github:Hythera/nix-waterfox";
+    transmission.url = "github:NixOS/nixpkgs/4a3fc4cf736b7d2d288d7a8bf775ac8d4c0920b4";
     #nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -41,6 +42,7 @@
       helium-browser,
       duckstation-appimage,
       wg-easy,
+      transmission,
       ...
     }@inputs:
     let
