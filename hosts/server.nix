@@ -12,7 +12,7 @@
     ../modules/server/boot.nix
     ../modules/server/packages.nix
     ../modules/server/firewall.nix
-    ../modules/services/network-manager.nix
+    ../modules/server/networking.nix
     ../modules/common/fish.nix
     ../modules/services/gc+optimise.nix
     ../modules/common/nix-ld.nix
