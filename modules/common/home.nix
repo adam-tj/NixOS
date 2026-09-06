@@ -59,11 +59,11 @@
     #bottles
     deluge devilutionx discord distroshelf
     #firefoxpwa
-    gamemode gemini-cli gimp googleearth-pro goofcord
+    gamemode gimp googleearth-pro goofcord
     heroic #hunspell
     itch
     joplin-desktop jellyfin-mpv-shim
-    libreoffice-qt-fresh libnotify #legcord
+    libreoffice-qt-stable libnotify #legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
     neovim-qt-unwrapped nextcloud-client
     obs-studio
@@ -94,7 +94,7 @@
     ]
     ++ [ inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default 
       inputs.waterfox.packages.${pkgs.stdenv.hostPlatform.system}.waterfox-bin 
-      inputs.duckstation-appimage.packages.${pkgs.system}.default]
+      inputs.duckstation-appimage.packages.${pkgs.stdenv.hostPlatform.system}.default]
     ++ (with jetbrains; [
         clion
         idea
