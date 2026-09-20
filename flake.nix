@@ -4,6 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-kernel.url = "github:nixos/nixpkgs/5c2bc52fb9f8c264ed6c93bd20afa2ff5e763dce";
+    nixpkgs-plasma6.url = "github:nixos/nixpkgs/b1b875982b17dabde9b4a37f3e229e74913e6db3";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
     sops-nix.url = "github:Mic92/sops-nix";
@@ -34,6 +35,7 @@
       nixpkgs,
       nixpkgs-unstable,
       nixpkgs-kernel,
+      nixpkgs-plasma6,
       nixos-hardware,
       home-manager,
       slippi,
@@ -110,6 +112,12 @@
         config.permittedInsecurePackages = insecurePackagesList;
       };
 
+      pkgsPlasma6 = import nixpkgs-plasma6 {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+        config.permittedInsecurePackages = insecurePackagesList;
+      };
+
       commonModules = [
         home-manager.nixosModules.home-manager
       ];
@@ -125,7 +133,8 @@
               pkgsWithSVP
               pkgsUnstable
               pkgsWithBgrt
-              pkgsWithMpvVs;
+              pkgsWithMpvVs
+              pkgsPlasma6;
           };
           modules = commonModules ++ [
             ./hosts/thinkpad.nix
@@ -200,7 +209,8 @@
               pkgsWithSVP
               pkgsUnstable
               nixpkgs-kernel
-              pkgsWithMpvVs;
+              pkgsWithMpvVs
+              pkgsPlasma6;
             openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [
