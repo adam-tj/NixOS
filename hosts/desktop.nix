@@ -23,8 +23,9 @@
     ../modules/services/plasma-login-manager.nix
     ../modules/services/plasma6.nix
     ../modules/common/exclude-plasma6-packages.nix
-    ../modules/services/fluxbox.nix
+    #../modules/services/fluxbox.nix
     ../modules/services/xserver.nix
+    ../modules/services/gnome.nix
 
     # System
     ../modules/desktop/boot.nix
