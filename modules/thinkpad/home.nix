@@ -6,6 +6,7 @@
   ];
 
 home.packages = (with pkgs-unstable; [
+    jellyfin-desktop jellyfin-mpv-shim
     mpv
   ]);
 }

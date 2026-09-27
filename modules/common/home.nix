@@ -63,12 +63,12 @@
     heroic #hunspell
     itch
     joplin-desktop jellyfin-mpv-shim
-    libreoffice-qt-stable libnotify #legcord
+    libreoffice libnotify #legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
     neovim-qt-unwrapped nextcloud-client
     obs-studio
     piper /* plex-mpv-shim */ protontricks
-    qalculate-qt qbittorrent quasselClient
+    qalculate-gtk qbittorrent quasselClient
     (retroarch.withCores (
         cores: with libretro; [
             beetle-psx-hw
@@ -85,7 +85,7 @@
             sameboy
           ]
     ))
-    remmina rssguard
+    remmina
     smplayer spotify starship-sf64 steam-art-manager svp swi-prolog
     tor-browser tremotesf trgui-ng
     vlc vorbis-tools vscodium
@@ -126,6 +126,18 @@
         ubuntu-mono ubuntu-sans
         zed-mono
     ]);
+
+  dconf = {
+    enable = true;
+      settings = {
+        "org/gnome/Console" = {
+          shell = [ "fish" ];
+        };
+        "org/gnome/desktop/wm/preferences" = {
+          resize-with-right-button = true;
+         };
+      };
+  };
 
   home.file = {
     # Enable Widevine

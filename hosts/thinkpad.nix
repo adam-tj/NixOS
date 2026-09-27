@@ -16,11 +16,12 @@
     ../modules/common/plex-portal.nix
 
     # GUI
-    ../modules/services/plasma-login-manager.nix
-    ../modules/services/plasma6.nix
-    ../modules/thinkpad/exclude-plasma6-packages-except-discover.nix
-    ../modules/services/hyprland.nix
+    #../modules/services/plasma-login-manager.nix
+    #../modules/services/plasma6.nix
+    #../modules/thinkpad/exclude-plasma6-packages-except-discover.nix
+    #../modules/services/hyprland.nix
     ../modules/services/xserver.nix
+    ../modules/services/gnome.nix
 
     # System
     ../modules/thinkpad/boot.nix
@@ -29,6 +30,7 @@
     ../modules/services/pipewire.nix
     ../modules/common/fish.nix
     ../modules/services/gc+optimise.nix
+    ../modules/services/fwupd.nix
     #../modules/common/whitelist-insecure-packages.nix
 
     # Services

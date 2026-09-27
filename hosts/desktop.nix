@@ -20,8 +20,8 @@
     ../modules/common/virt-manager.nix
 
     # GUI
-    ../modules/services/plasma-login-manager.nix
-    ../modules/services/plasma6.nix
+    #../modules/services/plasma-login-manager.nix
+    #../modules/services/plasma6.nix
     ../modules/common/exclude-plasma6-packages.nix
     #../modules/services/fluxbox.nix
     ../modules/services/xserver.nix
@@ -39,6 +39,7 @@
     ../modules/common/polkit.nix
     ../modules/common/nix-ld.nix
     ../modules/common/denuvo-hv.nix
+    ../modules/services/fwupd.nix
 
     # Services
     ../modules/services/bluetooth.nix

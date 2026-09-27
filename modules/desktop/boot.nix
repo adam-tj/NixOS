@@ -57,11 +57,11 @@
     };
   };
 
-  specialisation = {
-    lts-kernel.configuration = {
-      system.nixos.tags = [ "lts" ];
-      boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
-    };
-  };
+  # specialisation = {
+  #   lts-kernel.configuration = {
+  #     system.nixos.tags = [ "lts" ];
+  #     boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
+  #   };
+  # };
 
 }

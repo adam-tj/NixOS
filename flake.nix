@@ -74,15 +74,19 @@
             }/lib/python${final.python3.pythonVersion}/site-packages"
           ];
         });
-      };
 
-      # openldapOverlay = (
-      #   final: prev: {
-      #     openldap = prev.openldap.overrideAttrs (_: {
-      #       doCheck = !prev.stdenv.hostPlatform.isi686;
-      #     });
-      #   }
-      # );
+        celluloid = prev.celluloid.overrideAttrs (oldAttrs: {
+          nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ final.makeBinaryWrapper ];
+          postInstall = (oldAttrs.postInstall or "") + ''
+              wrapProgram $out/bin/celluloid \
+              --prefix PYTHONPATH : "${
+                final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ]
+              }/${final.python3.sitePackages}" \
+            --prefix LIBGL_DRIVERS_PATH : "/run/opengl-driver/lib/dri"
+          '';
+        });
+
+      };
 
       pkgsWithMpvVs = import nixpkgs {
         system = "x86_64-linux";
@@ -105,7 +109,6 @@
         overlays = [ bgrtOverlay ];
       };
 
-      
       pkgsUnstable = import nixpkgs-unstable {
         system = "x86_64-linux";
         config.allowUnfree = true;
@@ -134,7 +137,8 @@
               pkgsUnstable
               pkgsWithBgrt
               pkgsWithMpvVs
-              pkgsPlasma6;
+              pkgsPlasma6
+              ;
           };
           modules = commonModules ++ [
             ./hosts/thinkpad.nix
@@ -173,7 +177,8 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit
-              inputs;
+              inputs
+              ;
           };
           modules = [
             inputs.home-manager-stable.nixosModules.home-manager
@@ -210,7 +215,8 @@
               pkgsUnstable
               nixpkgs-kernel
               pkgsWithMpvVs
-              pkgsPlasma6;
+              pkgsPlasma6
+              ;
             openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [

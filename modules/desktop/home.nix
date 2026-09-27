@@ -5,12 +5,13 @@
     ../common/home.nix
   ];
 
-home.packages = (with pkgs-unstable; [
-    r2modman rpcs3
+  home.packages = (with pkgs-unstable; [
+    r2modman
     vapoursynth vapoursynth-mvtools
   ])
   ++ (with pkgsWithMpvVs; [
     jellyfin-desktop
     mpv
+    celluloid
   ]);
 }
