@@ -26,11 +26,13 @@ environment.systemPackages = with pkgs; [
     # Core Utilities & Desktop Applications
     dconf-editor
     gnome-firmware
+    gnome-mines
     gnome-tweaks
     hydrapaper
     karere
     peazip
     pinta
+    quadrapassel
 
     # GNOME Extensions
     gnomeExtensions.clipboard-history

@@ -62,12 +62,12 @@
     gamemode gimp googleearth-pro goofcord
     heroic #hunspell
     itch
-    joplin-desktop jellyfin-mpv-shim
+    joplin-desktop
     libreoffice libnotify #legcord
     mangohud mediainfo mediainfo-gui mesa-demos mesen
     neovim-qt-unwrapped nextcloud-client
     obs-studio
-    piper /* plex-mpv-shim */ protontricks
+    piper protontricks
     qalculate-gtk qbittorrent quasselClient
     (retroarch.withCores (
         cores: with libretro; [

@@ -13,5 +13,6 @@
       clinfo
     ]
     ++ (with pkgsUnstable; [
+      jellyfin-mpv-shim
       ]);
 }

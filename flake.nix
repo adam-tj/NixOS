@@ -86,9 +86,17 @@
           '';
         });
 
+        jellyfin-mpv-shim = prev.jellyfin-mpv-shim.overrideAttrs (oldAttrs: {
+          makeWrapperArgs = (oldAttrs.makeWrapperArgs or [ ]) ++ [
+            "--prefix"
+            "PYTHONPATH"
+            ":"
+            "${final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ]}/${final.python3.sitePackages}"
+          ];
+        });
       };
 
-      pkgsWithMpvVs = import nixpkgs {
+      pkgsWithMpvVs = import nixpkgs-unstable {
         system = "x86_64-linux";
         config.allowUnfree = true;
         #config.permittedInsecurePackages = insecurePackagesList;

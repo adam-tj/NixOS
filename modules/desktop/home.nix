@@ -10,6 +10,7 @@
     vapoursynth vapoursynth-mvtools
   ])
   ++ (with pkgsWithMpvVs; [
+    jellyfin-mpv-shim
     jellyfin-desktop
     mpv
     celluloid
