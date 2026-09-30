@@ -16,6 +16,8 @@
     ../modules/common/fish.nix
     ../modules/services/gc+optimise.nix
     ../modules/common/nix-ld.nix
+    ../modules/server/laptop-lid.nix
+
 
 
     # Services
