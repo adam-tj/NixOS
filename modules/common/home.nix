@@ -86,7 +86,7 @@
           ]
     ))
     remmina
-    smplayer spotify starship-sf64 steam-art-manager svp swi-prolog
+    spotify starship-sf64 steam-art-manager svp swi-prolog
     tor-browser tremotesf trgui-ng
     vlc vorbis-tools vscodium
     widevine-cdm winboat
