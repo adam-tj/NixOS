@@ -55,7 +55,7 @@
   home.packages = with pkgs-unstable; [
     _7kaa
     rbw
-    collabora-desktop
+    #collabora-desktop
     #bottles
     deluge devilutionx discord distroshelf
     #firefoxpwa
