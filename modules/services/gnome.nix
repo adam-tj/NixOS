@@ -35,10 +35,13 @@ environment.systemPackages = with pkgs; [
     quadrapassel
 
     # GNOME Extensions
+    gnomeExtensions.app-grid-tuner
     gnomeExtensions.clipboard-history
     gnomeExtensions.dash-to-panel
     gnomeExtensions.ddterm
     gnomeExtensions.gsconnect
+    gnomeExtensions.gtile
+    gnomeExtensions.keep-pinned-apps-in-appgrid
     gnomeExtensions.no-overview
     gnomeExtensions.power-off-options
     gnomeExtensions.quick-sound-switcher
