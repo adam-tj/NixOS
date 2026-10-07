@@ -1,5 +1,5 @@
 {
-  pkgs, lib, # nix-cachyos-kernel, nixpkgs-kernel,
+  pkgs, # nix-cachyos-kernel, nixpkgs-kernel,
   ...
 }:
 
@@ -8,8 +8,8 @@
   #nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
   #nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    #kernelPackages = pkgs.linuxPackages; # LTS Kernel
+    #kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages; # LTS Kernel
     #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
     #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-x86_64-v3;
     plymouth = {
@@ -41,10 +41,10 @@
       #Denuvo Crack
       "clearcpuid=umip"
 
-      #"nvidia.NVreg_EnableGpuFirmware=0"
-      #"nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-      #"nvidia_drm.fbdev=0"
-      #"nvidia_drm.modeset=1"
+      "nvidia.NVreg_EnableGpuFirmware=0"
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+      "nvidia_drm.fbdev=0"
+      "nvidia_drm.modeset=1"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key

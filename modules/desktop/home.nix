@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, pkgs-unstable, pkgsWithMpvVs, ... }:
+{ pkgs-unstable, pkgsWithMpvVs, ... }:
 
 {
   imports = [

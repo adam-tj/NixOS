@@ -60,18 +60,18 @@
   };
 
 # Sound fix
-  systemd.services.nvidia-lock-memclk = {
-    description = "Lock NVIDIA memory clock to prevent HDMI audio drop‑outs";
-    after = [
-      "nvidia-persistenced.service"
-      "display-manager.service"
-    ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi --lock-memory-clocks=${toString 5005}";
-    };
-  };
+  # systemd.services.nvidia-lock-memclk = {
+  #   description = "Lock NVIDIA memory clock to prevent HDMI audio drop‑outs";
+  #   after = [
+  #     "nvidia-persistenced.service"
+  #     "display-manager.service"
+  #   ];
+  #   wantedBy = [ "multi-user.target" ];
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     ExecStart = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi --lock-memory-clocks=${toString 5005}";
+  #   };
+  # };
 
 
 }

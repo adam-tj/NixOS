@@ -59,6 +59,7 @@
     #bottles
     deluge devilutionx discord distroshelf
     #firefoxpwa
+    faugus-launcher
     gamemode gimp googleearth-pro goofcord
     heroic #hunspell
     itch
