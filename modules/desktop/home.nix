@@ -8,6 +8,7 @@
   home.packages = (with pkgs-unstable; [
     r2modman
     vapoursynth vapoursynth-mvtools
+    zapzap
   ])
   ++ (with pkgsWithMpvVs; [
     jellyfin-mpv-shim

@@ -1,0 +1,264 @@
+From d6e6b25bef7b856ac3b717bea0668a2f8e5a38ad Mon Sep 17 00:00:00 2001
+From: everyx <lunt.luo@gmail.com>
+Date: Fri, 18 Sep 2026 08:59:53 +0800
+Subject: [PATCH] compositor, clutter: Propagate window color state and support
+ FP16 offscreen textures
+
+When an offscreen effect (such as Shell.GLSLEffect) is applied to a
+window or its surface container, the window contents appear dimmed on an
+HDR display.
+
+This is caused by two compounding issues:
+1. MetaWindowActor (and its surface container) does not mirror the
+   color state of its primary MetaSurfaceActor, defaulting to sRGB.
+   As a result, ClutterLayerNode sets the FBO target color state to
+   sRGB, forcing the child HDR surface to be tone-mapped down to SDR
+   reference white (~100 nits).
+2. ClutterOffscreenEffect hardcodes 8-bit RGBA (COGL_PIXEL_FORMAT_RGBA_8888_PRE)
+   via cogl_texture_2d_new_with_size(), clamping any high-dynamic-range
+   color components.
+
+Fix this by:
+- Listening to 'notify::color-state' on the primary surface actor in
+  MetaWindowActor, propagating the color state to the window actor and
+  its Wayland surface container.
+- Triggering clutter_actor_queue_redraw() in ClutterActor when color-state
+  changes so effects and pipelines are repainted.
+- Updating ClutterOffscreenEffect to allocate FP16 textures
+  (COGL_PIXEL_FORMAT_RGBA_FP_16161616_PRE) when the actor's color state
+  requires more than 8bpc.
+- Validating the texture format in ClutterOffscreenEffect's update_fbo()
+  to ensure the FBO is reallocated when switching between SDR and HDR.
+---
+ clutter/clutter/clutter-actor.c            |  9 +++-
+ clutter/clutter/clutter-offscreen-effect.c | 52 ++++++++++++++++++++--
+ src/compositor/meta-window-actor-wayland.c | 16 +++++++
+ src/compositor/meta-window-actor.c         | 31 +++++++++++++
+ 4 files changed, 104 insertions(+), 4 deletions(-)
+
+diff --git a/clutter/clutter/clutter-actor.c b/clutter/clutter/clutter-actor.c
+index d19b239aaf..816add1138 100644
+--- a/clutter/clutter/clutter-actor.c
++++ b/clutter/clutter/clutter-actor.c
+@@ -18025,8 +18025,15 @@ clutter_actor_set_color_state_internal (ClutterActor      *self,
+ {
+   ClutterActorPrivate *priv = clutter_actor_get_instance_private (self);
+ 
++  if (priv->color_state && color_state &&
++      clutter_color_state_equals (priv->color_state, color_state))
++    return;
++
+   if (g_set_object (&priv->color_state, color_state))
+-    g_object_notify_by_pspec (G_OBJECT (self), obj_props[PROP_COLOR_STATE]);
++    {
++      g_object_notify_by_pspec (G_OBJECT (self), obj_props[PROP_COLOR_STATE]);
++      clutter_actor_queue_redraw (self);
++    }
+ }
+ 
+ /**
+diff --git a/clutter/clutter/clutter-offscreen-effect.c b/clutter/clutter/clutter-offscreen-effect.c
+index 548e5cc595..2b08a5158a 100644
+--- a/clutter/clutter/clutter-offscreen-effect.c
++++ b/clutter/clutter/clutter-offscreen-effect.c
+@@ -102,6 +102,7 @@
+ #include "clutter/clutter-paint-nodes.h"
+ #include "clutter/clutter-paint-volume-private.h"
+ #include "clutter/clutter-actor-box-private.h"
++#include "clutter/clutter-color-state.h"
+ 
+ typedef struct _ClutterOffscreenEffectPrivate
+ {
+@@ -167,15 +168,45 @@ clutter_offscreen_effect_set_actor (ClutterActorMeta *meta,
+     }
+ }
+ 
++static gboolean
++actor_needs_fp16 (ClutterActor *actor)
++{
++  ClutterColorState *color_state;
++
++  if (!actor)
++    return FALSE;
++
++  color_state = clutter_actor_get_color_state (actor);
++
++  return clutter_color_state_required_format (color_state) >
++         CLUTTER_ENCODING_REQUIRED_FORMAT_UINT8;
++}
++
+ static CoglTexture*
+ clutter_offscreen_effect_real_create_texture (ClutterOffscreenEffect *effect,
+                                               CoglContext            *cogl_context,
+                                               gfloat                  width,
+                                               gfloat                  height)
+ {
++  ClutterOffscreenEffectPrivate *priv =
++    clutter_offscreen_effect_get_instance_private (effect);
++  int tex_width;
++  int tex_height;
++
++  tex_width = (int) MAX (width, 1);
++  tex_height = (int) MAX (height, 1);
++
++  if (actor_needs_fp16 (priv->actor))
++    {
++      return cogl_texture_2d_new_with_format (cogl_context,
++                                              tex_width,
++                                              tex_height,
++                                              COGL_PIXEL_FORMAT_RGBA_FP_16161616_PRE);
++    }
++
+   return cogl_texture_2d_new_with_size (cogl_context,
+-                                        (int) MAX (width, 1),
+-                                        (int) MAX (height, 1));
++                                        tex_width,
++                                        tex_height);
+ }
+ 
+ static void
+@@ -248,6 +279,7 @@ update_fbo (ClutterEffect *effect,
+   ClutterContext *context;
+   ClutterBackend *backend;
+   CoglContext *cogl_context;
++  gboolean format_matches = TRUE;
+   g_autoptr (GError) error = NULL;
+ 
+   stage_actor = clutter_actor_get_stage (priv->actor);
+@@ -277,9 +309,23 @@ update_fbo (ClutterEffect *effect,
+       return FALSE;
+     }
+ 
++  if (priv->actor && priv->texture)
++    {
++      gboolean needs_fp16;
++      gboolean is_fp16;
++
++      needs_fp16 = actor_needs_fp16 (priv->actor);
++      is_fp16 = (cogl_texture_get_format (priv->texture) ==
++                 COGL_PIXEL_FORMAT_RGBA_FP_16161616_PRE);
++
++      if (needs_fp16 != is_fp16)
++        format_matches = FALSE;
++    }
++
+   if (priv->target_width == target_width &&
+       priv->target_height == target_height &&
+-      priv->offscreen != NULL)
++      priv->offscreen != NULL &&
++      format_matches)
+     {
+       ensure_pipeline_filter_for_scale (self, resource_scale);
+       return TRUE;
+diff --git a/src/compositor/meta-window-actor-wayland.c b/src/compositor/meta-window-actor-wayland.c
+index 540975a6a3..7057faa128 100644
+--- a/src/compositor/meta-window-actor-wayland.c
++++ b/src/compositor/meta-window-actor-wayland.c
+@@ -277,6 +277,15 @@ meta_window_actor_wayland_rebuild_surface_tree (MetaWindowActor *actor)
+                    &traverse_data);
+ }
+ 
++static void
++on_window_actor_color_state_changed (MetaWindowActor *window_actor,
++                                     GParamSpec      *pspec,
++                                     ClutterActor    *surface_container)
++{
++  clutter_actor_set_color_state (surface_container,
++                                 clutter_actor_get_color_state (CLUTTER_ACTOR (window_actor)));
++}
++
+ static MtkRegion *
+ calculate_background_cull_region (MetaWindowActorWayland *self)
+ {
+@@ -683,6 +692,10 @@ meta_window_actor_wayland_dispose (GObject *object)
+   g_clear_signal_handler (&self->highest_scale_monitor_handler_id,
+                           window);
+ 
++  g_signal_handlers_disconnect_by_func (self,
++                                        on_window_actor_color_state_changed,
++                                        CLUTTER_ACTOR (self->surface_container));
++
+   parent_class->dispose (object);
+ }
+ 
+@@ -737,4 +750,7 @@ meta_window_actor_wayland_init (MetaWindowActorWayland *self)
+   g_signal_connect_swapped (self, "notify::allocation",
+                             G_CALLBACK (clutter_actor_notify_transform_invalid),
+                             self->surface_container);
++  g_signal_connect (self, "notify::color-state",
++                    G_CALLBACK (on_window_actor_color_state_changed),
++                    CLUTTER_ACTOR (self->surface_container));
+ }
+diff --git a/src/compositor/meta-window-actor.c b/src/compositor/meta-window-actor.c
+index 967fc2bc13..800650a652 100644
+--- a/src/compositor/meta-window-actor.c
++++ b/src/compositor/meta-window-actor.c
+@@ -429,6 +429,7 @@ meta_window_actor_real_assign_surface_actor (MetaWindowActor  *self,
+ {
+   MetaWindowActorPrivate *priv =
+     meta_window_actor_get_instance_private (self);
++  ClutterColorState *color_state = NULL;
+ 
+   if (priv->surface)
+     meta_window_actor_remove_surface_actor (self, priv->surface);
+@@ -439,6 +440,14 @@ meta_window_actor_real_assign_surface_actor (MetaWindowActor  *self,
+   meta_window_actor_add_surface_actor (self, surface_actor);
+   meta_window_actor_update_opacity (self);
+ 
++  if (priv->surface)
++    color_state = clutter_actor_get_color_state (CLUTTER_ACTOR (priv->surface));
++
++  if (color_state)
++    clutter_actor_set_color_state (CLUTTER_ACTOR (self), color_state);
++  else
++    clutter_actor_unset_color_state (CLUTTER_ACTOR (self));
++
+   if (meta_window_actor_is_frozen (self))
+     meta_window_actor_set_frozen (self, TRUE);
+   else
+@@ -483,6 +492,21 @@ is_surface_actor_mapped_changed (MetaSurfaceActor *surface_actor,
+   update_is_effectively_visible  (window_actor);
+ }
+ 
++static void
++surface_actor_color_state_changed_cb (MetaSurfaceActor *surface_actor,
++                                      GParamSpec       *pspec,
++                                      MetaWindowActor  *window_actor)
++{
++  MetaWindowActorPrivate *priv =
++    meta_window_actor_get_instance_private (window_actor);
++
++  if (surface_actor == priv->surface)
++    {
++      clutter_actor_set_color_state (CLUTTER_ACTOR (window_actor),
++                                     clutter_actor_get_color_state (CLUTTER_ACTOR (surface_actor)));
++    }
++}
++
+ static void
+ disconnect_surface_actor_from (MetaSurfaceActor *surface_actor,
+                                MetaWindowActor  *window_actor)
+@@ -496,6 +520,9 @@ disconnect_surface_actor_from (MetaSurfaceActor *surface_actor,
+   g_signal_handlers_disconnect_by_func (surface_actor,
+                                         is_surface_actor_mapped_changed,
+                                         window_actor);
++  g_signal_handlers_disconnect_by_func (surface_actor,
++                                        surface_actor_color_state_changed_cb,
++                                        window_actor);
+   if (meta_surface_actor_is_obscured (surface_actor))
+     priv->n_obscured_surfaces--;
+   if (clutter_actor_is_mapped (CLUTTER_ACTOR (surface_actor)))
+@@ -518,6 +545,10 @@ meta_window_actor_add_surface_actor (MetaWindowActor  *window_actor,
+                     "notify::mapped",
+                     G_CALLBACK (is_surface_actor_mapped_changed),
+                     window_actor);
++  g_signal_connect (surface_actor,
++                    "notify::color-state",
++                    G_CALLBACK (surface_actor_color_state_changed_cb),
++                    window_actor);
+   if (meta_surface_actor_is_obscured (surface_actor))
+     priv->n_obscured_surfaces++;
+   if (clutter_actor_is_mapped (CLUTTER_ACTOR (surface_actor)))
+-- 
+GitLab
+
