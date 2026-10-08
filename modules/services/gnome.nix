@@ -4,17 +4,11 @@
   # Overlay to patch mutter globally so GNOME Shell uses the modified build
   nixpkgs.overlays = [
     (final: prev: {
-      gnome = prev.gnome.overrideScope (
-        gfinal: gprev: {
-          mutter = gprev.mutter.overrideAttrs (oldAttrs: {
-            patches = (oldAttrs.patches or [ ]) ++ [
-              ../../patches/mutter-hdr.patch
-            ];
-          });
-        }
-      );
-      # Handle top-level mutter package if referenced directly
-      mutter = final.gnome.mutter;
+      mutter = prev.mutter.overrideAttrs (oldAttrs: {
+        patches = (oldAttrs.patches or [ ]) ++ [
+          ../../patches/mutter-hdr.patch
+        ];
+      });
     })
   ];
 
