@@ -20,7 +20,6 @@
 
     # Enable "Silent Boot"
     consoleLogLevel = 0;
-    initrd.verbose = false;
     kernelParams = [
       "quiet"
       "splash"
@@ -36,7 +35,6 @@
     loader.timeout = 0;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    initrd.systemd.enable = true;
   };
 
 }

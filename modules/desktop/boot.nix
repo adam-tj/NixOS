@@ -19,7 +19,7 @@
 
     # Enable "Silent Boot"
     consoleLogLevel = 0;
-    initrd.verbose = false;
+    #initrd.verbose = false;
     kernelParams = [
       "quiet"
       "splash"
