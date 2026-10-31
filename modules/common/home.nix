@@ -1,10 +1,7 @@
 {
-  config,
   inputs,
   pkgs,
   pkgs-unstable,
-  pkgsWithMpvVs,
-  lib,
   ...
 }:
 

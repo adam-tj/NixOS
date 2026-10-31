@@ -42,7 +42,6 @@
     hydrapaper
     karere
     nocturne
-    peazip
     pinta
     ptyxis
     quadrapassel
