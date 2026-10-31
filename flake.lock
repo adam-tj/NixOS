@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793404165,
-        "narHash": "sha256-WEejUSw35KTJ88A7XMusBRhJb+v/QH5EbCP/FpVKy24=",
+        "lastModified": 1793406826,
+        "narHash": "sha256-l88IscMPBjMSSNLeieHAjKvdpmP87UzzD7CPCKxw+Dc=",
         "owner": "adam-tj",
         "repo": "akizip-flake",
-        "rev": "828e63d12fb3e54f9bd4475391f09384bf6605ce",
+        "rev": "d02e9f51071c2e7de0986a98c6258934b6af40a3",
         "type": "github"
       },
       "original": {
