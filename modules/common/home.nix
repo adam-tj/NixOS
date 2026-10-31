@@ -68,7 +68,7 @@
       itch
       joplin-desktop
       libreoffice
-      libnotify
+      #libnotify
       mangohud
       mediainfo
       mediainfo-gui
@@ -130,9 +130,9 @@
       pycharm
       #rust-rover
     ])
-    ++ (with pkgs; [
+    # ++ (with pkgs; [
       #plex-mpv-shim jellyfin-mpv-shim
-    ])
+    # ])
     # ++ (with pkgsWithMpvVs; [
     #   jellyfin-desktop
     #   mpv
@@ -192,9 +192,9 @@
       };
 
       "org/gnome/desktop/wm/keybindings" = {
-        minimize = [ "<Super><Control>z" ];
-        close = [ "<Super><Control>x" ];
-        toggle-maximized = [ "<Super><Control>c" ];
+        #minimize = [ "<Super><Control>z" ];
+        close = [ "<Super><Control>z" ];
+        toggle-maximized = [ "<Super><Control>x" ];
         begin-move = [ ];
         begin-resize = [ ];
         toggle-fullscreen = [ "<Super>f" ];
