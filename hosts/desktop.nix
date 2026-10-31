@@ -6,7 +6,7 @@
     ../modules/desktop/hardware.nix
     ../modules/desktop/nvidia-gpu.nix
     ../modules/desktop/amdgpu.nix
-    ../modules/common/gamecube-controller.nix
+    #../modules/common/gamecube-controller.nix
     #../modules/common/xbox-controller.nix
     ../modules/services/piper-rules.nix
 
@@ -38,7 +38,7 @@
     #../modules/common/whitelist-insecure-packages.nix
     ../modules/common/polkit.nix
     ../modules/common/nix-ld.nix
-    ../modules/common/denuvo-hv.nix
+    #../modules/common/denuvo-hv.nix
     ../modules/services/fwupd.nix
 
     # Services

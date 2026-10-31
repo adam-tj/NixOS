@@ -5,7 +5,7 @@
     # Hardware
     ../modules/thinkpad/hardware.nix
     ../modules/thinkpad/intel-igpu.nix
-    ../modules/common/gamecube-controller.nix
+    #../modules/common/gamecube-controller.nix
     ../modules/common/xbox-controller.nix
     # ../modules/services/piper-rules.nix
 
@@ -32,6 +32,7 @@
     ../modules/services/gc+optimise.nix
     ../modules/services/fwupd.nix
     #../modules/common/whitelist-insecure-packages.nix
+    ../modules/common/nix-ld.nix
 
     # Services
     ../modules/services/bluetooth.nix

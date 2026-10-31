@@ -24,5 +24,12 @@
     libxdamage
     libxfixes
     libxi
+
+    stdenv.cc.cc
+    zlib
+    glibc
+    openssl
+    sqlite
+
   ];
 }
