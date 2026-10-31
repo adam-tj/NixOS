@@ -29,4 +29,16 @@
     allowedTCPPorts = [ 51821 ];
     allowedUDPPorts = [ 51820 ];
   };
+
+  # networking.firewall.extraCommands = ''
+  #   iptables -A FORWARD -i wg0 -j ACCEPT
+  #   iptables -A FORWARD -o wg0 -j ACCEPT
+  #   iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o enp6s0 -j MASQUERADE
+  # '';
+  # networking.firewall.extraStopCommands = ''
+  #   iptables -D FORWARD -i wg0 -j ACCEPT
+  #   iptables -D FORWARD -o wg0 -j ACCEPT
+  #   iptables -t nat -D POSTROUTING -s 10.8.0.0/24 -o enp6s0 -j MASQUERADE
+  # '';
+
 }
