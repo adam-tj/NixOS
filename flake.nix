@@ -6,8 +6,11 @@
     nixpkgs-kernel.url = "github:nixos/nixpkgs/5c2bc52fb9f8c264ed6c93bd20afa2ff5e763dce";
     nixpkgs-plasma6.url = "github:nixos/nixpkgs/b1b875982b17dabde9b4a37f3e229e74913e6db3";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
-    sops-nix.url = "github:Mic92/sops-nix";
+    #openmw-nix.url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     helium-browser = {
       url = "github:adam-tj/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -27,7 +30,10 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    akizip.url = "github:adam-tj/akizip-flake";
+    akizip = {
+      url = "github:adam-tj/akizip-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     #sam-repo.url = "github:adam-tj/nixpkgs/steam-art-manager";
   };
 
@@ -40,7 +46,7 @@
       nixos-hardware,
       home-manager,
       slippi,
-      openmw-nix,
+      #openmw-nix,
       sops-nix,
       helium-browser,
       # duckstation-appimage,
@@ -227,7 +233,7 @@
               pkgsWithMpvVs
               pkgsPlasma6
               ;
-            openmwPkgs = openmw-nix.packages.x86_64-linux;
+            #openmwPkgs = openmw-nix.packages.x86_64-linux;
           };
           modules = commonModules ++ [
             ./hosts/desktop.nix
