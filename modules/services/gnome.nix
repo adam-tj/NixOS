@@ -56,6 +56,7 @@
     gnomeExtensions.ddterm
     gnomeExtensions.gsconnect
     gnomeExtensions.gtile
+    gnomeExtensions.just-perfection
     gnomeExtensions.keep-pinned-apps-in-appgrid
     gnomeExtensions.no-overview
     gnomeExtensions.power-off-options
@@ -63,6 +64,7 @@
     gnomeExtensions.rounded-window-corners-reborn
     gnomeExtensions.run-or-raise
     gnomeExtensions.simpleweather
+    gnomeExtensions.space-bar
     gnomeExtensions.start-overlay-in-application-view
     gnomeExtensions.status-tray
     gnomeExtensions.top-bar-organizer
