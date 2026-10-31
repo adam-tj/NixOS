@@ -34,12 +34,10 @@
   boot.initrd.luks.devices = {
     home = {
       device = "/dev/disk/by-uuid/b656f06b-fc60-4749-aec8-dc51410438b7";
-      preLVM = true;
       allowDiscards = true;
     };
     swap = {
       device = "/dev/disk/by-uuid/43e89e5e-75f1-4f89-a4a1-936fc913d3ed";
-      preLVM = true;
       allowDiscards = true;
     };
   };
