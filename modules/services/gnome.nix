@@ -22,10 +22,10 @@
   environment.gnome.excludePackages = with pkgs; [
     epiphany
     gnome-calculator
+    gnome-console
     gnome-contacts
     gnome-tour
     gnome-user-docs
-    gnome-music
     gnome-maps
     gnome-software
     showtime
@@ -41,11 +41,15 @@
     gnome-tweaks
     hydrapaper
     karere
+    nocturne
     peazip
     pinta
+    ptyxis
     quadrapassel
+    kdePackages.ark
 
     # GNOME Extensions
+    gnomeExtensions.appindicator
     gnomeExtensions.app-grid-tuner
     gnomeExtensions.clipboard-history
     gnomeExtensions.dash-to-panel
@@ -57,6 +61,7 @@
     gnomeExtensions.power-off-options
     gnomeExtensions.quick-sound-switcher
     gnomeExtensions.rounded-window-corners-reborn
+    gnomeExtensions.run-or-raise
     gnomeExtensions.simpleweather
     gnomeExtensions.start-overlay-in-application-view
     gnomeExtensions.status-tray
