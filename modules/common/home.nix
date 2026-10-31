@@ -131,7 +131,7 @@
       #rust-rover
     ])
     # ++ (with pkgs; [
-      #plex-mpv-shim jellyfin-mpv-shim
+    #plex-mpv-shim jellyfin-mpv-shim
     # ])
     # ++ (with pkgsWithMpvVs; [
     #   jellyfin-desktop
@@ -161,6 +161,14 @@
       ubuntu-sans
       zed-mono
     ]);
+
+  programs.ghostty = {
+    enable = true;
+    settings = {
+      command = "${pkgs.fish}/bin/fish";
+      theme = "Adwaita Dark";
+    };
+  };
 
   programs.vscodium = {
     enable = true;
