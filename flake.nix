@@ -12,9 +12,9 @@
       url = "github:adam-tj/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    duckstation-appimage = {
-      url = "github:adam-tj/duckstation-appimage";
-    };
+    # duckstation-appimage = {
+    #   url = "github:adam-tj/duckstation-appimage";
+    # };
     wg-easy.url = "github:adam-tj/wg-easy-nix";
     waterfox.url = "github:Hythera/nix-waterfox";
     transmission.url = "github:nixos/nixpkgs/4a3fc4cf736b7d2d288d7a8bf775ac8d4c0920b4";
@@ -27,6 +27,7 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    akizip.url = "github:adam-tj/akizip-flake";
     #sam-repo.url = "github:adam-tj/nixpkgs/steam-art-manager";
   };
 
@@ -42,9 +43,10 @@
       openmw-nix,
       sops-nix,
       helium-browser,
-      duckstation-appimage,
+      # duckstation-appimage,
       wg-easy,
       transmission,
+      akizip,
       ...
     }@inputs:
     let
