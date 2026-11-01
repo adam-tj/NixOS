@@ -51,7 +51,7 @@
     # It will just not appear on screen unless a key is pressed
 
     loader = {
-      timeout = 0;
+      timeout = 10;
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
