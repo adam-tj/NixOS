@@ -78,7 +78,7 @@
       neovim-qt-unwrapped
       nextcloud-client
       obs-studio
-      opencode
+      #opencode
       piper
       protontricks
       qalculate-gtk
@@ -124,10 +124,10 @@
       inputs.akizip.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
     ++ (with jetbrains; [
-      clion
+      #clion
       idea
       jdk
-      pycharm
+      #pycharm
       #rust-rover
     ])
     # ++ (with pkgs; [
