@@ -9,7 +9,8 @@
       distrobox dysk
       e2fsprogs
       fastfetch
-      gcc gh git gnugrep gnumake gocryptfs
+      #gcc gnumake
+      gh git gnugrep gocryptfs
       htop
       irssi
       jdk25
