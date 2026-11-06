@@ -57,6 +57,7 @@
       claude-code
       deluge
       devilutionx
+      direnv
       discord
       distroshelf
       faugus-launcher

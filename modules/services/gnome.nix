@@ -45,7 +45,7 @@
     pinta
     ptyxis
     quadrapassel
-    kdePackages.ark
+    #kdePackages.ark
 
     # GNOME Extensions
     gnomeExtensions.appindicator
