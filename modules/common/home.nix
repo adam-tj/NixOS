@@ -57,7 +57,6 @@
       claude-code
       deluge
       devilutionx
-      direnv
       discord
       distroshelf
       faugus-launcher
@@ -74,6 +73,7 @@
       mediainfo-gui
       mesa-demos
       mesen
+      nix-direnv
       nodejs
       neovim-qt-unwrapped
       nextcloud-client
