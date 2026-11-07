@@ -111,13 +111,6 @@
         overlays = [ mpvVsOverlay ];
       };
 
-      # pkgsWithSVP = import nixpkgs {
-      #   system = "x86_64-linux";
-      #   config.allowUnfree = true;
-      #   #config.permittedInsecurePackages = insecurePackagesList;
-      #   overlays = [ svpOverlay ];
-      # };
-
       pkgsWithBgrt = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
@@ -149,7 +142,6 @@
           specialArgs = {
             inherit
               inputs
-              # pkgsWithSVP
               pkgsUnstable
               pkgsWithBgrt
               pkgsWithMpvVs
@@ -173,8 +165,6 @@
                   {
                     nixpkgs.overlays = [
                       mpvVsOverlay
-                      #openldapOverlay
-                      # svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
                     #nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
@@ -202,7 +192,6 @@
             sops-nix.nixosModules.sops
             wg-easy.nixosModules.wg-easy
             {
-              #nixpkgs.overlays = [ openldapOverlay ];
               nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
             }
             {
@@ -227,7 +216,6 @@
           specialArgs = {
             inherit
               inputs
-              # pkgsWithSVP
               pkgsUnstable
               nixpkgs-kernel
               pkgsWithMpvVs
@@ -252,8 +240,6 @@
                   {
                     nixpkgs.overlays = [
                       mpvVsOverlay
-                      #openldapOverlay
-                      # svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
                     #nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
