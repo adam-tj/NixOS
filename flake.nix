@@ -59,9 +59,9 @@
       # 1. MOVE THIS TO THE TOP SO EVERYTHING BELOW CAN USE IT
       insecurePackagesList = import ./modules/common/whitelist-insecure-packages.nix;
 
-      svpOverlay = final: prev: {
-        svp-with-mpv = final.callPackage ./nix-overlays/svp-with-mpv/package.nix { };
-      };
+      # svpOverlay = final: prev: {
+      #   svp-with-mpv = final.callPackage ./nix-overlays/svp-with-mpv/package.nix { };
+      # };
       bgrtOverlay = final: prev: {
         nixos-bgrt-plymouth-no-firmware =
           final.callPackage ./nix-overlays/nixos-bgrt-plymouth-no-firmware/package.nix
@@ -111,12 +111,12 @@
         overlays = [ mpvVsOverlay ];
       };
 
-      pkgsWithSVP = import nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-        #config.permittedInsecurePackages = insecurePackagesList;
-        overlays = [ svpOverlay ];
-      };
+      # pkgsWithSVP = import nixpkgs {
+      #   system = "x86_64-linux";
+      #   config.allowUnfree = true;
+      #   #config.permittedInsecurePackages = insecurePackagesList;
+      #   overlays = [ svpOverlay ];
+      # };
 
       pkgsWithBgrt = import nixpkgs {
         system = "x86_64-linux";
@@ -149,7 +149,7 @@
           specialArgs = {
             inherit
               inputs
-              pkgsWithSVP
+              # pkgsWithSVP
               pkgsUnstable
               pkgsWithBgrt
               pkgsWithMpvVs
@@ -174,7 +174,7 @@
                     nixpkgs.overlays = [
                       mpvVsOverlay
                       #openldapOverlay
-                      svpOverlay
+                      # svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
                     #nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
@@ -227,7 +227,7 @@
           specialArgs = {
             inherit
               inputs
-              pkgsWithSVP
+              # pkgsWithSVP
               pkgsUnstable
               nixpkgs-kernel
               pkgsWithMpvVs
@@ -253,7 +253,7 @@
                     nixpkgs.overlays = [
                       mpvVsOverlay
                       #openldapOverlay
-                      svpOverlay
+                      # svpOverlay
                     ];
                     nixpkgs.config.allowUnfree = true;
                     #nixpkgs.config.permittedInsecurePackages = insecurePackagesList;
