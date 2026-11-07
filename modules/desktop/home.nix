@@ -23,14 +23,14 @@
     "org/gnome/shell" = {
       favorite-apps = [
         "helium.desktop" # Super+Q
-        "discord.desktop" # Super+D
+        "vesktop.desktop" # Super+D
         "chrome-gdfaincndogidkdcdkhapmbffkckdkhn-Default.desktop" # Super+Z
         "chrome-fmpnliohjhemenmnlpbfagaolkdacoja-Default.desktop" # Super+X
         "codium.desktop" # Super+C
         "com.rtosta.zapzap.desktop" # Super+W
         "org.gnome.Nautilus.desktop" # Super+E
         "intellij-idea.desktop" # Super+R
-        "org.gnome.Ptyxis.desktop" # Super+Enter
+        "com.mitchellh.ghostty.desktop" # Super+Enter
       ];
     };
   };

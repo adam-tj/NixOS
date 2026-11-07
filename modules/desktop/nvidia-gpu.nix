@@ -4,7 +4,7 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [ nvidia-vaapi-driver egl-wayland ];
+    extraPackages = with pkgs; [ nvidia-vaapi-driver egl-wayland ocl-icd ];
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -21,5 +21,6 @@
     system.nixos.tags = [ "amd" ];
     services.xserver.videoDrivers = lib.mkForce [ "amdgpu" ];
     hardware.graphics.extraPackages = lib.mkForce [ ];
+    imports = [ ./amdgpu.nix ];
   };
 }
