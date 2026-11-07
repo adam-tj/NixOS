@@ -36,11 +36,11 @@
     options = [ "noauto" "rw" "users" ];
   };
 
-  #fileSystems."/mnt/c_drive" = {
-  #  device = "/dev/disk/by-uuid/E49E6E5E9E6E296E";
-  #  fsType = "ntfs3";
-  #  options = [ "noauto" "rw" "users" ];
-  #};
+  fileSystems."/mnt/c_drive" = {
+    device = "/dev/disk/by-uuid/E49E6E5E9E6E296E";
+    fsType = "ntfs3";
+    options = [ "noauto" "rw" "users" ];
+  };
 
   swapDevices =
     [{ device = "/dev/disk/by-uuid/84702e15-99e2-4adb-b0ac-1ee2fba2e036"; }];
