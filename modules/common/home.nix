@@ -60,6 +60,7 @@
       direnv
       discord
       distroshelf
+      eden
       faugus-launcher
       gamemode
       gimp
@@ -175,7 +176,6 @@
     enable = true;
     package = pkgs-unstable.vscodium-fhs;
     profiles.default.extensions = with pkgs-unstable.vscode-extensions; [
-      github.copilot
       github.copilot-chat
     ];
   };
