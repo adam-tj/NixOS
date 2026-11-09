@@ -1,18 +1,47 @@
 {
-  pkgs, # nix-cachyos-kernel, nixpkgs-kernel,
+  pkgs,
+  lib,
   ...
 }:
 
+let
+  # "linux_7_2" -> "7.2"
+  toVersion = name: lib.replaceStrings [ "_" ] [ "." ] (lib.removePrefix "linux_" name);
+
+  # Vanilla kernel branches in nixpkgs, newest first
+  kernelBranches = lib.pipe (builtins.attrNames pkgs.linuxKernel.packages) [
+    (builtins.filter (name: builtins.match "linux_[0-9]+_[0-9]+" name != null))
+    (builtins.filter (name: (builtins.tryEval pkgs.linuxKernel.packages.${name}).success))
+    (builtins.sort (a: b: builtins.compareVersions (toVersion a) (toVersion b) > 0))
+  ];
+
+  newest = builtins.elemAt kernelBranches 0;
+  second = builtins.elemAt kernelBranches 1;
+
+  # "linux_7_2" -> [ 7 2 ]
+  parts = name: map lib.toInt (lib.splitVersion (toVersion name));
+
+  # Is `b` the branch right before `a`? (7.3 -> 7.2; 8.0 -> any 7.x)
+  isDirectPredecessor = a: b:
+    let
+      pa = parts a;
+      pb = parts b;
+      major = builtins.elemAt pa 0;
+      minor = builtins.elemAt pa 1;
+    in
+    if minor == 0
+    then builtins.elemAt pb 0 == major - 1
+    else pb == [ major (minor - 1) ];
+
+  chosenKernel = pkgs.linuxKernel.packages.${
+    if isDirectPredecessor newest second then second else newest
+  };
+in
 {
-  #nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ];
-  #nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-  #nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
   boot = {
     #kernelPackages = pkgs.linuxPackages_latest;
     #kernelPackages = pkgs.linuxPackages; # LTS Kernel
-    kernelPackages = pkgs.linuxKernel.packages.linux_7_2;
-    #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
-    #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-x86_64-v3;
+    kernelPackages = chosenKernel;
     plymouth = {
       enable = true;
       theme = "bgrt";
@@ -20,7 +49,6 @@
 
     # Enable "Silent Boot"
     consoleLogLevel = 0;
-    #initrd.verbose = false;
     kernelParams = [
       "quiet"
       "splash"
@@ -37,7 +65,6 @@
       "amdgpu.ppfeaturemask=0xffffffff"
       "amdgpu.gfxoff=0"
       "amdgpu.gpu_recovery=1"
-
 
       #Denuvo Crack
       "clearcpuid=umip"
