@@ -149,9 +149,7 @@
     ])
     ++ (with nerd-fonts; [
       adwaita-mono
-      bitstream-vera-sans-mono
       dejavu-sans-mono
-      droid-sans-mono
       hack
       jetbrains-mono
       liberation
@@ -159,9 +157,6 @@
       roboto-mono
       space-mono
       terminess-ttf
-      ubuntu-mono
-      ubuntu-sans
-      zed-mono
     ]);
 
   programs.ghostty = {

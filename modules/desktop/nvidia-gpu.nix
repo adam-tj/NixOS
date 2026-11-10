@@ -4,6 +4,7 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    # extraPackages = with pkgs; [ nvidia-vaapi-driver ocl-icd ];
     extraPackages = with pkgs; [ nvidia-vaapi-driver egl-wayland ocl-icd ];
   };
 
