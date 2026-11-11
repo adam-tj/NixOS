@@ -63,7 +63,7 @@
       eden
       faugus-launcher
       gamemode
-      geany
+      geany-with-vte
       gimp
       heroic
       itch
