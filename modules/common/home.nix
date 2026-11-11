@@ -63,8 +63,8 @@
       eden
       faugus-launcher
       gamemode
+      geany
       gimp
-      googleearth-pro
       heroic
       itch
       joplin-desktop
