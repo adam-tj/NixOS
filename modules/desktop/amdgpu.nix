@@ -11,8 +11,22 @@
       initrd.enable = true;
     };
   };
+
   services.lact.enable = true;
+
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-rocm; # ROCm build for AMD GPUs
+    loadModels = [ "gemma3:12b" ];
+
+    # Only if your card isn't officially supported by ROCm (e.g. RDNA2/3 consumer cards).
+    # Pick the value matching your GPU, e.g. "10.3.0" for RDNA2, "11.0.0" for RDNA3:
+    # environmentVariables.HSA_OVERRIDE_GFX_VERSION = "11.0.0";
+  };
+
   environment.systemPackages = with pkgs; [
+    rocmPackages.rocminfo
+    rocmPackages.clr
     amdenc
     amdgpu_top
     vulkan-tools
@@ -20,6 +34,15 @@
     virtualglLib
     gpu-viewer
   ];
+
+  services.open-webui = {
+    enable = true;
+    port = 8080;
+    environment = {
+      OLLAMA_BASE_URL = "http://127.0.0.1:11434";
+    };
+  };
+
   # AMD Power Management Lock Tracker Fix (Timur Kristóf's overrides)
   # systemd.services.amdgpu-stability-fix = {
   #   description = "Lock AMDGPU out of unstable power-saving states";
