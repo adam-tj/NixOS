@@ -106,7 +106,26 @@
       spotify
       starship-sf64
       steam-art-manager
-      svp
+      (svp.override {
+        buildFHSEnv =
+          args:
+          buildFHSEnv (
+            args
+            // {
+              targetPkgs =
+                fhsPkgs:
+                (args.targetPkgs fhsPkgs)
+                ++ [
+                  ocl-icd
+                  rocmPackages.clr
+                  rocmPackages.clr.icd
+                ];
+              profile = (args.profile or "") + ''
+                export OCL_ICD_VENDORS="${rocmPackages.clr.icd}/etc/OpenCL/vendors"
+              '';
+            }
+          );
+      })
       swi-prolog
       tor-browser
       tremotesf

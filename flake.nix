@@ -68,42 +68,77 @@
           final.callPackage ./nix-overlays/nixos-bgrt-plymouth-no-firmware/package.nix
             { };
       };
-      mpvVsOverlay = final: prev: {
-        mpv-unwrapped = prev.mpv-unwrapped.override {
-          vapoursynthSupport = true;
-          vapoursynth = final.vapoursynth.withPlugins [
+
+      mpvVsOverlay =
+        final: prev:
+        let
+          vsWithPlugins = final.vapoursynth.withPlugins [
             final.vapoursynth-mvtools
           ];
-        };
+          openclLibPath = "${vsWithPlugins}/lib:${final.ocl-icd}/lib:${final.rocmPackages.clr}/lib";
+          openclVendors = "${final.rocmPackages.clr.icd}/etc/OpenCL/vendors";
+        in
+        {
+          mpv-unwrapped = prev.mpv-unwrapped.override {
+            vapoursynthSupport = true;
+            vapoursynth = vsWithPlugins;
+          };
 
-        jellyfin-desktop = prev.jellyfin-desktop.overrideAttrs (oldAttrs: {
-          qtWrapperArgs = (oldAttrs.qtWrapperArgs or [ ]) ++ [
-            "--prefix PYTHONPATH : ${
-              final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ]
-            }/lib/python${final.python3.pythonVersion}/site-packages"
-          ];
-        });
+          mpv = prev.mpv.override {
+            extraMakeWrapperArgs = [
+              "--prefix"
+              "LD_LIBRARY_PATH"
+              ":"
+              openclLibPath
+              "--set"
+              "OCL_ICD_VENDORS"
+              openclVendors
+            ];
+          };
 
-        celluloid = prev.celluloid.overrideAttrs (oldAttrs: {
-          nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ final.makeBinaryWrapper ];
-          postInstall = (oldAttrs.postInstall or "") + ''
+          jellyfin-desktop = prev.jellyfin-desktop.overrideAttrs (oldAttrs: {
+            qtWrapperArgs = (oldAttrs.qtWrapperArgs or [ ]) ++ [
+              "--prefix"
+              "PYTHONPATH"
+              ":"
+              "${vsWithPlugins}/lib/python${final.python3.pythonVersion}/site-packages"
+              "--prefix"
+              "LD_LIBRARY_PATH"
+              ":"
+              openclLibPath
+              "--set"
+              "OCL_ICD_VENDORS"
+              openclVendors
+            ];
+          });
+
+          celluloid = prev.celluloid.overrideAttrs (oldAttrs: {
+            nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ final.makeBinaryWrapper ];
+            postInstall = (oldAttrs.postInstall or "") + ''
               wrapProgram $out/bin/celluloid \
-              --prefix PYTHONPATH : "${
-                final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ]
-              }/${final.python3.sitePackages}" \
-            --prefix LIBGL_DRIVERS_PATH : "/run/opengl-driver/lib/dri"
-          '';
-        });
+                --prefix PYTHONPATH : "${vsWithPlugins}/${final.python3.sitePackages}" \
+                --prefix LD_LIBRARY_PATH : "${openclLibPath}" \
+                --set OCL_ICD_VENDORS "${openclVendors}" \
+                --prefix LIBGL_DRIVERS_PATH : "/run/opengl-driver/lib/dri"
+            '';
+          });
 
-        jellyfin-mpv-shim = prev.jellyfin-mpv-shim.overrideAttrs (oldAttrs: {
-          makeWrapperArgs = (oldAttrs.makeWrapperArgs or [ ]) ++ [
-            "--prefix"
-            "PYTHONPATH"
-            ":"
-            "${final.vapoursynth.withPlugins [ final.vapoursynth-mvtools ]}/${final.python3.sitePackages}"
-          ];
-        });
-      };
+          jellyfin-mpv-shim = prev.jellyfin-mpv-shim.overrideAttrs (oldAttrs: {
+            makeWrapperArgs = (oldAttrs.makeWrapperArgs or [ ]) ++ [
+              "--prefix"
+              "PYTHONPATH"
+              ":"
+              "${vsWithPlugins}/${final.python3.sitePackages}"
+              "--prefix"
+              "LD_LIBRARY_PATH"
+              ":"
+              openclLibPath
+              "--set"
+              "OCL_ICD_VENDORS"
+              openclVendors
+            ];
+          });
+        };
 
       pkgsWithMpvVs = import nixpkgs-unstable {
         system = "x86_64-linux";
