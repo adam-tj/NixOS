@@ -39,8 +39,8 @@
 # in
 {
   boot = {
-    # kernelPackages = pkgs.linuxPackages_latest;
-    kernelPackages = pkgs.linuxPackages; # LTS Kernel
+    kernelPackages = pkgs.linuxPackages_latest;
+    #kernelPackages = pkgs.linuxPackages; # LTS Kernel
     #kernelPackages = chosenKernel;
     plymouth = {
       enable = true;
@@ -60,10 +60,10 @@
       "kvm.enable_virt_at_load=0"
 
       #AMD anti lockup
-      # "amdgpu.aspm=0"
-      # "amdgpu.runpm=0"
-      # "amdgpu.ppfeaturemask=0xffffffff"
-      # "amdgpu.gfxoff=0"
+      "amdgpu.aspm=0"
+      "amdgpu.runpm=0"
+      "amdgpu.ppfeaturemask=0xffffffff"
+      "amdgpu.gfxoff=0"
       # "amdgpu.gpu_recovery=1"
 
       #Denuvo Crack

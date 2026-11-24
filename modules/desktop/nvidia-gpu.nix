@@ -9,6 +9,7 @@
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -16,12 +17,5 @@
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
-  };
-
-  specialisation.amd.configuration = {
-    system.nixos.tags = [ "amd" ];
-    services.xserver.videoDrivers = lib.mkForce [ "amdgpu" ];
-    hardware.graphics.extraPackages = lib.mkForce [ ];
-    imports = [ ./amdgpu.nix ];
   };
 }
