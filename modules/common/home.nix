@@ -26,12 +26,12 @@
 
   slippi-launcher = {
     enable = true;
-    isoPath = "/home/adam/Games/ROMS/animelee.iso";
-    rootSlpPath = "/home/adam/Games/Slippi";
-    launchMeleeOnPlay = false;
-    useMonthlySubfolders = true;
-    enableJukebox = true;
-    useNetplayBeta = false;
+    # isoPath = "/home/adam/Games/ROMS/animelee.iso";
+    # rootSlpPath = "/home/adam/Games/Slippi";
+    # launchMeleeOnPlay = false;
+    # useMonthlySubfolders = true;
+    # enableJukebox = true;
+    # useNetplayBeta = false;
   };
 
   # Lutris + ProtonGE
